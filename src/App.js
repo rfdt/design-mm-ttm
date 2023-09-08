@@ -1,7 +1,14 @@
 import './App.css';
 import MmLogo from './static/images/MM-LOGO.png';
-import {HomeOutlined, IssuesCloseOutlined, LogoutOutlined, ScheduleOutlined, SettingOutlined} from "@ant-design/icons";
-import {Input} from "antd";
+import {
+    HomeOutlined,
+    IssuesCloseOutlined,
+    LogoutOutlined,
+    ScheduleOutlined,
+    SettingOutlined,
+    UserOutlined
+} from "@ant-design/icons";
+import {Avatar, Badge, Input} from "antd";
 import {useState} from "react";
 import classNames from "classnames";
 
@@ -88,7 +95,19 @@ function App() {
                                 allowClear size={'large'} />
                     </div>
                     <div className="Header__User">
-
+                        <div className="Header__User-Avatar">
+                            <Badge dot status={'success'}>
+                                <Avatar shape="square" icon={<UserOutlined />} size={46}/>
+                            </Badge>
+                        </div>
+                        <div className="Header__User-Info">
+                            <div className="Header__User-Data">
+                                Федько Руслан
+                            </div>
+                            <div className="Header__User-Email">
+                                ruslan-fedko@miranda-media.ru
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

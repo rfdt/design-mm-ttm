@@ -140,3 +140,24 @@
 .Header__Search-Input{
     width: 300px;
 }
+
+.Header__User{
+    display: flex;
+    align-items: center;
+}
+
+.Header__User-Info{
+    margin-left: 8px;
+}
+
+.Header__User-Data{
+    position: relative;
+    top: -4px;
+    font-size: 20px;
+    line-height: 26px;
+    font-weight: bold;
+}
+
+.Header__User-Email{
+    color: #8c8c8c;
+}

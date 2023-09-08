@@ -1,0 +1,142 @@
+@import url('https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,800;0,900;1,800;1,900&display=swap');
+
+.App__Container {
+    width: 100%;
+    height: 100vh;
+    background-color: #faf9ff;
+    display: flex;
+    flex-direction: row;
+}
+
+.Menu__Container {
+    width: 280px;
+    height: 100%;
+    background-color: #5a57ff;
+    border-radius: 0 50px 50px 0;
+    position: relative;
+    z-index: 2;
+}
+
+.Menu__Logo{
+    user-select: none;
+    margin-top: 50px;
+}
+
+.Menu__Logo-IMG{
+    display: flex;
+    justify-content: center;
+}
+
+.Menu__Logo-IMG img{
+    margin: 0 auto;
+    height: 60%;
+    width: 60%;
+}
+
+.Menu__Logo-Title{
+    font-size: 22px;
+    color: #ffffff;
+    text-align: center;
+    margin-top: 20px;
+    letter-spacing: 1px;
+    font-weight: 800;
+    font-family: 'Exo 2', sans-serif;
+}
+
+.Menu__Items{
+    user-select: none;
+    margin-top: 120px;
+}
+
+.Menu__Item{
+    padding-left: 45px;
+    margin-bottom: 30px;
+    cursor: pointer;
+}
+
+.Menu__Item--Active{
+    border-left: 4px solid #ffffff;
+}
+
+.Menu__Item-Logo{
+    font-size: 28px;
+    color: white;
+    opacity: 0.4;
+}
+
+.Menu__Item-Logo--Active{
+    opacity: 1;
+    font-size: 34px;
+}
+
+.Menu__Item-Text{
+    padding-left: 20px;
+    font-size: 18px;
+    color: white;
+    opacity: 0.4;
+    position: relative;
+    top: -2px;
+}
+
+.Menu__Item-Text--Active{
+    opacity: 1;
+    font-size: 22px;
+}
+
+.Menu__Bottom{
+    user-select: none;
+    position: absolute;
+    bottom: 50px;
+    height: 100px;
+    width: 100%;
+}
+
+.Menu__Settings, .Menu__Logout {
+    padding-left: 45px;
+    margin-bottom: 30px;
+    cursor: pointer;
+}
+
+.Menu__Settings-Logo, .Menu__Logout-Logo{
+    font-size: 28px;
+    color: white;
+    opacity: 0.4;
+    transition: 0.4s;
+}
+
+.Menu__Settings-Text, .Menu__Logout-Text{
+    padding-left: 20px;
+    font-size: 18px;
+    color: white;
+    opacity: 0.4;
+    position: relative;
+    top: -2px;
+    transition: 0.4s;
+}
+
+.Menu__Settings:hover > *, .Menu__Logout:hover > *{
+    opacity: 1;
+}
+
+.Layout__Container{
+    width: 100%;
+}
+
+.Header__Container{
+    height: 80px;
+    background: #ffffff;
+    width: calc(100% + 50px);
+    left: -50px;
+    z-index: 0;
+    position: relative;
+    box-shadow: -2px 7px 5px -4px rgba(34, 60, 80, 0.2);
+    padding-left: 90px;
+    padding-right: 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.Header__Search-Input{
+    width: 300px;
+}

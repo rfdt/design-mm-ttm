@@ -11,6 +11,7 @@ import {Avatar, Badge, Input} from "antd";
 import {useState} from "react";
 import classNames from "classnames";
 import Home from "./Pages/Home/Home";
+import Channels from "./Pages/Channels/Channels";
 
 const {Search} = Input;
 
@@ -111,7 +112,8 @@ function App() {
                     </div>
                 </div>
                 <div className="Pages__Container">
-                    <Home />
+                    {/*<Home /> HOME PAGE LAYOUT*/}
+                    <Channels/>
                 </div>
             </div>
         </div>

@@ -8,7 +8,6 @@ function ChannelsCityChart(props) {
     const [chartOptions, setChartOptions] = useState({});
 
     useEffect(() => {
-        const documentStyle = getComputedStyle(document.documentElement);
         const data = {
             labels: ['Симферополь', 'Севастополь', 'Керчь', 'Алушта', 'Ялта', 'Джанкой'],
             datasets: [

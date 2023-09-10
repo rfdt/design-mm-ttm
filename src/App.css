@@ -161,3 +161,8 @@
 .Header__User-Email{
     color: #8c8c8c;
 }
+
+.Pages__Container{
+    height: calc(100% - 80px);
+    padding: 20px;
+}

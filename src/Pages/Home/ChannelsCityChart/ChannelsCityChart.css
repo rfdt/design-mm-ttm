@@ -1,0 +1,11 @@
+.ChannelsCityChart__Container{
+    width: 100%;
+    height: 100%;
+    border-radius: 35px;
+    padding: 10px;
+}
+
+.ChannelsCityChart__Chart{
+    width: 100%;
+    height: 100%;
+}

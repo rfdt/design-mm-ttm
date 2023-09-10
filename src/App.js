@@ -4,13 +4,13 @@ import {
     HomeOutlined,
     IssuesCloseOutlined,
     LogoutOutlined,
-    ScheduleOutlined,
-    SettingOutlined,
+    SettingOutlined, SlidersOutlined,
     UserOutlined
 } from "@ant-design/icons";
 import {Avatar, Badge, Input} from "antd";
 import {useState} from "react";
 import classNames from "classnames";
+import Home from "./Pages/Home/Home";
 
 const {Search} = Input;
 
@@ -50,7 +50,7 @@ function App() {
                             'Menu__Item',
                             {'Menu__Item--Active' : selectedItem === 'inventory'}
                         )} onClick={()=>setSelectedItem('inventory')}>
-                        <ScheduleOutlined className={
+                        <SlidersOutlined className={
                             classNames(
                                 'Menu__Item-Logo',
                                 {'Menu__Item-Logo--Active' : selectedItem === 'inventory'}
@@ -109,6 +109,9 @@ function App() {
                             </div>
                         </div>
                     </div>
+                </div>
+                <div className="Pages__Container">
+                    <Home />
                 </div>
             </div>
         </div>

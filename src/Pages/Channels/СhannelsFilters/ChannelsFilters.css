@@ -1,0 +1,39 @@
+.ChannelsFilters__Container{
+    padding-top: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    height: 100%;
+}
+
+.ChannelsFilters__Base{
+    width: 50%;
+    height: 100%;
+}
+
+.ChannelsFilters__Info{
+    width: 50%;
+    height: 100%;
+}
+
+.ChannelsFilters__AdditionalSearch{
+    display: flex;
+    align-items: center;
+}
+
+.ChannelsFilters__AdditionalSearch-Input{
+    width: 60%;
+}
+
+.ChannelsFilters__AdditionalSearch-SearchBtn{
+    margin-left: 10px;
+}
+
+.ChannelsFilters__AdditionalSearch-ClearBtn{
+    margin-left: 10px;
+}
+
+.ChannelsFilters__MainSearch{
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-between;
+}

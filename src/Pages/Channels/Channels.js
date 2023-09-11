@@ -1,50 +1,42 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import _InnerPage from "../_InnerPage/_InnerPage";
-import { DataTable } from 'primereact/datatable';
-import {Column} from "primereact/column";
 import './Channels.css';
-import fakeData from '../../static/staticData/fake_data.json';
-import {Tag} from "primereact/tag";
+import ChannelsFilters from "./СhannelsFilters/ChannelsFilters";
+import ChannelsTable from "./ChannelsTable/ChannelsTable";
+import ChannelInfo from "./ChannelInfo/ChannelInfo";
 
 function Channels(props) {
 
     const [selectedChannel, setSelectedChannel] = useState(null);
+    const [channelInfoVisible, setChannelInfoVisible] = useState(false);
 
-    const getStatusColor = (status)=>{
-        switch (status) {
-            case 'ВКЛ':
-                return 'success';
-            case 'ВЫКЛ':
-                return 'danger';
-            case 'ИЗМ':
-                return 'info';
+    useEffect(()=>{
+        if(selectedChannel && selectedChannel._id){
+            setChannelInfoVisible(true);
+        } // Эффекта которая срабатывает на выбранный канал, если выбран канал с полем _id,
+        // то открыть сайд бар, запускать асинх на загрузку и т.д
+    }, [selectedChannel]);
+
+    useEffect(()=>{
+        if(!selectedChannel){
+            //Эффекта, которая срабатывает на удаление канала из состояние локального selectedChannel
+            //Удалять тут состояния которое загружается с сервера и т.д
+            setChannelInfoVisible(false);
         }
-    }
+    },[selectedChannel])
 
-    const statusBodyTemplate = (rowData) => {
-        return <Tag style={{width: "50px",}} value={rowData.status} severity={getStatusColor(rowData.status)}></Tag>;
-    };
+    const closeChannelInfo = () =>{
+        setSelectedChannel(null);
+    }
 
     return (
        <_InnerPage>
            <div className="ChannelsPage__Container">
                <div className="ChannelsPage__Filters">
-                Фильтры
+                <ChannelsFilters selectedChannel={selectedChannel} setSelectedChannel={setSelectedChannel}/>
                </div>
-               <DataTable value={fakeData} paginator rows={10} className={'ChannelsPage__Table-Container'}
-                          selectionMode="single" selection={selectedChannel} onSelectionChange={(e) => setSelectedChannel(e.value)} dataKey="_id"
-                          metaKeySelection={false}>
-                   <Column field="id" header="ID" style={{maxWidth: '60px', overflow: 'clip'}}></Column>
-                   <Column field="id_oss" header="ID_OSS"></Column>
-                   <Column field="client" header="Клиент"></Column>
-                   <Column field="service" header="Услуга"></Column>
-                   <Column field="city" header="Нас.Пункт"></Column>
-                   <Column field="street" header="Улица"></Column>
-                   <Column field="home" header="Дом"></Column>
-                   <Column field="status" header="Статус" body={statusBodyTemplate}></Column>
-                   <Column field="date" header="Дата"></Column>
-               </DataTable>
-
+               <ChannelsTable selectedChannel={selectedChannel} setSelectedChannel={setSelectedChannel} />
+               <ChannelInfo channelInfoVisible={channelInfoVisible} closeChannelInfo={closeChannelInfo}/>
            </div>
        </_InnerPage>
     );

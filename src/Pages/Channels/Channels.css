@@ -3,6 +3,7 @@
 }
 
 .ChannelsPage__Table-Container{
+    margin-top: 10px;
     border: 1px solid #efdbff;
     -webkit-box-shadow: -7px 4px 29px 9px rgba(217, 217, 217, 0.2);
     -moz-box-shadow: -7px 4px 29px 9px rgba(217, 217, 217, 0.2);
@@ -10,6 +11,5 @@
 }
 
 .ChannelsPage__Filters{
-    height: 110px;
-    /*background-color: red;*/
+    height: 120px;
 }

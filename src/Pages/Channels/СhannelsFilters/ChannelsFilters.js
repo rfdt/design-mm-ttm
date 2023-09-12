@@ -46,7 +46,7 @@ function ChannelsFilters(props) {
             <div className="ChannelsFilters__Base">
                 <div className="ChannelsFilters__AdditionalSearch">
                     <InputText type="text"
-                               className="p-inputtext-lg ChannelsFilters__AdditionalSearch-Input"
+                               className=" ChannelsFilters__AdditionalSearch-Input"
                                placeholder="ID / Клиент / Доп.Инфо / Примечание" />
                     <Button icon="pi pi-search"
                             className={'ChannelsFilters__AdditionalSearch-SearchBtn'}  rounded severity="info"/>

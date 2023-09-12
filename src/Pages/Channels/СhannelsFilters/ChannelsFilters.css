@@ -3,15 +3,16 @@
     padding-left: 10px;
     padding-right: 10px;
     height: 100%;
+    display: flex;
 }
 
 .ChannelsFilters__Base{
-    width: 50%;
+    width: 65%;
     height: 100%;
 }
 
 .ChannelsFilters__Info{
-    width: 50%;
+    width: 35%;
     height: 100%;
 }
 
@@ -36,4 +37,49 @@
     margin-top: 10px;
     display: flex;
     justify-content: space-between;
+}
+
+.ChannelsFilters__MainSearch-City{
+    width: 30%;
+}
+
+.ChannelsFilters__MainSearch-Street{
+    width: 30%;
+}
+
+.ChannelsFilters__MainSearch-Home{
+    width: 13%;
+}
+
+.ChannelsFilters__MainSearch-Service{
+    width: 13%;
+}
+
+.ChannelsFilters__MainSearch-Status{
+    width: 13%;
+}
+
+.ChannelsFilters__Info{
+    padding: 10px;
+    /*background-color: red;*/
+}
+
+.ChannelsFilters__Info div{
+    height: 50%;
+}
+
+.ChannelsFilters__ExtendedSearch-Info{
+    font-size: 28px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    text-align: center;
+}
+
+.ChannelsFilters__ExtendedSearch-Btns{
+    display: flex;
+    justify-content: center;
+}
+
+.ChannelsFilters__ExtendedSearch-Btn{
+    margin-left: 10px;
 }

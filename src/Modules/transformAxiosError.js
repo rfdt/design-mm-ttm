@@ -1,0 +1,1 @@
+export const transformAxiosError = (error) => error?.response?.data.message || error?.request.message || error.message

@@ -1,0 +1,25 @@
+.ExtendedSearch__Container{
+    width: 500px;
+}
+
+.ExtendedSearch__Row{
+    margin-top: 8px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.ExtendedSearch__Item-25{
+    width: 25%;
+}
+
+.ExtendedSearch__Item-40{
+    width: 49%;
+}
+
+.ExtendedSearch__Item-100{
+    width: 100%;
+}
+
+.p-autocomplete-items-wrapper{
+    max-width: 600px;
+}

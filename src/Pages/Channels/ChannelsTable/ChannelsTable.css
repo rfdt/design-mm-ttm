@@ -1,7 +1,7 @@
-.ChannelsPage__Table-Container table{
-    /*стиль который не даёт таблице уменьшится при недостатке элементов, подумать, нужен он или нет*/
-    min-height: 700px;
-}
+/*.ChannelsPage__Table-Container table{*/
+/*    !*стиль который не даёт таблице уменьшится при недостатке элементов, подумать, нужен он или нет*!*/
+/*    min-height: 700px;*/
+/*}*/
 
 .ChannelsPage__Table-Container{
     margin-top: 10px;
@@ -13,10 +13,13 @@
 
 .ChannelsPage__Table-ID-Field{
     width: 5%;
+    max-width: 130px;
+    overflow-x: hidden;
 }
 
 .ChannelsPage__Table-ID-OSS-Field{
     width: 5%;
+    max-width: 5%;
 }
 
 .ChannelsPage__Table-Client-Field{

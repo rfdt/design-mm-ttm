@@ -183,7 +183,7 @@ function ChannelsFilters({
                     </div>
                 </div>
             </div>
-            <ExtendedSearch visible={extendedSearchVisible} close={() => setExtendedSearchVisible(false)}
+            <ExtendedSearch  visible={extendedSearchVisible} close={() => setExtendedSearchVisible(false)}
                             // clientFilter={clientFilter} setClientFilter={setClientFilter}
                             filtersValue={filtersValue}
                             rdFilter={rdFilter} setRdFilter={setRdFilter}

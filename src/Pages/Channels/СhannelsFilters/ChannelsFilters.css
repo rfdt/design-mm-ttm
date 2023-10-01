@@ -83,3 +83,76 @@
 .ChannelsFilters__ExtendedSearch-Btn{
     margin-left: 10px;
 }
+
+/*Приоритет снизу вверх*/
+/*Сначала правило до 320 потом до 480 и т.д*/
+@media (max-width: 1440px) {
+    /*from 0px to 1440px*/
+}
+@media (max-width: 1200px) {
+   .ChannelsFilters__Container{
+       flex-wrap: nowrap;
+       flex-direction: column;
+   }
+    .ChannelsFilters__Base{
+        order: 2;
+        width: 100%;
+    }
+    .ChannelsFilters__Info{
+        order: 1;
+        display: flex;
+        width: 100%;
+        align-items: center;
+        justify-content: space-between;
+        height: 80px;
+        padding: 10px 0;
+    }
+    .ChannelsFilters__Info div{
+        height: 100%;
+    }
+    .ChannelsFilters__ExtendedSearch-Info{
+       line-height: 51px;
+    }
+    .ChannelsFilters__AdditionalSearch-Input{
+        flex-grow: 1;
+    }
+}
+@media (max-width: 992px){
+    /*from 0px to 992px*/
+}
+@media (max-width: 768px) {
+    .ChannelsFilters__Base{
+
+    }
+    .ChannelsFilters__MainSearch{
+        flex-wrap: wrap;
+        /*flex-direction: column;*/
+    }
+    .ChannelsFilters__MainSearch-City{
+        width: 100%;
+    }
+    .ChannelsFilters__MainSearch-Street{
+        margin-top: 5px;
+        margin-bottom: 5px;
+        width: 100%;
+    }
+    .ChannelsFilters__MainSearch-Home{
+        width: 33%;
+    }
+    .ChannelsFilters__MainSearch-Status{
+        width: 33%;
+    }
+    .ChannelsFilters__MainSearch-Service{
+        width: 33%;
+    }
+    .ChannelsFilters__Info{
+        flex-direction: column;
+        height: auto;
+    }
+}
+@media (max-width: 480px){
+
+}
+@media (max-width: 320px){
+    /*from 0px to 320px*/
+}

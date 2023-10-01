@@ -1,0 +1,184 @@
+.Menu__Container {
+    flex-shrink: 0;
+    width: 80px;
+    overflow: hidden;
+    height: 100%;
+    background-color: #5a57ff;
+    border-radius: 0 10px 10px 0;
+    position: relative;
+    z-index: 2;
+    /*display: none;*/
+    transition: 0.2s all linear;
+
+}
+
+.Menu--Open {
+    width: 230px;
+    border-radius: 0 50px 50px 0;
+}
+
+.Menu__Logo {
+    user-select: none;
+    /*margin-top: 50px;*/
+    height: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 0.15s linear;
+}
+
+.Menu__Logo--Open {
+    height: 200px;
+    flex-direction: column;
+}
+
+.Menu__Logo-IMG {
+    width: 150px;
+}
+
+.Menu__Logo-IMG img {
+    margin: 0 auto;
+    height: 100%;
+    width: 100%;
+}
+
+.Menu__Logo-Title {
+    font-size: 22px;
+    color: #ffffff;
+    text-align: center;
+    margin-top: 20px;
+    letter-spacing: 1px;
+    font-weight: 800;
+    font-family: 'Exo 2', sans-serif;
+    transition: 0.3s;
+    opacity: 0;
+    animation: visible 0.6s forwards;
+}
+
+@keyframes visible {
+    0% {
+        opacity: 0;
+    }
+    35% {
+        opacity: 0
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+.Menu__Items {
+    user-select: none;
+    margin-top: 120px;
+}
+
+.Menu__Item {
+    /*padding-left: 45px;*/
+    margin-bottom: 30px;
+    cursor: pointer;
+}
+
+.Menu__Item--Closed {
+    display: flex;
+    justify-content: center;
+}
+
+.Menu__Item--Active {
+    border-left: 4px solid #ffffff;
+}
+
+.Menu__Item-Logo {
+    font-size: 28px;
+    color: white;
+    opacity: 0.4;
+}
+
+.Menu__Item-Logo-Opened {
+    margin-left: 40px;
+}
+
+.Menu__Item-Logo--Active {
+    opacity: 1;
+    font-size: 34px;
+    /*margin-left: 34px;*/
+}
+
+.Menu__Item-Text {
+    padding-left: 20px;
+    font-size: 18px;
+    color: white;
+    position: relative;
+    top: -2px;
+    animation: visible 0.5s forwards;
+}
+
+.Menu__Item-Text--Disabled{
+    color: #8A88FF;
+}
+
+.Menu__Item-Text--Active {
+    font-size: 22px;
+    color: white;
+}
+
+@keyframes visible-opacity4 {
+    0% {
+        opacity: 0;
+    }
+    35% {
+        opacity: 0
+    }
+    100% {
+        opacity: 0.4;
+    }
+}
+
+.Menu__Bottom {
+    user-select: none;
+    position: absolute;
+    bottom: 20px;
+    width: 100%;
+    height: 180px;
+}
+
+.Menu__Item:hover > *, .Menu__Item:hover > * {
+    opacity: 1;
+    color: white;
+    transition: 0.2s;
+}
+
+.Menu__Item-Bottom-Text{
+    color: #8A88FF;
+}
+
+.Menu-Item-Closed{
+    transform: rotate(-180deg);
+}
+
+/*Приоритет снизу вверх*/
+/*Сначала правило до 320 потом до 480 и т.д*/
+@media (max-width: 1440px) {
+    /*from 0px to 1440px*/
+}
+
+@media (max-width: 1200px) {
+    /*from 0px to 1200px*/
+}
+
+@media (max-width: 992px) {
+    .Menu__Container {
+        display: none;
+    }
+}
+
+@media (max-width: 768px) {
+    /*from 0px to 768px*/
+}
+
+@media (max-width: 480px) {
+    /*from 0px to 480px*/
+}
+
+@media (max-width: 320px) {
+    /*from 0px to 320px*/
+}

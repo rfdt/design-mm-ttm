@@ -47,7 +47,9 @@ function ExtendedSearch({
         filtersValue ? setAccSuggestions(e.query ? filtersValue.acc.filter(acc => acc.toLowerCase().includes(e.query.toLowerCase())) : filtersValue.acc) : setAccSuggestions([]);
     }
 
-    return (<Dialog header="Расширенный поиск" visible={visible} className={'ExtendedSearch__Container'} onHide={close}
+    return (<Dialog header="Расширенный поиск" visible={visible} className={'ExtendedSearch__Container'}
+                    blockScroll={false}
+                    onHide={close}
                     dismissableMask draggable={false} resizable={false}>
         <div className="ExtendedSearch__Filters">
             <div className="ExtendedSearch__Row">

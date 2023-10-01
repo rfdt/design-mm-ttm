@@ -27,3 +27,28 @@
     border-radius: 10px;
     background-color: #5a57ff;
 }
+
+/*Приоритет снизу вверх*/
+/*Сначала правило до 320 потом до 480 и т.д*/
+@media (max-width: 1440px) {
+    /*from 0px to 1440px*/
+}
+@media (max-width: 1200px) {
+    /*from 0px to 1200px*/
+}
+@media (max-width: 992px){
+    /*from 0px to 992px*/
+}
+@media (max-width: 768px) {
+    .InnerPage__ScrollBar--Style::-webkit-scrollbar
+    {
+        width: 0px;
+        background-color: #F5F5F5;
+    }
+}
+@media (max-width: 480px){
+
+}
+@media (max-width: 320px){
+    /*from 0px to 320px*/
+}

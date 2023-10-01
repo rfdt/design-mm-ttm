@@ -3,6 +3,10 @@
 /*    min-height: 700px;*/
 /*}*/
 
+.ChannelsPage__Table-Container .p-datatable-wrapper {
+    max-height: calc(100vh - 255px);
+}
+
 .ChannelsPage__Table-Container{
     margin-top: 10px;
     border: 1px solid #efdbff;
@@ -52,4 +56,51 @@
 
 .ChannelsPage__Table-Date-Field{
     width: 5%;
+}
+
+/*Приоритет снизу вверх*/
+/*Сначала правило до 320 потом до 480 и т.д*/
+@media (max-width: 1440px) {
+    /*from 0px to 1440px*/
+    .ChannelsPage__Table-ID-OSS-Field{
+        display: none;
+    }
+    .ChannelsPage__Table-Date-Field{
+        display: none;
+    }
+}
+@media (max-width: 1250px) {
+    .ChannelsPage__Table-City-Field{
+        display: none;
+    }
+    .ChannelsPage__Table-Street-Field{
+        display: none;
+    }
+    .ChannelsPage__Table-Home-Field{
+        display: none;
+    }
+    .ChannelsPage__Table-Container{
+        font-size: 14px;
+    }
+    .ChannelsPage__Table-Container .p-datatable-wrapper {
+        max-height: calc(100vh - 320px);
+    }
+}
+@media (max-width: 992px){
+   .ChannelsPage__Table-Date-Field{
+       display: none;
+   }
+}
+@media (max-width: 768px) {
+    .ChannelsPage__Table-ID-Field{
+        display: none;
+    }
+}
+@media (max-width: 480px){
+    .ChannelsPage__Table-Size-Field{
+        display: none;
+    }
+}
+@media (max-width: 320px){
+    /*from 0px to 320px*/
 }

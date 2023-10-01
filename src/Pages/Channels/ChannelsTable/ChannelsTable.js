@@ -43,13 +43,13 @@ function ChannelsTable({setSelectedChannel, selectedChannel, filteredChannels}) 
     return (
         <>
             <ContextMenu model={menuModel} ref={cm} onHide={() => setContextSelected(null)}/>
-            <DataTable value={filteredChannels} scrollable scrollHeight={'700px'} className={'ChannelsPage__Table-Container'}
+            <DataTable value={filteredChannels} scrollable className={'ChannelsPage__Table-Container'}
                        selectionMode="single" selection={selectedChannel}
                        onSelectionChange={(e) => setSelectedChannel(e.value)} dataKey="_id"
                        onContextMenu={(e) => cm.current.show(e.originalEvent)}
                        contextMenuSelection={contextSelected}
                        onContextMenuSelectionChange={(e) => setContextSelected(e.value)}
-                       metaKeySelection={false} /*isDataSelectable={isRowSelectable}*/
+                       metaKeySelection={false}
             >
                 <Column field="id_suz" header="ID" className='ChannelsPage__Table-ID-Field'></Column>
                 <Column field="id_oss" header="ID_OSS" className='ChannelsPage__Table-ID-OSS-Field'></Column>

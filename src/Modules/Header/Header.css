@@ -72,12 +72,13 @@
     .Header__User-Email{
         font-size: 14px;
     }
+    .Header__User-Info{
+        max-width: 80%;
+        overflow: hidden;
+    }
 }
 @media (max-width: 550px){
     /*from 0px to 480px*/
-    .Header__User-Email{
-        display: none;
-    }
 }
 @media (max-width: 480px){
     /*from 0px to 480px*/

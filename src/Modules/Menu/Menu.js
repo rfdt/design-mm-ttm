@@ -12,7 +12,7 @@ import {
 import './Menu.css';
 
 function Menu(props) {
-    const [isMenuOpened, setIsMenuOpened] = useState(true)
+    const [isMenuOpened, setIsMenuOpened] = useState(false)
     const [selectedItem, setSelectedItem] = useState('home');
 
     return (

@@ -53,6 +53,13 @@ function ChannelsFilters({
         setStreetFilter('');
         setStatusFilter('');
         setServiceFilter('');
+        setPeFilter('');
+        setRdFilter('');
+        setVidFilter('');
+        setSizeFilter('')
+        setChannelIpMngFilter('');
+        setChannelAggStopFilter('');
+        setChannelAccStopFilter('');
 
         findChannels({
             addInfoFilter: "",

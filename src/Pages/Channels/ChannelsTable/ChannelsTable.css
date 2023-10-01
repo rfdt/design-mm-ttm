@@ -82,6 +82,8 @@
     .ChannelsPage__Table-Container{
         font-size: 14px;
     }
+}
+@media (max-width: 1200px) {
     .ChannelsPage__Table-Container .p-datatable-wrapper {
         max-height: calc(100vh - 320px);
     }
@@ -94,6 +96,9 @@
 @media (max-width: 768px) {
     .ChannelsPage__Table-ID-Field{
         display: none;
+    }
+    .ChannelsPage__Table-Container .p-datatable-wrapper {
+        max-height: max-content;
     }
 }
 @media (max-width: 480px){

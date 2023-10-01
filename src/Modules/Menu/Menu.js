@@ -87,7 +87,7 @@ function Menu(props) {
             </div>
             <div className="Menu__Bottom">
                 <div onClick={()=>setIsMenuOpened(!isMenuOpened)}
-                    className={classNames('Menu__Item',
+                    className={classNames('Menu__Item', 'Menu__Item-Open-Btn',
                         {'Menu__Item--Closed': !isMenuOpened})}>
                     <RightCircleOutlined  className={
                         classNames(

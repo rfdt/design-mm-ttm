@@ -1,0 +1,87 @@
+.Header__Container{
+    height: 80px;
+    background: #ffffff;
+    width: calc(100% + 50px);
+    left: -50px;
+    z-index: 0;
+    position: relative;
+    box-shadow: -2px 7px 5px -4px rgba(34, 60, 80, 0.2);
+    padding-left: 90px;
+    padding-right: 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.Header__Search-Input{
+    width: 300px;
+}
+
+.Header__User{
+    display: flex;
+    align-items: center;
+}
+
+.Header__User-Info{
+    margin-left: 8px;
+}
+
+.Header__User-Data{
+    position: relative;
+    top: -4px;
+    font-size: 20px;
+    line-height: 26px;
+    font-weight: bold;
+}
+
+.Header__User-Email{
+    color: #8c8c8c;
+}
+
+.Header__Mobile-Menu-Btn{
+    font-size: 32px;
+    font-weight: 600;
+    display: none;
+    color: #8c8c8c;
+    transition: 0.1s linear;
+}
+
+.Header__Mobile-Menu-Btn:hover{
+    color: #8A88FF;
+}
+
+@media (max-width: 992px){
+    .Header__Search{
+        display: none;
+    }
+    .Header__Mobile-Menu-Btn{
+        display: block;
+    }
+}
+@media (max-width: 768px) {
+    /*from 0px to 768px*/
+    .Header__Container{
+        padding-left: 60px;
+        padding-right: 10px;
+        height: 60px;
+    }
+    .Header__User-Data{
+        font-size: 16px;
+        top: 0;
+    }
+    .Header__User-Email{
+        font-size: 14px;
+    }
+}
+@media (max-width: 550px){
+    /*from 0px to 480px*/
+    .Header__User-Email{
+        display: none;
+    }
+}
+@media (max-width: 480px){
+    /*from 0px to 480px*/
+}
+@media (max-width: 320px){
+    /*from 0px to 320px*/
+}

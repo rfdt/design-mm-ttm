@@ -1,6 +1,6 @@
 import React from 'react';
 import {Avatar, Badge, Input} from "antd";
-import {LeftCircleOutlined, LeftSquareOutlined, UserOutlined} from "@ant-design/icons";
+import {LeftCircleOutlined, UserOutlined} from "@ant-design/icons";
 import './Header.css';
 
 const {Search} = Input;

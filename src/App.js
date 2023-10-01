@@ -1,7 +1,4 @@
 import './App.css';
-import {useState} from "react";
-import classNames from "classnames";
-import Home from "./Pages/Home/Home";
 import Channels from "./Pages/Channels/Channels";
 import Menu from "./Modules/Menu/Menu";
 import Header from "./Modules/Header/Header";

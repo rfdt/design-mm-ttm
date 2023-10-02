@@ -1,8 +1,5 @@
 import {axiosRequest} from "../Axios/axiosRequest";
 
-// export const ChannelsApi = {
-//     gitFiltersValue: () => axiosRequest.get('/channels/getfiltersvalue'),
-// }
 
 export class ChannelsApi {
     static prefix = 'channels/'

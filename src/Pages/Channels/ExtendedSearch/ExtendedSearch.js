@@ -48,7 +48,7 @@ function ExtendedSearch({
     }
 
     return (<Dialog header="Расширенный поиск" visible={visible} className={'ExtendedSearch__Container'}
-                    blockScroll={false}
+                    blockScroll={true}
                     onHide={close}
                     dismissableMask draggable={false} resizable={false}>
         <div className="ExtendedSearch__Filters">

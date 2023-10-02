@@ -19,5 +19,9 @@ export class ChannelsApi {
         return axiosRequest.get(ChannelsApi.prefix + 'find/'+channel_id)
     }
 
+    static findToExport(filters){
+        return axiosRequest.post(ChannelsApi.prefix + 'findall', {...filters})
+    }
+
 
 }

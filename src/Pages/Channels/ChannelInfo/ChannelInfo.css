@@ -113,6 +113,15 @@
     .ChannelInfo__Table-String{
         flex-direction: column;
     }
+    .ChannelInfo__Table-String-Input-100{
+        margin-bottom: 5px;
+    }
+    .ChannelInfo__Table-String-Input-70{
+        margin-bottom: 5px;
+    }
+    .ChannelInfo__Table-String-Input-45{
+        margin-bottom: 5px;
+    }
 }
 @media (max-width: 480px){
     /*from 0px to 480px*/
@@ -122,6 +131,7 @@
     }
     .ChannelInfo__Table-String-Input-25{
         width: 50%;
+        margin-bottom: 5px;
     }
 }
 @media (max-width: 420px){

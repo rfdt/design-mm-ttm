@@ -6,6 +6,7 @@ import {Dropdown} from "primereact/dropdown";
 import {ChannelsApi} from "../../../Api/ChannelsApi";
 import './ChannelsFilters.css';
 import ExtendedSearch from "../ExtendedSearch/ExtendedSearch";
+import ExportExcel from "../ExportExcel/ExportExcel";
 
 function ChannelsFilters({
                              showError,
@@ -22,8 +23,7 @@ function ChannelsFilters({
                              setStatusFilter,
                              statusFilter,
                              findChannels,
-                             channelsCount,
-                             // clientFilter,
+                             channelsCount, // clientFilter,
                              // setClientFilter,
                              rdFilter,
                              setRdFilter,
@@ -36,7 +36,9 @@ function ChannelsFilters({
                              channelIpMngFilter,
                              channelAccStopFilter,
                              setChannelAccStopFilter,
-                             setChannelIpMngFilter, peFilter, setPeFilter
+                             setChannelIpMngFilter,
+                             peFilter,
+                             setPeFilter
                          }) {
     const [filtersValue, setFiltersValue] = useState(null);
     const [filteredCitySuggestions, setFilteredCitySuggestions] = useState([]);
@@ -68,7 +70,13 @@ function ChannelsFilters({
             homeFilter: "",
             statusFilter: "",
             serviceFilter: "",
-            peFilter:"", rdFilter:"", channelAggStopFilter:"", vidFilter:"", sizeFilter:"", channelAccStopFilter:"", channelIpMngFilter:""
+            peFilter: "",
+            rdFilter: "",
+            channelAggStopFilter: "",
+            vidFilter: "",
+            sizeFilter: "",
+            channelAccStopFilter: "",
+            channelIpMngFilter: ""
         })
     }
 
@@ -93,20 +101,15 @@ function ChannelsFilters({
             });
             setServicesSuggestions(suggestions);
         }
-        setStatusSuggestions([
-            {name: "ВКЛ", code: "ВКЛ"},
-            {name: "ОТКЛ", code: "ОТКЛ"},
-            {name: "РЕЗЕРВ", code: "РЕЗЕРВ"},
-            {name: "ИЗМ", code: "ИЗМ"},
-            {name: "ПАУЗА", code: "ПАУЗА"},
-        ])
+        setStatusSuggestions([{name: "ВКЛ", code: "ВКЛ"}, {name: "ОТКЛ", code: "ОТКЛ"}, {
+            name: "РЕЗЕРВ",
+            code: "РЕЗЕРВ"
+        }, {name: "ИЗМ", code: "ИЗМ"}, {name: "ПАУЗА", code: "ПАУЗА"},])
     }, [filtersValue])
 
 
     const cityCompleteMethod = (e) => {
-        filtersValue ?
-            setFilteredCitySuggestions(e.query ? filtersValue.city.filter(city => city.toLowerCase().includes(e.query.toLowerCase())) : filtersValue.city) :
-            setFilteredCitySuggestions([]);
+        filtersValue ? setFilteredCitySuggestions(e.query ? filtersValue.city.filter(city => city.toLowerCase().includes(e.query.toLowerCase())) : filtersValue.city) : setFilteredCitySuggestions([]);
     }
 
     const streetsCompleteMethod = (e) => {
@@ -126,8 +129,7 @@ function ChannelsFilters({
         }
     }
 
-    return (
-        <>
+    return (<>
             <div className='ChannelsFilters__Container'>
                 <div className="ChannelsFilters__Base">
                     <div className="ChannelsFilters__AdditionalSearch">
@@ -136,7 +138,7 @@ function ChannelsFilters({
                                    placeholder="ID / Клиент / Доп.Инфо / Примечание" value={addInfoFilter}
                                    onChange={(e) => setAddInfoFilter(e.target.value)}/>
                         <Button icon="pi pi-search"
-                                onClick={()=>findChannels()}
+                                onClick={() => findChannels()}
                                 className={'ChannelsFilters__AdditionalSearch-SearchBtn'} rounded severity="info"/>
                         <Button icon="pi pi-times"
                                 className={'ChannelsFilters__AdditionalSearch-ClearBtn'} onClick={defaultFilters}
@@ -181,8 +183,22 @@ function ChannelsFilters({
                         <Button icon="pi pi-sliders-h" severity="info" className='ChannelsFilters__ExtendedSearch-Btn'
                                 onClick={() => setExtendedSearchVisible(true)}
                         />
-                        <Button icon="pi pi-file-excel" severity="success"
-                                className='ChannelsFilters__ExtendedSearch-Btn'/>
+                        {/*<Button icon="pi pi-file-excel" severity="success"*/}
+                        {/*        className='ChannelsFilters__ExtendedSearch-Btn'/>*/}
+                        <ExportExcel showError={showError} addInfoFilter={addInfoFilter}
+                                     cityFilter={cityFilter}
+                                     streetFilter={streetFilter}
+                                     homeFilter={homeFilter}
+                                     serviceFilter={serviceFilter}
+                                     statusFilter={statusFilter}
+                                     rdFilter={rdFilter}
+                                     channelAggStopFilter={channelAggStopFilter}
+                                     vidFilter={vidFilter}
+                                     sizeFilter={sizeFilter}
+                                     channelAccStopFilter={channelAccStopFilter}
+                                     channelIpMngFilter={channelIpMngFilter}
+                                     peFilter={peFilter}
+                        />
                         <Button icon="pi pi-plus-circle" disabled onClick={() => console.log(123)}
                                 className='ChannelsFilters__ExtendedSearch-Btn'/>
                         <Button icon="pi pi-database" disabled severity="help" onClick={() => console.log(123)}
@@ -190,8 +206,8 @@ function ChannelsFilters({
                     </div>
                 </div>
             </div>
-            <ExtendedSearch  visible={extendedSearchVisible} close={() => setExtendedSearchVisible(false)}
-                            // clientFilter={clientFilter} setClientFilter={setClientFilter}
+            <ExtendedSearch visible={extendedSearchVisible} close={() => setExtendedSearchVisible(false)}
+                // clientFilter={clientFilter} setClientFilter={setClientFilter}
                             filtersValue={filtersValue}
                             rdFilter={rdFilter} setRdFilter={setRdFilter}
                             channelAggStopFilter={channelAggStopFilter}
@@ -204,8 +220,7 @@ function ChannelsFilters({
                             addInfoFilter={addInfoFilter} setAddInfoFilter={setAddInfoFilter}
                             peFilter={peFilter} setPeFilter={setPeFilter}
             />
-        </>
-    );
+        </>);
 }
 
 export default ChannelsFilters;

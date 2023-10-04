@@ -77,12 +77,3 @@
         overflow: hidden;
     }
 }
-@media (max-width: 550px){
-    /*from 0px to 480px*/
-}
-@media (max-width: 480px){
-    /*from 0px to 480px*/
-}
-@media (max-width: 320px){
-    /*from 0px to 320px*/
-}

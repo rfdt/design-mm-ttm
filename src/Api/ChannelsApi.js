@@ -20,5 +20,7 @@ export class ChannelsApi {
         return axiosRequest.post(ChannelsApi.prefix + 'findall', {...filters})
     }
 
-
+    static testError(){
+        return axiosRequest.get(ChannelsApi.prefix + 'test')
+    }
 }

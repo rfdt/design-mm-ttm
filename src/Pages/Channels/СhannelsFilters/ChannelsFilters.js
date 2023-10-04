@@ -101,10 +101,8 @@ function ChannelsFilters({
             });
             setServicesSuggestions(suggestions);
         }
-        setStatusSuggestions([{name: "ВКЛ", code: "ВКЛ"}, {name: "ОТКЛ", code: "ОТКЛ"}, {
-            name: "РЕЗЕРВ",
-            code: "РЕЗЕРВ"
-        }, {name: "ИЗМ", code: "ИЗМ"}, {name: "ПАУЗА", code: "ПАУЗА"},])
+        setStatusSuggestions([{name: "ВКЛ", code: "ВКЛ"}, {name: "ОТКЛ", code: "ОТКЛ"},
+            {name: "РЕЗЕРВ", code: "РЕЗЕРВ"}, {name: "ИЗМ", code: "ИЗМ"}, {name: "ПАУЗА", code: "ПАУЗА"},])
     }, [filtersValue])
 
 
@@ -126,6 +124,14 @@ function ChannelsFilters({
             }
         } else {
             setFilteredStreetsSuggestions([]);
+        }
+    }
+
+    async function testError(){
+        try {
+            await ChannelsApi.testError()
+        }catch (e){
+            showError(e)
         }
     }
 
@@ -199,7 +205,7 @@ function ChannelsFilters({
                                      channelIpMngFilter={channelIpMngFilter}
                                      peFilter={peFilter}
                         />
-                        <Button icon="pi pi-plus-circle" disabled onClick={() => console.log(123)}
+                        <Button icon="pi pi-plus-circle" onClick={testError}
                                 className='ChannelsFilters__ExtendedSearch-Btn'/>
                         <Button icon="pi pi-database" disabled severity="help" onClick={() => console.log(123)}
                                 className='ChannelsFilters__ExtendedSearch-Btn'/>

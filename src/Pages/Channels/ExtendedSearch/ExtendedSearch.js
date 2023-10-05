@@ -3,28 +3,12 @@ import {Dialog} from "primereact/dialog";
 import './ExtendedSearch.css';
 import {AutoComplete} from "primereact/autocomplete";
 import {InputText} from "primereact/inputtext";
+import {useSelector} from "react-redux";
+import {useActions} from "../../../Store/useActions";
 
-function ExtendedSearch({
-                            filtersValue,
-                            visible,
-                            close,
-                            // clientFilter,
-                            // setClientFilter,
-                            addInfoFilter, setAddInfoFilter,
-                            rdFilter,
-                            setRdFilter,
-                            vidFilter,
-                            setVidFilter,
-                            setChannelAggStopFilter,
-                            channelAggStopFilter,
-                            setSizeFilter,
-                            sizeFilter,
-                            channelIpMngFilter,
-                            channelAccStopFilter,
-                            setChannelAccStopFilter,
-                            setChannelIpMngFilter,
-                            peFilter, setPeFilter
-                        }) {
+function ExtendedSearch({visible, close}) {
+    const {channelsFilters, filtersValues} = useSelector(state => state.channels);
+    const {setFilterValue} = useActions()
 
     const [clientsSuggestions, setClientsSuggestions] = useState([]);
     const [aggSuggestions, setAggSuggestions] = useState([]);
@@ -33,18 +17,18 @@ function ExtendedSearch({
 
 
     const clientsCompleteMethod = (e) => {
-        filtersValue ? setClientsSuggestions(e.query ? filtersValue.clients.filter(clients => clients.toLowerCase().includes(e.query.toLowerCase())) : filtersValue.clients) : setClientsSuggestions([]);
+        filtersValues ? setClientsSuggestions(e.query ? filtersValues.clients.filter(clients => clients.toLowerCase().includes(e.query.toLowerCase())) : filtersValues.clients) : setClientsSuggestions([]);
     }
 
     const peCompleteMethod = (e) => {
-        filtersValue ? setPeSuggestions(e.query ? filtersValue.pe.filter(pe => pe.toLowerCase().includes(e.query.toLowerCase())) : filtersValue.pe) : setPeSuggestions([]);
+        filtersValues ? setPeSuggestions(e.query ? filtersValues.pe.filter(pe => pe.toLowerCase().includes(e.query.toLowerCase())) : filtersValues.pe) : setPeSuggestions([]);
     }
     const aggCompleteMethod = (e) => {
-        filtersValue ? setAggSuggestions(e.query ? filtersValue.agg.filter(agg => agg.toLowerCase().includes(e.query.toLowerCase())) : filtersValue.agg) : setAggSuggestions([]);
+        filtersValues ? setAggSuggestions(e.query ? filtersValues.agg.filter(agg => agg.toLowerCase().includes(e.query.toLowerCase())) : filtersValues.agg) : setAggSuggestions([]);
     }
 
     const accCompleteMethod = (e) => {
-        filtersValue ? setAccSuggestions(e.query ? filtersValue.acc.filter(acc => acc.toLowerCase().includes(e.query.toLowerCase())) : filtersValue.acc) : setAccSuggestions([]);
+        filtersValues ? setAccSuggestions(e.query ? filtersValues.acc.filter(acc => acc.toLowerCase().includes(e.query.toLowerCase())) : filtersValues.acc) : setAccSuggestions([]);
     }
 
     return (<Dialog header="Расширенный поиск" visible={visible} className={'ExtendedSearch__Container'}
@@ -53,50 +37,54 @@ function ExtendedSearch({
                     dismissableMask draggable={false} resizable={false}>
         <div className="ExtendedSearch__Filters">
             <div className="ExtendedSearch__Row">
-                <AutoComplete value={addInfoFilter} suggestions={clientsSuggestions}
+                <AutoComplete value={channelsFilters.addInfoFilter} suggestions={clientsSuggestions}
                               completeMethod={clientsCompleteMethod}
                               placeholder='Клиент'
-                              onChange={(e) => setAddInfoFilter(e.value)} dropdown
+                              onChange={(e) => setFilterValue('addInfoFilter', e.target.value)}
+                              dropdown
                               className={'ExtendedSearch__Item-100'}/>
             </div>
             <div className="ExtendedSearch__Row">
-                <AutoComplete value={peFilter} suggestions={peSuggestions}
+                <AutoComplete value={channelsFilters.peFilter} suggestions={peSuggestions}
                               completeMethod={peCompleteMethod}
                               placeholder='PE'
-                              onChange={(e) => setPeFilter(e.value)} dropdown
+                              onChange={(e) => setFilterValue('peFilter', e.target.value)}
+                              dropdown
                               className={'ExtendedSearch__Item-100'}/>
             </div>
             <div className="ExtendedSearch__Row">
-                <InputText value={rdFilter}
+                <InputText value={channelsFilters.rdFilter}
                            placeholder='RD'
-                           onChange={(e) => setRdFilter(e.target.value)}
+                           onChange={(e) => setFilterValue('rdFilter', e.target.value)}
                            className={'ExtendedSearch__Item-40'}/>
-                <AutoComplete value={channelAggStopFilter} suggestions={aggSuggestions}
+                <AutoComplete value={channelsFilters.channelAggStopFilter} suggestions={aggSuggestions}
                               completeMethod={aggCompleteMethod}
                               placeholder='AGG'
-                              onChange={(e) => setChannelAggStopFilter(e.value)} dropdown
+                              onChange={(e) => setFilterValue('channelAggStopFilter', e.target.value)}
+                              dropdown
                               className={'ExtendedSearch__Item-40'}/>
             </div>
             <div className="ExtendedSearch__Row">
-                <InputText value={vidFilter}
+                <InputText value={channelsFilters.vidFilter}
                            placeholder='Vlan ID'
                            keyfilter='num'
-                           onChange={(e) => setVidFilter(e.target.value)}
+                           onChange={(e) => setFilterValue('vidFilter', e.target.value)}
                            className={'ExtendedSearch__Item-40'}/>
-                <InputText value={sizeFilter}
+                <InputText value={channelsFilters.sizeFilter}
                            placeholder='Емкость'
-                           onChange={(e) => setSizeFilter(e.target.value)}
+                           onChange={(e) => setFilterValue('sizeFilter', e.target.value)}
                            className={'ExtendedSearch__Item-40'}/>
             </div>
             <div className="ExtendedSearch__Row">
-                <AutoComplete value={channelAccStopFilter} suggestions={accSuggestions}
+                <AutoComplete value={channelsFilters.channelAccStopFilter} suggestions={accSuggestions}
                               completeMethod={accCompleteMethod}
                               placeholder='ACC'
-                              onChange={(e) => setChannelAccStopFilter(e.value)} dropdown
+                              onChange={(e) => setFilterValue('channelAccStopFilter', e.target.value)}
+                              dropdown
                               className={'ExtendedSearch__Item-40'}/>
-                <InputText value={channelIpMngFilter}
+                <InputText value={channelsFilters.channelIpMngFilter}
                            placeholder='IP/MNG ACC'
-                           onChange={(e) => setChannelIpMngFilter(e.target.value)}
+                           onChange={(e) => setFilterValue('channelIpMngFilter', e.target.value)}
                            className={'ExtendedSearch__Item-40'}/>
             </div>
         </div>

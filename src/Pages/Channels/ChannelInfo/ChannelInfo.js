@@ -1,15 +1,27 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import './ChannelInfo.css';
 import {Sidebar} from "primereact/sidebar";
 import {InputText} from "primereact/inputtext";
 import {Divider} from 'primereact/divider';
 import {ProgressSpinner} from "primereact/progressspinner";
+import {useSelector} from "react-redux";
+import {useActions} from "../../../Store/useActions";
 
-function ChannelInfo({
-                         channelInfoVisible, closeChannelInfo,
-                         loadedChannel, setLoadedChannel,
-                         isLoadingChannel
-                     }) {
+function ChannelInfo() {
+
+    const {isLoadingSelectedChannel, loadedSelectedChannel, selectedChannel} = useSelector(state => state.channels)
+    const {clearSelectedChannel} = useActions()
+    const [visible, setVisible] = useState(false);
+
+    useEffect(()=>{
+        if (selectedChannel && selectedChannel._id) {
+           setVisible(true)
+        }
+        if (!selectedChannel) {
+            setVisible(false)
+        }
+    }, [selectedChannel])
+
 
     const customIcons = (
         <React.Fragment>
@@ -23,15 +35,15 @@ function ChannelInfo({
     );
 
     return (
-        <Sidebar visible={channelInfoVisible} className='ChannelInfo__Container'
-                 position="right" onHide={() => closeChannelInfo(false)} icons={customIcons}>
-            {isLoadingChannel ?
+        <Sidebar visible={visible} className='ChannelInfo__Container'
+                 position="right" onHide={() => clearSelectedChannel()} icons={customIcons}>
+            {isLoadingSelectedChannel ?
                 <div className={'ChannelInfo__Loading'}>
                     <ProgressSpinner style={{margin: "0 auto"}}/>
                 </div>
                 : null}
             {
-                !isLoadingChannel && loadedChannel ?
+                !isLoadingSelectedChannel && loadedSelectedChannel ?
                     <>
                         <div className="ChannelInfo__Table">
                             <div className="ChannelInfo__Table-String">
@@ -39,11 +51,11 @@ function ChannelInfo({
                                     ID
                                 </div>
                                 <div className="ChannelInfo__Table-String-Inputs">
-                                    <InputText value={loadedChannel.id_tbcd}
+                                    <InputText value={loadedSelectedChannel.id_tbcd}
                                                className="p-inputtext-sm ChannelInfo__Table-String-Input-33"/>
-                                    <InputText value={loadedChannel.id_suz}
+                                    <InputText value={loadedSelectedChannel.id_suz}
                                                className="p-inputtext-sm ChannelInfo__Table-String-Input-33"/>
-                                    <InputText value={loadedChannel.id_oss}
+                                    <InputText value={loadedSelectedChannel.id_oss}
                                                className="p-inputtext-sm ChannelInfo__Table-String-Input-33"/>
                                 </div>
                             </div>
@@ -52,7 +64,7 @@ function ChannelInfo({
                                     Клиент
                                 </div>
                                 <div className="ChannelInfo__Table-String-Inputs">
-                                    <InputText value={loadedChannel.client}
+                                    <InputText value={loadedSelectedChannel.client}
                                                className="p-inputtext-sm ChannelInfo__Table-String-Input-100"/>
                                 </div>
                             </div>
@@ -61,9 +73,9 @@ function ChannelInfo({
                                     Услуга
                                 </div>
                                 <div className="ChannelInfo__Table-String-Inputs">
-                                    <InputText value={loadedChannel.service}
+                                    <InputText value={loadedSelectedChannel.service}
                                                className="p-inputtext-sm ChannelInfo__Table-String-Input-50"/>
-                                    <InputText value={loadedChannel.service_size}
+                                    <InputText value={loadedSelectedChannel.service_size}
                                                className="p-inputtext-sm ChannelInfo__Table-String-Input-50"/>
                                 </div>
                             </div>
@@ -72,11 +84,11 @@ function ChannelInfo({
                                     Адрес
                                 </div>
                                 <div className="ChannelInfo__Table-String-Inputs">
-                                    <InputText value={loadedChannel.city}
+                                    <InputText value={loadedSelectedChannel.city}
                                                className="p-inputtext-sm ChannelInfo__Table-String-Input-45"/>
-                                    <InputText value={loadedChannel.street}
+                                    <InputText value={loadedSelectedChannel.street}
                                                className="p-inputtext-sm ChannelInfo__Table-String-Input-45"/>
-                                    <InputText value={loadedChannel.home}
+                                    <InputText value={loadedSelectedChannel.home}
                                                className="p-inputtext-sm ChannelInfo__Table-String-Input-10"/>
                                 </div>
                             </div>
@@ -85,7 +97,7 @@ function ChannelInfo({
                                     Инфо
                                 </div>
                                 <div className="ChannelInfo__Table-String-Inputs">
-                                    <InputText value={loadedChannel.add_info}
+                                    <InputText value={loadedSelectedChannel.add_info}
                                                className="p-inputtext-sm ChannelInfo__Table-String-Input-100"/>
                                 </div>
                             </div>
@@ -94,7 +106,7 @@ function ChannelInfo({
                                     Контакт
                                 </div>
                                 <div className="ChannelInfo__Table-String-Inputs">
-                                    <InputText value={loadedChannel.contact}
+                                    <InputText value={loadedSelectedChannel.contact}
                                                className="p-inputtext-sm ChannelInfo__Table-String-Input-100"/>
                                 </div>
                             </div>
@@ -103,14 +115,14 @@ function ChannelInfo({
                                     Статус
                                 </div>
                                 <div className="ChannelInfo__Table-String-Inputs">
-                                    <InputText value={loadedChannel.status}
+                                    <InputText value={loadedSelectedChannel.status}
                                                className={["p-inputtext-sm", "ChannelInfo__Table-String-Input-50",
-                                                   loadedChannel.status === "ВКЛ" ? "ChannelInfo__Table-String-Input-ON" : null,
-                                                   loadedChannel.status === "ОТКЛ" ? "ChannelInfo__Table-String-Input-OFF" : null,
-                                                   loadedChannel.status === "ПАУЗА" ? "ChannelInfo__Table-String-Input-PAUSE" : null,
-                                                   loadedChannel.status !== "ОТКЛ" && loadedChannel.status !== "ВКЛ" &&  loadedChannel.status !== "ПАУЗА" ? "ChannelInfo__Table-String-Input-OTHER" : null
+                                                   loadedSelectedChannel.status === "ВКЛ" ? "ChannelInfo__Table-String-Input-ON" : null,
+                                                   loadedSelectedChannel.status === "ОТКЛ" ? "ChannelInfo__Table-String-Input-OFF" : null,
+                                                   loadedSelectedChannel.status === "ПАУЗА" ? "ChannelInfo__Table-String-Input-PAUSE" : null,
+                                                   loadedSelectedChannel.status !== "ОТКЛ" && loadedSelectedChannel.status !== "ВКЛ" &&  loadedSelectedChannel.status !== "ПАУЗА" ? "ChannelInfo__Table-String-Input-OTHER" : null
                                                ].join(' ')}/>
-                                    <InputText value={loadedChannel.date}
+                                    <InputText value={loadedSelectedChannel.date}
                                                className="p-inputtext-sm  ChannelInfo__Table-String-Input-50"/>
                                 </div>
                             </div>
@@ -119,9 +131,9 @@ function ChannelInfo({
                                     Прим
                                 </div>
                                 <div className="ChannelInfo__Table-String-Inputs">
-                                    <InputText value={loadedChannel.note}
+                                    <InputText value={loadedSelectedChannel.note}
                                                className="p-inputtext-sm ChannelInfo__Table-String-Input-50"/>
-                                    <InputText value={loadedChannel.rd_sr}
+                                    <InputText value={loadedSelectedChannel.rd_sr}
                                                className="p-inputtext-sm  ChannelInfo__Table-String-Input-50"/>
                                 </div>
                             </div>
@@ -133,11 +145,11 @@ function ChannelInfo({
                                     PE
                                 </div>
                                 <div className="ChannelInfo__Table-String-Inputs">
-                                    <InputText value={loadedChannel.channel_pe}
+                                    <InputText value={loadedSelectedChannel.channel_pe}
                                                className="p-inputtext-sm ChannelInfo__Table-String-Input-50"/>
-                                    <InputText value={loadedChannel.channel_pe_port}
+                                    <InputText value={loadedSelectedChannel.channel_pe_port}
                                                className="p-inputtext-sm ChannelInfo__Table-String-Input-25"/>
-                                    <InputText value={loadedChannel.channel_vid}
+                                    <InputText value={loadedSelectedChannel.channel_vid}
                                                className="p-inputtext-sm ChannelInfo__Table-String-Input-25"/>
                                 </div>
                             </div>
@@ -146,9 +158,9 @@ function ChannelInfo({
                                     AGGSTOP
                                 </div>
                                 <div className="ChannelInfo__Table-String-Inputs">
-                                    <InputText value={loadedChannel.channel_agg_stop}
+                                    <InputText value={loadedSelectedChannel.channel_agg_stop}
                                                className="p-inputtext-sm ChannelInfo__Table-String-Input-70"/>
-                                    <InputText value={loadedChannel.channel_agg_port}
+                                    <InputText value={loadedSelectedChannel.channel_agg_port}
                                                className="p-inputtext-sm ChannelInfo__Table-String-Input-30"/>
                                 </div>
                             </div>
@@ -157,7 +169,7 @@ function ChannelInfo({
                                     ACCSTOP
                                 </div>
                                 <div className="ChannelInfo__Table-String-Inputs">
-                                    <InputText value={loadedChannel.channel_acc_stop}
+                                    <InputText value={loadedSelectedChannel.channel_acc_stop}
                                                className="p-inputtext-sm ChannelInfo__Table-String-Input-100"/>
                                 </div>
                             </div>
@@ -166,7 +178,7 @@ function ChannelInfo({
                                     IP MNG/A
                                 </div>
                                 <div className="ChannelInfo__Table-String-Inputs">
-                                    <InputText value={loadedChannel.channel_ip_mng_acc}
+                                    <InputText value={loadedSelectedChannel.channel_ip_mng_acc}
                                                className="p-inputtext-sm ChannelInfo__Table-String-Input-100"/>
                                 </div>
                             </div>
@@ -175,7 +187,7 @@ function ChannelInfo({
                                     PORT_A
                                 </div>
                                 <div className="ChannelInfo__Table-String-Inputs">
-                                    <InputText value={loadedChannel.channel_acc_port}
+                                    <InputText value={loadedSelectedChannel.channel_acc_port}
                                                className="p-inputtext-sm ChannelInfo__Table-String-Input-100"/>
                                 </div>
                             </div>
@@ -184,7 +196,7 @@ function ChannelInfo({
                                     MODEL
                                 </div>
                                 <div className="ChannelInfo__Table-String-Inputs">
-                                    <InputText value={loadedChannel.channel_acc_model}
+                                    <InputText value={loadedSelectedChannel.channel_acc_model}
                                                className="p-inputtext-sm ChannelInfo__Table-String-Input-100"/>
                                 </div>
                             </div>
@@ -193,7 +205,7 @@ function ChannelInfo({
                                     SN
                                 </div>
                                 <div className="ChannelInfo__Table-String-Inputs">
-                                    <InputText value={loadedChannel.channel_acc_sn}
+                                    <InputText value={loadedSelectedChannel.channel_acc_sn}
                                                className="p-inputtext-sm ChannelInfo__Table-String-Input-100"/>
                                 </div>
                             </div>
@@ -202,7 +214,7 @@ function ChannelInfo({
                                     MAC
                                 </div>
                                 <div className="ChannelInfo__Table-String-Inputs">
-                                    <InputText value={loadedChannel.channel_acc_mac}
+                                    <InputText value={loadedSelectedChannel.channel_acc_mac}
                                                className="p-inputtext-sm ChannelInfo__Table-String-Input-100"/>
                                 </div>
                             </div>
@@ -211,9 +223,9 @@ function ChannelInfo({
                                     Zabbix
                                 </div>
                                 <div className="ChannelInfo__Table-String-Inputs">
-                                    <InputText value={loadedChannel.zabbix}
+                                    <InputText value={loadedSelectedChannel.zabbix}
                                                className="p-inputtext-sm ChannelInfo__Table-String-Input-50"/>
-                                    <InputText value={loadedChannel.zabbix_avail}
+                                    <InputText value={loadedSelectedChannel.zabbix_avail}
                                                className="p-inputtext-sm ChannelInfo__Table-String-Input-50"/>
                                 </div>
                             </div>

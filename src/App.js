@@ -2,8 +2,7 @@ import './App.css';
 import Channels from "./Pages/Channels/Channels";
 import Menu from "./Modules/Menu/Menu";
 import Header from "./Modules/Header/Header";
-
-
+import ErrorToast from "./Modules/ErrorToast/ErrorToast";
 
 function App() {
 
@@ -17,6 +16,7 @@ function App() {
                     <Channels/>
                 </div>
             </div>
+            <ErrorToast />
         </div>
     );
 }

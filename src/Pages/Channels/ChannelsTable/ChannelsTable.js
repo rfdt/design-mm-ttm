@@ -4,8 +4,13 @@ import {DataTable} from "primereact/datatable";
 import {Tag} from "primereact/tag";
 import {ContextMenu} from "primereact/contextmenu";
 import './ChannelsTable.css';
+import {useActions} from "../../../Store/useActions";
+import {useSelector} from "react-redux";
 
-function ChannelsTable({setSelectedChannel, selectedChannel, filteredChannels}) {
+function ChannelsTable() {
+
+    const {selectedChannel, filteredChannels} = useSelector(state => state.channels)
+    const {selectChannel} = useActions();
 
     //TODO Добить идею с таблицей, подумать нужно ли добавлять элементы, или пусть таблица по высоте сжимается,
     //поразмыслить и что-то в голову придёт
@@ -14,7 +19,7 @@ function ChannelsTable({setSelectedChannel, selectedChannel, filteredChannels}) 
 
     const cm = useRef(null);
     const menuModel = [
-        {label: 'Просмотреть', icon: 'pi pi-fw pi-eye', command: ()=> setSelectedChannel(contextSelected)},
+        {label: 'Просмотреть', icon: 'pi pi-fw pi-eye', command: ()=> selectChannel(contextSelected)},
         {label: 'Копировать СУЗ', icon: 'pi pi-fw pi-copy', command: ()=>console.log(contextSelected)} //Функция на копирования СУЗа в бу.обмен
     ];
 
@@ -45,7 +50,7 @@ function ChannelsTable({setSelectedChannel, selectedChannel, filteredChannels}) 
             <ContextMenu model={menuModel} ref={cm} onHide={() => setContextSelected(null)}/>
             <DataTable value={filteredChannels} scrollable className={'ChannelsPage__Table-Container'}
                        selectionMode="single" selection={selectedChannel}
-                       onSelectionChange={(e) => setSelectedChannel(e.value)} dataKey="_id"
+                       onSelectionChange={(e) => selectChannel(e.value)} dataKey="_id"
                        onContextMenu={(e) => cm.current.show(e.originalEvent)}
                        contextMenuSelection={contextSelected}
                        onContextMenuSelectionChange={(e) => setContextSelected(e.value)}

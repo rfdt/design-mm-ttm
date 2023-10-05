@@ -1,57 +1,47 @@
 import React, {useState} from 'react';
 import {Button} from "primereact/button";
-import {ConfirmDialog, confirmDialog} from 'primereact/confirmdialog';
+import {ConfirmDialog} from 'primereact/confirmdialog';
 import {exportExcelFromJson} from "../../../Modules/exportExcel";
 import {ChannelsApi} from "../../../Api/ChannelsApi";
+import {useSelector} from "react-redux";
+import {useActions} from "../../../Store/useActions";
 
-function ExportExcel({
-                         showError,
-                         addInfoFilter,
-                         cityFilter,
-                         streetFilter,
-                         homeFilter,
-                         serviceFilter,
-                         statusFilter,
-                         findChannels,
-                         rdFilter,
-                         vidFilter,
-                         channelAggStopFilter,
-                         sizeFilter,
-                         channelIpMngFilter,
-                         channelAccStopFilter, peFilter
-                     }) {
+function ExportExcel() {
+    const {channelsFilters} = useSelector(state => state.channels);
+    const {setError} = useActions();
+
+    const [visible, setVisible] = useState(false)
+
+    function close(){
+        setVisible(false);
+    }
 
     async function findAndExport() {
         try {
-            const response = await ChannelsApi.findToExport({
-                addInfoFilter, cityFilter, streetFilter, homeFilter,
-                serviceFilter: serviceFilter.name || "", statusFilter: statusFilter?.name || "",
-                peFilter, rdFilter, channelAggStopFilter, vidFilter, sizeFilter, channelAccStopFilter, channelIpMngFilter
-            })
-            exportExcelFromJson(response?.data || [])
+            const response = await ChannelsApi.findToExport({...channelsFilters})
+            exportExcelFromJson(response?.data.channels || [])
         } catch (error) {
-            showError(error)
+            setError(error)
+        }finally {
+            close()
         }
     }
 
-    const confirm = () => {
-        confirmDialog({
-            acceptLabel: 'Да',
-            rejectLabel: 'Нет',
-            message: 'Вы уверены, что хотите экспортировать все найденные каналы?',
-            header: 'Подтверждение',
-            icon: 'pi pi-exclamation-triangle',
-            blockScroll: true,
-            draggable: false,
-            dismissableMask: true,
-            accept: findAndExport
-        });
-    };
-
     return (
         <>
-            <ConfirmDialog/>
-            <Button icon="pi pi-file-excel" severity="success" onClick={confirm}
+            <ConfirmDialog acceptLabel="Да" rejectLabel="Нет"
+                           visible={visible}
+                           onHide={() => close()} message="Вы уверены, что хотите экспортировать все найденные каналы?"
+                            blockScroll
+                           draggable={false}
+                           dismissableMask={true}
+                           header="Подтверждение"
+                           icon="pi pi-exclamation-triangle"
+                           accept={findAndExport}
+                           reject={close}
+                           resizable={false}
+            />
+            <Button icon="pi pi-file-excel" severity="success" onClick={()=>setVisible(true)}
                     className='ChannelsFilters__ExtendedSearch-Btn'/>
         </>
     );

@@ -1,0 +1,64 @@
+import {ChannelsApi} from "../../../Api/ChannelsApi";
+import {
+    CHANNELS_CLEAR_SELECTED_CHANNEL, CHANNELS_RESET_FILTERS,
+    CHANNELS_SET_FILTER_VALUE,
+    CHANNELS_SET_FILTERED_CHANNELS,
+    CHANNELS_SET_FILTERED_CHANNELS_COUNT,
+    CHANNELS_SET_FILTERS_VALUES,
+    CHANNELS_SET_LOADED_SELECTED_CHANNEL,
+    CHANNELS_SET_LOADING_SELECTED_CHANNEL,
+    CHANNELS_SET_SELECTED_CHANNEL
+} from "./channelsTypes";
+import {setError} from "../errors/errorsActions";
+
+const setFilteredChannelsAC = (channels) => ({type: CHANNELS_SET_FILTERED_CHANNELS, payload: channels})
+const setFilteredChannelsCountAC = (count) => ({type: CHANNELS_SET_FILTERED_CHANNELS_COUNT, payload: count})
+const setSelectedChannelAC = (channel) => ({type: CHANNELS_SET_SELECTED_CHANNEL, payload: channel})
+const setLoadingSelectedChannelAC = (isLoading) => ({type: CHANNELS_SET_LOADING_SELECTED_CHANNEL, payload: isLoading})
+const setLoadedSelectedChannelAC = (channel) => ({type: CHANNELS_SET_LOADED_SELECTED_CHANNEL, payload: channel})
+const setFiltersValuesAC = (filterValues) => ({type: CHANNELS_SET_FILTERS_VALUES, payload: filterValues})
+
+export const findChannels = () => async (dispatch, getState) => {
+    try {
+        const filters = getState().channels.channelsFilters;
+        const channels = await ChannelsApi.findChannels(filters);
+        dispatch(setFilteredChannelsAC(channels.data.channels));
+        dispatch(setFilteredChannelsCountAC(channels.data.count));
+    } catch (e) {
+        dispatch(setError(e))
+    }
+}
+
+export const clearSearch = () => async (dispatch, getState) => {
+    try {
+        dispatch(resetFilters());
+        dispatch(findChannels());
+    }catch (e){
+        dispatch(setError(e))
+    }
+}
+
+export const selectChannel = (channel) => async (dispatch, getState) => {
+    try {
+        dispatch(setSelectedChannelAC(channel));
+        dispatch(setLoadingSelectedChannelAC(true));
+        const selectedChannel = getState().channels.selectedChannel
+        const loadedData = await ChannelsApi.findChannelById(selectedChannel._id);
+        dispatch(setLoadedSelectedChannelAC(loadedData.data))
+        dispatch(setLoadingSelectedChannelAC(false));
+    } catch (e) {
+        dispatch(setError(e))
+    }
+}
+
+export const clearSelectedChannel = () => ({type: CHANNELS_CLEAR_SELECTED_CHANNEL})
+export const setFilterValue = (filter, value) =>({type: CHANNELS_SET_FILTER_VALUE, payload: {filter, value}})
+export const resetFilters = () => ({type: CHANNELS_RESET_FILTERS})
+export const getFilterValues = () => async (dispatch) =>{
+    try {
+        const filtersValue = await ChannelsApi.getFiltersValue();
+        dispatch(setFiltersValuesAC(filtersValue.data))
+    }catch (e){
+        dispatch(setError(e))
+    }
+}

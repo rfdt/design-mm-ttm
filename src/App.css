@@ -15,6 +15,7 @@
 .Pages__Container{
     height: calc(100% - 80px);
     padding: 20px;
+    position: relative;
 }
 
 /*Приоритет снизу вверх*/

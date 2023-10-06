@@ -65,11 +65,11 @@ function Home(props) {
                         </div>
                     </div>
                 </div>
-                <div className="HomePage__StatCards-Container">
-                    <div className="HomePage__StatCard HomePage__StatCard--Sqaure">
+                <div className="HomePage__StatCards-Container HomePage__StatCards-Container-Square">
+                    <div className="HomePage__StatCard--Sqaure">
                         <ChannelsTypesChart />
                     </div>
-                    <div className="HomePage__StatCard HomePage__StatCard--Sqaure">
+                    <div className="HomePage__StatCard--Sqaure">
                         <ChannelsCityChart/>
                     </div>
                 </div>

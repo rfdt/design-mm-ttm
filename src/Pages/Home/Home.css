@@ -1,32 +1,33 @@
-.HomePage__Container{
+.HomePage__Container {
     width: 100%;
 }
 
-.HomePage__Welcome{
+.HomePage__Welcome {
     margin-top: 48px;
     margin-left: 20px;
 }
 
-.HomePage__Title{
+.HomePage__Title {
     font-size: 24px;
     font-weight: bold;
     letter-spacing: 1px;
 }
 
-.HomePage__SubTitle{
+.HomePage__SubTitle {
     margin-top: 8px;
     font-size: 18px;
     color: #8c8c8c;
 }
 
-.HomePage__StatCards-Container{
+.HomePage__StatCards-Container {
     margin-top: 30px;
     display: flex;
     justify-content: space-around;
 }
 
-.HomePage__StatCard{
-    width: 400px;
+.HomePage__StatCard {
+    max-width: 400px;
+    width: 33%;
     height: 200px;
     border-radius: 35px;
     background-color: #fff;
@@ -36,11 +37,19 @@
     box-shadow: -7px 4px 29px 9px rgba(217, 217, 217, 0.2);
 }
 
-.HomePage__StatCard--Sqaure{
+.HomePage__StatCard--Sqaure {
     height: 400px;
+    max-width: 400px;
+    width: 45%;
+    border-radius: 35px;
+    background-color: #fff;
+    border: 1px solid #efdbff;
+    -webkit-box-shadow: -7px 4px 29px 9px rgba(217, 217, 217, 0.2);
+    -moz-box-shadow: -7px 4px 29px 9px rgba(217, 217, 217, 0.2);
+    box-shadow: -7px 4px 29px 9px rgba(217, 217, 217, 0.2);
 }
 
-.HomePage__Activation-Container{
+.HomePage__Activation-Container {
     user-select: none;
     position: relative;
     width: 100%;
@@ -48,18 +57,18 @@
     border-radius: 35px;
 }
 
-.HomePage__Activation-Title{
+.HomePage__Activation-Title {
     margin: 30px;
     font-size: 22px;
     font-weight: bold;
 }
 
-.HomePage__Activation-Count{
+.HomePage__Activation-Count {
     font-size: 38px;
     margin-left: 25px;
 }
 
-.HomePage__Activation-Channels{
+.HomePage__Activation-Channels {
     font-size: 18px;
     margin-left: 30px;
     margin-top: 30px;
@@ -71,16 +80,16 @@
     font-weight: bold;
 }
 
-.HomePage__Activation-Icon{
+.HomePage__Activation-Icon {
     position: absolute;
-    top: 20px;
-    right: 60px;
+    right: 4%;
+    top: 4%;
     font-size: 60px;
     transform: rotate(-50deg);
     color: #87e8de;
 }
 
-.HomePage__Reserved-Container{
+.HomePage__Reserved-Container {
     user-select: none;
     position: relative;
     width: 100%;
@@ -88,18 +97,18 @@
     border-radius: 35px;
 }
 
-.HomePage__Reserved-Title{
+.HomePage__Reserved-Title {
     margin: 30px;
     font-size: 22px;
     font-weight: bold;
 }
 
-.HomePage__Reserved-Count{
+.HomePage__Reserved-Count {
     font-size: 38px;
     margin-left: 25px;
 }
 
-.HomePage__Reserved-Description{
+.HomePage__Reserved-Description {
     font-size: 14px;
     margin-left: 30px;
     margin-top: 32px;
@@ -107,15 +116,15 @@
     color: #ff4d4f;
 }
 
-.HomePage__Reserved-Icon{
+.HomePage__Reserved-Icon {
     position: absolute;
-    top: 10px;
-    right: 35px;
+    right: 4%;
+    top: 4%;
     font-size: 60px;
     color: #ffa940;
 }
 
-.HomePage__Clients-Container{
+.HomePage__Clients-Container {
     user-select: none;
     position: relative;
     width: 100%;
@@ -123,42 +132,43 @@
     border-radius: 35px;
 }
 
-.HomePage__Clients-Title{
+.HomePage__Clients-Title {
     margin: 30px;
     font-size: 22px;
     font-weight: bold;
 }
 
-.HomePage__Clients-Count{
+.HomePage__Clients-Count {
     font-size: 38px;
     margin-left: 25px;
 }
 
-.HomePage__Clients-Description{
+.HomePage__Clients-Description {
     font-size: 18px;
     margin-left: 30px;
     margin-top: 30px;
     font-weight: bold;
 }
 
-.HomePage__Clients-Description span{
+.HomePage__Clients-Description span {
     font-weight: bold;
     color: #5a57ff
 }
 
-.HomePage__Clients-Icon{
+.HomePage__Clients-Icon {
     position: absolute;
-    top: 10px;
-    right: 35px;
+    right: 4%;
+    top: 4%;
     font-size: 60px;
     color: #55b8ea;
 }
 
-.HomePage__TicketsCharts{
+.HomePage__TicketsCharts {
+    max-width: 1300px;
     margin: 40px auto 0;
     padding: 20px;
     height: 400px;
-    width: 1200px;
+    width: 95%;
     border-radius: 35px;
     background-color: #fff;
     border: 1px solid #efdbff;
@@ -167,30 +177,30 @@
     box-shadow: -7px 4px 29px 9px rgba(217, 217, 217, 0.2);
 }
 
-.HomePage__TicketsBlock-Welcome{
+.HomePage__TicketsBlock-Welcome {
     margin-top: 48px;
     margin-left: 20px;
 }
 
-.HomePage__TicketsBlock-Title{
+.HomePage__TicketsBlock-Title {
     font-size: 24px;
     font-weight: bold;
     letter-spacing: 1px;
 }
 
-.HomePage__TicketsBlock-SubTitle{
+.HomePage__TicketsBlock-SubTitle {
     margin-top: 8px;
     font-size: 18px;
     color: #8c8c8c;
 }
 
-.HomePage__StatTickets-Container{
+.HomePage__StatTickets-Container {
     margin-top: 30px;
     display: flex;
     justify-content: space-around;
 }
 
-.HomePage__OpenedTicket-Container{
+.HomePage__OpenedTicket-Container {
     user-select: none;
     position: relative;
     width: 100%;
@@ -198,37 +208,37 @@
     border-radius: 35px;
 }
 
-.HomePage__OpenedTicket-Title{
+.HomePage__OpenedTicket-Title {
     margin: 30px;
     font-size: 22px;
     font-weight: bold;
 }
 
-.HomePage__OpenedTicket-Count{
+.HomePage__OpenedTicket-Count {
     font-size: 38px;
     margin-left: 25px;
 }
 
-.HomePage__OpenedTicket-Info{
+.HomePage__OpenedTicket-Info {
     font-size: 18px;
     margin-left: 30px;
     margin-top: 30px;
     font-weight: bold;
 }
 
-.HomePage__OpenedTicket-Info span{
+.HomePage__OpenedTicket-Info span {
     color: #9254de;
 }
 
-.HomePage__OpenedTicket-Icon{
+.HomePage__OpenedTicket-Icon {
     position: absolute;
-    top: 20px;
-    right: 60px;
+    right: 8%;
+    top: 4%;
     font-size: 60px;
     color: #4096ff;
 }
 
-.HomePage__ClosedTickets-Container{
+.HomePage__ClosedTickets-Container {
     user-select: none;
     position: relative;
     width: 100%;
@@ -236,38 +246,38 @@
     border-radius: 35px;
 }
 
-.HomePage__ClosedTickets-Title{
+.HomePage__ClosedTickets-Title {
     margin: 30px;
     font-size: 22px;
     font-weight: bold;
 }
 
-.HomePage__ClosedTickets-Count{
+.HomePage__ClosedTickets-Count {
     font-size: 38px;
     margin-left: 25px;
 }
 
-.HomePage__ClosedTickets-Description{
+.HomePage__ClosedTickets-Description {
     font-size: 18px;
     margin-left: 30px;
     margin-top: 30px;
     font-weight: bold;
 }
 
-.HomePage__ClosedTickets-Description span{
+.HomePage__ClosedTickets-Description span {
     color: #fa8c16;
     font-size: 20px;
 }
 
-.HomePage__ClosedTickets-Icon{
+.HomePage__ClosedTickets-Icon {
     position: absolute;
-    top: 20px;
-    right: 40px;
+    right: 8%;
+    top: 4%;
     font-size: 60px;
     color: #a0d911;
 }
 
-.HomePage__AllTickets-Container{
+.HomePage__AllTickets-Container {
     user-select: none;
     position: relative;
     width: 100%;
@@ -275,33 +285,236 @@
     border-radius: 35px;
 }
 
-.HomePage__AllTickets-Title{
+.HomePage__AllTickets-Title {
     margin: 30px;
     font-size: 22px;
     font-weight: bold;
 }
 
-.HomePage__AllTickets-Count{
+.HomePage__AllTickets-Count {
     font-size: 38px;
     margin-left: 25px;
 }
 
-.HomePage__AllTickets-Description{
+.HomePage__AllTickets-Description {
     font-size: 18px;
     margin-left: 30px;
     margin-top: 30px;
     font-weight: bold;
 }
 
-.HomePage__AllTickets-Description span{
+.HomePage__AllTickets-Description span {
     color: #55b8ea;
     font-size: 22px;
 }
 
-.HomePage__AllTickets-Icon{
+.HomePage__AllTickets-Icon {
     position: absolute;
-    top: 20px;
-    right: 40px;
+    top: 4%;
+    right: 8%;
     font-size: 60px;
     color: #9254de;
+}
+
+@media (max-width: 768px) {
+    .HomePage__TicketsCharts {
+        height: 300px;
+        width: 100%;
+    }
+
+    .HomePage__Welcome {
+        margin-top: 10px;
+    }
+
+    .HomePage__Title {
+        font-size: 20px;
+    }
+
+    .HomePage__SubTitle {
+        margin-top: 8px;
+        font-size: 16px;
+        color: #8c8c8c;
+    }
+
+    .HomePage__TicketsBlock-Title {
+        font-size: 20px;
+    }
+
+    .HomePage__TicketsBlock-SubTitle {
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 1200px) {
+    .HomePage__Activation-Title {
+        margin-left: 20px;
+        margin-top: 20px;
+        font-size: 18px;
+        margin-bottom: 10px;
+    }
+
+    .HomePage__Activation-Count {
+        font-size: 26px;
+        margin-left: 20px;
+        margin-top: 25px;
+    }
+
+    .HomePage__Activation-Channels {
+        font-size: 14px;
+        margin-left: 20px;
+        margin-top: 20px;
+    }
+
+    .HomePage__StatCard {
+        height: 150px;
+    }
+
+    .HomePage__StatCard--Sqaure {
+        aspect-ratio: 1 / 1;
+        height: 100%;
+    }
+
+    .HomePage__Reserved-Title {
+        margin-left: 20px;
+        margin-top: 20px;
+        font-size: 18px;
+        margin-bottom: 10px;
+    }
+
+    .HomePage__Reserved-Count {
+        font-size: 26px;
+        margin-left: 20px;
+        margin-top: 25px;
+    }
+
+    .HomePage__Reserved-Description {
+        font-weight: bold;
+        color: #ff4d4f;
+        font-size: 14px;
+        margin-left: 20px;
+        margin-top: 20px;
+    }
+
+    .HomePage__Clients-Title {
+        margin-left: 20px;
+        margin-top: 20px;
+        font-size: 18px;
+        margin-bottom: 10px;
+    }
+
+    .HomePage__Clients-Count {
+        font-size: 26px;
+        margin-left: 20px;
+        margin-top: 25px;
+    }
+
+    .HomePage__Clients-Description {
+        font-size: 14px;
+        margin-left: 20px;
+        margin-top: 20px;
+    }
+
+    .HomePage__OpenedTicket-Title {
+        margin-left: 20px;
+        margin-top: 20px;
+        font-size: 18px;
+        margin-bottom: 10px;
+    }
+
+    .HomePage__OpenedTicket-Count {
+        font-size: 26px;
+        margin-left: 20px;
+        margin-top: 25px;
+    }
+
+    .HomePage__OpenedTicket-Info {
+        font-size: 14px;
+        margin-left: 20px;
+        margin-top: 20px;
+    }
+
+    .HomePage__ClosedTickets-Title {
+        margin-left: 20px;
+        margin-top: 20px;
+        font-size: 18px;
+        margin-bottom: 10px;
+    }
+
+    .HomePage__ClosedTickets-Count {
+        font-size: 26px;
+        margin-left: 20px;
+        margin-top: 25px;
+    }
+
+    .HomePage__ClosedTickets-Description {
+        font-size: 14px;
+        margin-left: 20px;
+        margin-top: 20px;
+    }
+
+    .HomePage__AllTickets-Title {
+        margin-left: 20px;
+        margin-top: 20px;
+        font-size: 18px;
+        margin-bottom: 10px;
+    }
+
+    .HomePage__AllTickets-Count {
+        font-size: 26px;
+        margin-left: 20px;
+        margin-top: 25px;
+    }
+
+    .HomePage__AllTickets-Description {
+        font-size: 14px;
+        margin-left: 20px;
+        margin-top: 20px;
+    }
+}
+
+@media (max-width: 992px) {
+    .HomePage__StatCards-Container {
+        flex-direction: column;
+        margin-top: 15px;
+    }
+
+    .HomePage__StatTickets-Container {
+        flex-direction: column;
+        margin-top: 15px;
+    }
+
+    .HomePage__StatCard {
+        width: 100%;
+        max-width: none;
+        margin-bottom: 5px;
+    }
+
+    .HomePage__StatCard--Sqaure {
+        margin-bottom: 5px;
+        width: 100%;
+    }
+
+    .HomePage__StatCards-Container-Square {
+        align-items: center;
+        margin-top: 0;
+    }
+
+    .HomePage__TicketsBlock-Welcome {
+        margin-top: 20px;
+    }
+    .HomePage__TicketsCharts{
+        margin-top: 0;
+    }
+}
+
+@media (max-width: 768px) {
+    /*from 0px to 768px*/
+}
+
+@media (max-width: 480px) {
+    /*from 0px to 480px*/
+}
+
+@media (max-width: 320px) {
+    /*from 0px to 320px*/
 }

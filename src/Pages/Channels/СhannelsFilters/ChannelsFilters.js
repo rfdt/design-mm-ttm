@@ -125,7 +125,7 @@ function ChannelsFilters({showError}) {
                             onClick={() => setExtendedSearchVisible(true)}
                     />
                     <ExportExcel/>
-                    <Button icon="pi pi-plus-circle" onClick={testError}
+                    <Button icon="pi pi-plus-circle" onClick={()=>testError()}
                             className='ChannelsFilters__ExtendedSearch-Btn'/>
                     <Button icon="pi pi-database" disabled severity="help" onClick={() => console.log(123)}
                             className='ChannelsFilters__ExtendedSearch-Btn'/>

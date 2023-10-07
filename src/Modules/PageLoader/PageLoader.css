@@ -1,0 +1,7 @@
+.InnerPage__Loader{
+    width: 100%;
+}
+
+.InnerPage__Loader .p-progress-spinner::before{
+    display: inline;
+}

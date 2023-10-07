@@ -1,0 +1,62 @@
+.UnknownPage__Container{
+    display: flex;
+    justify-content:center;
+    align-items: center;
+    height: 100%;
+}
+
+.UnknownPage__Logo{
+    height: 400px;
+    width: 400px;
+}
+
+.UnknownPage__Info{
+    max-width: 600px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.UnknownPage__Info-Title{
+    font-family: 'Exo 2', sans-serif;
+    font-size: 48px;
+    text-align: center;
+}
+
+.UnknownPage__Info-SubTitle{
+    margin-top: 20px;
+    font-size: 24px;
+    text-align: center;
+    line-height: 28px;
+}
+
+.UnknownPage__Info-BackBtn{
+    margin: 15px auto;
+}
+
+/*Приоритет снизу вверх*/
+/*Сначала правило до 320 потом до 480 и т.д*/
+@media (max-width: 992px){
+    /*from 0px to 992px*/
+    .UnknownPage__Container{
+        flex-direction: column;
+        justify-content: flex-start;
+    }
+    .UnknownPage__Info{
+        max-width: 90%;
+    }
+}
+@media (max-width: 480px){
+    /*from 0px to 480px*/
+    .UnknownPage__Logo{
+        height: 300px;
+        width: 300px;
+    }
+    .UnknownPage__Info-Title{
+        font-size: 32px;
+    }
+    .UnknownPage__Info-SubTitle{
+        font-size: 16px;
+        margin-top: 10px;
+    }
+}

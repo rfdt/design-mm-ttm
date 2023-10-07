@@ -1,0 +1,115 @@
+.AuthPage__Poster{
+    width: 100%;
+    position: relative;
+    height: 100%;
+    background: rgb(90,87,255);
+    background: linear-gradient(61deg, rgba(90,87,255,1) 55%, #EAD6FD 100%);
+    border-radius: 40px 10px 10px 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.AuthPage__Poster-Logo{
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    user-select: none;
+    z-index: 2;
+}
+
+.AuthPage__Poster-Logo-IMG{
+    width: 160px;
+    margin: 0 auto;
+}
+
+.AuthPage__Poster-Title{
+    color: #ffffff;
+    text-align:center;
+    font-size: 28px;
+    font-weight: bold;
+    font-family: 'Exo 2', sans-serif;
+    margin-top: 15px;
+}
+
+.AuthPage__Poster-SubTitle{
+    font-size: 20px;
+    margin-top: 15px;
+    font-family: 'Exo 2', sans-serif;
+    color: #ffffff;
+}
+
+.AuthPage__Poster-Image-1{
+    width: 128px;
+    height: 128px;
+    position: absolute;
+    bottom: 0;
+}
+
+.AuthPage__Poster-Image-2{
+    width: 64px;
+    height: 64px;
+    position: absolute;
+    top: 35px;
+    left: 50px;
+    transform: rotate(60deg);
+}
+
+.AuthPage__Poster-Image-3{
+    width: 128px;
+    height: 128px;
+    position: absolute;
+    top: 250px;
+    right: 60px;
+}
+
+.AuthPage__Poster-Image-4{
+    width: 80px;
+    height: 80px;
+    position: absolute;
+    left: 80px;
+    bottom: 230px;
+}
+
+.AuthPage__Poster-Image-5{
+    width: 100px;
+    height: 100px;
+    position: absolute;
+    right: 95px;
+    bottom: 150px;
+}
+
+.AuthPage__Poster-Image-6{
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    top: 50px;
+    right: 330px;
+    transform: rotate(20deg);
+}
+
+.AuthPage__Poster-Image-7{
+    position: absolute;
+    left: 130px;
+    width: 80px;
+    height: 80px;
+    top: 250px;
+    transform: rotate(20deg);
+}
+
+.AuthPage__Poster-Image-8{
+    position: absolute;
+    top: 40px;
+    right: 60px;
+    width: 80px;
+    height: 80px;
+}
+
+@media (max-width: 1200px) {
+    /*from 0px to 1200px*/
+    .AuthPage__Poster-Image-6{
+        display: none;
+    }
+}

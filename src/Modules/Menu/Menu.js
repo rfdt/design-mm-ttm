@@ -1,5 +1,5 @@
-import React, {useState} from 'react';
-import MmLogo from "../../static/images/MM-LOGO.png";
+import React, {useEffect, useState} from 'react';
+import MmLogo from "../../static/images/MM-LOGO-ENCIRCLE.png";
 import classNames from "classnames";
 import {
     HomeOutlined,
@@ -10,10 +10,32 @@ import {
     SlidersOutlined
 } from "@ant-design/icons";
 import './Menu.css';
+import {useLocation, useNavigate} from "react-router-dom";
 
 function Menu(props) {
     const [isMenuOpened, setIsMenuOpened] = useState(false)
     const [selectedItem, setSelectedItem] = useState('home');
+
+    const location = useLocation();
+    const navigate = useNavigate();
+
+    const navigateTo = (path) =>{
+        navigate(path)
+    }
+
+    useEffect(()=>{
+        switch (location.pathname){
+            case "/":
+               return setSelectedItem('home');
+            case "/channels":
+                return setSelectedItem('channels');
+            case "/tickets":
+                return setSelectedItem('tickets');
+            default:
+                return setSelectedItem('unknown');
+        }
+    }, [location])
+
 
     return (
         <div className={
@@ -30,7 +52,7 @@ function Menu(props) {
                 }
             </div>
             <div className="Menu__Items">
-                <div onClick={() => setSelectedItem('home')}
+                <div onClick={() => navigateTo('/')}
                      className={classNames('Menu__Item',
                          {'Menu__Item--Closed': !isMenuOpened}, {'Menu__Item--Active': selectedItem === 'home'})}>
                     <HomeOutlined className={
@@ -48,7 +70,7 @@ function Menu(props) {
                         )}>Главная</span>
                     }
                 </div>
-                <div onClick={() => setSelectedItem('channels')}
+                <div onClick={() => navigateTo('/channels')}
                      className={classNames('Menu__Item',
                          {'Menu__Item--Closed': !isMenuOpened}, {'Menu__Item--Active': selectedItem === 'channels'})}>
                     <SlidersOutlined className={
@@ -66,7 +88,7 @@ function Menu(props) {
                         )}>Включения</span>
                     }
                 </div>
-                <div onClick={() => setSelectedItem('tickets')}
+                <div onClick={() => navigateTo('/tickets')}
                      className={classNames('Menu__Item',
                          {'Menu__Item--Closed': !isMenuOpened}, {'Menu__Item--Active': selectedItem === 'tickets'})}>
                     <IssuesCloseOutlined className={

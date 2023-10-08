@@ -9,6 +9,7 @@ import ExtendedSearch from "../ExtendedSearch/ExtendedSearch";
 import ExportExcel from "../ExportExcel/ExportExcel";
 import {useActions} from "../../../Store/useActions";
 import {useSelector} from "react-redux";
+import {MultiStateCheckbox} from "primereact/multistatecheckbox";
 
 function ChannelsFilters({showError}) {
 
@@ -67,6 +68,11 @@ function ChannelsFilters({showError}) {
         }
     }
 
+    const channelRegionOptions = [
+        {value: 'crimea', icon: 'pi pi-home'},
+        {value: 'north', icon: 'pi pi-map'},
+    ];
+
     return (<>
         <div className='ChannelsFilters__Container'>
             <div className="ChannelsFilters__Base">
@@ -75,13 +81,19 @@ function ChannelsFilters({showError}) {
                                className="ChannelsFilters__AdditionalSearch-Input"
                                placeholder="ID / Клиент / Доп.Инфо / Примечание" value={channelsFilters.addInfoFilter}
                                onChange={(e) => setFilterValue('addInfoFilter', e.target.value)}/>
-                    <Button icon="pi pi-search"
-                            onClick={findChannels}
-                            className={'ChannelsFilters__AdditionalSearch-SearchBtn'} rounded severity="info"/>
-                    <Button icon="pi pi-times"
-                            className={'ChannelsFilters__AdditionalSearch-ClearBtn'}
-                            onClick={clearSearch}
-                            rounded severity="warning"/>
+                    <div className="ChannelsFilters__AdditionalSearch-Btns">
+                        <MultiStateCheckbox value={channelsFilters.channelRegionFilter}
+                                            onChange={(e) => setFilterValue('channelRegionFilter', e.value)}
+                                            options={channelRegionOptions} optionValue="value"
+                                            className='ChannelsFilters__AdditionalSearch-RegionBtn' empty={false}/>
+                        <Button icon="pi pi-search"
+                                onClick={findChannels}
+                                className={'ChannelsFilters__AdditionalSearch-SearchBtn'} rounded severity="info"/>
+                        <Button icon="pi pi-times"
+                                className={'ChannelsFilters__AdditionalSearch-ClearBtn'}
+                                onClick={clearSearch}
+                                rounded severity="warning"/>
+                    </div>
                 </div>
                 <div className="ChannelsFilters__MainSearch">
                     <AutoComplete value={channelsFilters.cityFilter} suggestions={filteredCitySuggestions}
@@ -125,7 +137,7 @@ function ChannelsFilters({showError}) {
                             onClick={() => setExtendedSearchVisible(true)}
                     />
                     <ExportExcel/>
-                    <Button icon="pi pi-plus-circle" onClick={()=>testError()}
+                    <Button icon="pi pi-plus-circle" onClick={() => testError()}
                             className='ChannelsFilters__ExtendedSearch-Btn'/>
                     <Button icon="pi pi-database" disabled severity="help" onClick={() => console.log(123)}
                             className='ChannelsFilters__ExtendedSearch-Btn'/>

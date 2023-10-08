@@ -22,7 +22,12 @@
     }
 }
 @media (max-width: 480px){
-
+    .ChannelsPage__Filters{
+        height: 390px;
+    }
+    .ChannelsFilters__MainSearch{
+        margin-top: 5px;
+    }
 }
 @media (max-width: 320px){
     /*from 0px to 320px*/

@@ -22,7 +22,8 @@ const filtersInitialValue = {
     vidFilter: '',
     sizeFilter: '',
     channelAccStopFilter: '',
-    channelIpMngFilter: ''
+    channelIpMngFilter: '',
+    channelRegionFilter: 'crimea'
 }
 
 const channelsReducerInitialState = {

@@ -14,9 +14,6 @@ function ChannelsTable() {
     const {selectedChannel, filteredChannels} = useSelector(state => state.channels)
     const {selectChannel} = useActions();
 
-    //TODO Добить идею с таблицей, подумать нужно ли добавлять элементы, или пусть таблица по высоте сжимается,
-    //поразмыслить и что-то в голову придёт
-
     const [contextSelected, setContextSelected] = useState(null);
 
     const cm = useRef(null);

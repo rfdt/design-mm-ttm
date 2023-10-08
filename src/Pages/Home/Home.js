@@ -10,13 +10,18 @@ import {
 import TicketsHistory from "./TicketsHistoryChart/TicketsHistory";
 import ChannelsTypesChart from "./ChannelsTypesChart/ChannelsTypesChart";
 import ChannelsCityChart from "./ChannelsCityChart/ChannelsCityChart";
+import {useSelector} from "react-redux";
+import classNames from 'classnames';
+
 import './Home.css';
 
 function Home(props) {
 
+    const {appTheme} = useSelector(state => state.global)
+
     return (
         <_InnerPage>
-            <div className="HomePage__Container">
+            <div className={classNames("HomePage__Container", {"HomePage__Container--Dark": appTheme==='dark'})}>
                 <div className="HomePage__Welcome">
                     <div className="HomePage__Title">
                         Администирование

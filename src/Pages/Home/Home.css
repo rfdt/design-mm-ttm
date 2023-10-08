@@ -25,6 +25,7 @@
     justify-content: space-around;
 }
 
+
 .HomePage__StatCard {
     max-width: 400px;
     width: 33%;
@@ -37,6 +38,12 @@
     box-shadow: -7px 4px 29px 9px rgba(217, 217, 217, 0.2);
 }
 
+.HomePage__Container--Dark .HomePage__StatCard{
+    border: 1px transparent;
+    background-color: #071426;
+    box-shadow: none;
+}
+
 .HomePage__StatCard--Sqaure {
     height: 400px;
     max-width: 400px;
@@ -47,6 +54,12 @@
     -webkit-box-shadow: -7px 4px 29px 9px rgba(217, 217, 217, 0.2);
     -moz-box-shadow: -7px 4px 29px 9px rgba(217, 217, 217, 0.2);
     box-shadow: -7px 4px 29px 9px rgba(217, 217, 217, 0.2);
+}
+
+.HomePage__Container--Dark .HomePage__StatCard--Sqaure{
+    border: 1px transparent;
+    background-color: #071426;
+    box-shadow: none;
 }
 
 .HomePage__Activation-Container {
@@ -175,6 +188,12 @@
     -webkit-box-shadow: -7px 4px 29px 9px rgba(217, 217, 217, 0.2);
     -moz-box-shadow: -7px 4px 29px 9px rgba(217, 217, 217, 0.2);
     box-shadow: -7px 4px 29px 9px rgba(217, 217, 217, 0.2);
+}
+
+.HomePage__Container--Dark .HomePage__TicketsCharts{
+    border: 1px transparent;
+    background-color: #071426;
+    box-shadow: none;
 }
 
 .HomePage__TicketsBlock-Welcome {

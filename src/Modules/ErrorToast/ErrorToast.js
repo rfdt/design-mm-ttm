@@ -2,29 +2,32 @@ import React, {useEffect, useRef} from 'react';
 import {Toast} from "primereact/toast";
 import {transformAxiosError} from "../transformAxiosError";
 import {useSelector} from "react-redux";
+import {clearError} from "../../Store/reducers/errors/errorsActions";
+import {useActions} from "../../Store/useActions";
 
 function ErrorToast(props) {
 
     const toastRef = useRef(null);
-    const {isErrored, errorObj} = useSelector(state => state.errors)
+    const {isErrored, errorObj, errorMessage} = useSelector(state => state.errors);
+    const {clearError} = useActions();
 
     const showError = (error) => {
         toastRef.current.show({
             severity: 'error',
             summary: "Ошибка загрузки",
-            detail: transformAxiosError(error),
+            detail: errorMessage ? errorMessage : transformAxiosError(error),
             life: 3000
         })
     }
 
     useEffect(()=>{
-        if(isErrored && errorObj){
+        if(isErrored && (errorObj || errorMessage)){
             showError(errorObj)
         }
-    }, [isErrored, errorObj])
+    }, [isErrored, errorObj, errorMessage])
 
     return (
-        <Toast ref={toastRef} position="top-right"/>
+        <Toast ref={toastRef} position="top-right" onHide={()=>clearError()}/>
     );
 }
 

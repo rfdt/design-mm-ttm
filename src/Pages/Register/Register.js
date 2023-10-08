@@ -16,6 +16,7 @@ function Register(props) {
 
     const {registerUser} = useActions();
     const {isAuthenticated, isLoaded, isLoading} = useSelector(state => state.user);
+    const {appTheme} = useSelector(state => state.global)
     const navigate = useNavigate();
 
     const formik = useFormik({
@@ -45,7 +46,7 @@ function Register(props) {
     };
 
     return (
-        <div className='RegisterPage__Container'>
+        <div className={classNames('RegisterPage__Container', {'RegisterPage__Container--Dark' : appTheme==='dark'})}>
             <div className="RegisterPage__LeftSide">
                 <div className="RegisterPage__Register-Module">
                     <div className="RegisterPage__Register-Module-Header">

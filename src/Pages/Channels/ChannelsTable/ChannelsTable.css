@@ -15,6 +15,11 @@
     box-shadow: -7px 4px 29px 9px rgba(217, 217, 217, 0.2);
 }
 
+.ChannelsPage__Table-Dark-Container{
+    border: 1px solid transparent;
+    box-shadow: none;
+}
+
 .ChannelsPage__Table-ID-Field{
     width: 5%;
     max-width: 130px;

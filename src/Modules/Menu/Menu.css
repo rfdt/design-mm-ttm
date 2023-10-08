@@ -9,7 +9,10 @@
     z-index: 2;
     /*display: none;*/
     transition: 0.2s all linear;
+}
 
+.Menu__Container--Dark{
+    background-color: #282960;
 }
 
 .Menu--Open {
@@ -116,6 +119,11 @@
     color: #8A88FF;
 }
 
+.Menu__Item-Text--Disabled-Dark{
+    /*color: #8A88FF;*/
+    color: #8c8c8c;
+}
+
 .Menu__Item-Text--Active {
     font-size: 22px;
     color: white;
@@ -152,6 +160,10 @@
 
 .Menu__Item-Bottom-Text{
     color: #8A88FF;
+}
+
+.Menu__Item-Bottom-Text-Dark{
+    color: #8c8c8c;
 }
 
 .Menu-Item-Closed{

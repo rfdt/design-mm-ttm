@@ -13,6 +13,11 @@
     align-items: center;
 }
 
+.Header__Container--Dark{
+    background-color: #071426;
+    box-shadow: none;
+}
+
 .Header__Search-Input{
     width: 300px;
 }

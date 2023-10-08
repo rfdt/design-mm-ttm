@@ -1,0 +1,15 @@
+.MenuSettings__Container{
+    width: 500px;
+}
+
+.MenuSettings__InnerContainer{
+    width: 80%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.MenuSettings__Change-Theme{
+    margin: 0 auto;
+}

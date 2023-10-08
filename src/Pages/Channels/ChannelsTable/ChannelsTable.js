@@ -6,9 +6,11 @@ import {ContextMenu} from "primereact/contextmenu";
 import './ChannelsTable.css';
 import {useActions} from "../../../Store/useActions";
 import {useSelector} from "react-redux";
+import classNames from "classnames"
 
 function ChannelsTable() {
 
+    const {appTheme} = useSelector(state => state.global);
     const {selectedChannel, filteredChannels} = useSelector(state => state.channels)
     const {selectChannel} = useActions();
 
@@ -48,7 +50,8 @@ function ChannelsTable() {
     return (
         <>
             <ContextMenu model={menuModel} ref={cm} onHide={() => setContextSelected(null)}/>
-            <DataTable value={filteredChannels} scrollable className={'ChannelsPage__Table-Container'}
+            <DataTable value={filteredChannels} scrollable
+                       className={classNames('ChannelsPage__Table-Container', {"ChannelsPage__Table-Dark-Container": appTheme === 'dark'})}
                        selectionMode="single" selection={selectedChannel}
                        onSelectionChange={(e) => selectChannel(e.value)} dataKey="_id"
                        onContextMenu={(e) => cm.current.show(e.originalEvent)}

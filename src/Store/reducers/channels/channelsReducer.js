@@ -1,5 +1,8 @@
 import {
-    CHANNELS_CLEAR_SELECTED_CHANNEL, CHANNELS_RESET_FILTERS,
+    CHANNELS_CLEAR_SELECTED_CHANNEL,
+    CHANNELS_RESET_FILTERS,
+    CHANNELS_SET_EDITING_CHANNEL,
+    CHANNELS_SET_EDITING_MODE,
     CHANNELS_SET_FILTER_VALUE,
     CHANNELS_SET_FILTERED_CHANNELS,
     CHANNELS_SET_FILTERED_CHANNELS_COUNT,
@@ -23,7 +26,7 @@ const filtersInitialValue = {
     sizeFilter: '',
     channelAccStopFilter: '',
     channelIpMngFilter: '',
-    channelRegionFilter: 'crimea'
+    channelRegionFilter: 'crimea',
 }
 
 const channelsReducerInitialState = {
@@ -33,7 +36,9 @@ const channelsReducerInitialState = {
     isLoadingSelectedChannel: false,
     loadedSelectedChannel: null,
     channelsFilters: {...filtersInitialValue},
-    filtersValues: null
+    filtersValues: null,
+    isEditingChannel: false,
+    editingMode: ''
 }
 
 export const channelsReducer = (state= channelsReducerInitialState, action) =>{
@@ -65,6 +70,10 @@ export const channelsReducer = (state= channelsReducerInitialState, action) =>{
         case CHANNELS_RESET_FILTERS: {
             return {...state, channelsFilters: {...filtersInitialValue}}
         }
+        case CHANNELS_SET_EDITING_CHANNEL:
+            return {...state, isEditingChannel: action.payload, editingMode: ''}
+        case CHANNELS_SET_EDITING_MODE:
+            return {...state, editingMode: action.payload}
         default: return state
     }
 }

@@ -2,33 +2,44 @@ import React from 'react';
 import {Avatar, Badge, Input} from "antd";
 import {LeftCircleOutlined, UserOutlined} from "@ant-design/icons";
 import './Header.css';
-
-const {Search} = Input;
+import {useSelector} from "react-redux";
+import {InputText} from "primereact/inputtext";
+import {Button} from "primereact/button";
+import {useActions} from "../../Store/useActions";
+import classNames from "classnames"
 
 function Header(props) {
+
+    const {appTheme} = useSelector(state => state.global)
+    const {isAuthenticated, user} = useSelector(state => state.user)
+
     return (
-        <div className="Header__Container">
+        <div className={classNames("Header__Container", {"Header__Container--Dark": appTheme === 'dark'})}>
             <div className="Header__Search">
-                <Search placeholder="Начните что-то искать"
-                        rootClassName='Header__Search-Input'
-                        allowClear size={'large'}/>
+                <div className="p-inputgroup flex-1">
+                    <InputText placeholder="Поиск" />
+                    <Button icon="pi pi-search" className="p-button-primary" />
+                </div>
             </div>
             <div className="Header__User">
-                <div className="Header__User-Avatar">
-                    <Badge dot status={'success'}>
-                        <Avatar shape="square" icon={<UserOutlined/>} size={46}/>
-                    </Badge>
-                </div>
-                <div className="Header__User-Info">
-                    <div className="Header__User-Data">
-                        Федько Руслан
-                    </div>
-                    <div className="Header__User-Email">
-                        ruslan-fedko@miranda-media.ru
-                    </div>
-                </div>
+                {isAuthenticated &&
+                    <>
+                        <div className="Header__User-Avatar">
+                            <Badge dot status={'success'}>
+                                <Avatar shape="square" icon={<UserOutlined/>} size={46}/>
+                            </Badge>
+                        </div>
+                        <div className="Header__User-Info">
+                            <div className="Header__User-Data">
+                                {user.name.split(' ').slice(0,2).reverse().join(' ')}
+                            </div>
+                            <div className="Header__User-Email">
+                                {user.login}@miranda-media.ru
+                            </div>
+                        </div>
+                    </>}
             </div>
-            <LeftCircleOutlined  className="Header__Mobile-Menu-Btn"/>
+            <LeftCircleOutlined className="Header__Mobile-Menu-Btn"/>
         </div>
     );
 }

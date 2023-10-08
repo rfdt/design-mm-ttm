@@ -11,6 +11,11 @@
     flex-direction: column;
 }
 
+.AuthPage__Poster--Dark{
+    background: rgb(90,87,255);
+    background: linear-gradient(61deg, rgba(90,87,255,0.5) 55%, rgba(234, 214, 253, 0.7) 100%);
+}
+
 .AuthPage__Poster-Logo{
     position: absolute;
     display: flex;

@@ -14,11 +14,19 @@
     box-shadow: -20px 28px 29px 3px rgba(0,0,0,0.1);
 }
 
+.LoginPage__Container--Dark .LoginPage__Login-Module{
+    background-color: #071426;
+}
+
 .LoginPage__Login-Module-Header{
     background-color: #5a57ff;
     height: 200px;
     border-radius: 35px 35px 140px 40px;
     user-select: none;
+}
+
+.LoginPage__Container--Dark .LoginPage__Login-Module-Header{
+    background-color: #A5B4FC;
 }
 
 .LoginPage__Login-Module-Header-Title{
@@ -31,6 +39,10 @@
     font-family: 'Exo 2', sans-serif;
 }
 
+.LoginPage__Container--Dark .LoginPage__Login-Module-Header-Title{
+    color: #1c2127;
+}
+
 .LoginPage__Login-Module-Header-Title p{
     margin-bottom: 15px;
 }
@@ -41,6 +53,10 @@
     font-size: 20px;
     color: #ffffff;
     opacity: 0.9;
+}
+
+.LoginPage__Container--Dark .LoginPage__Login-Module-Header-SubTitle{
+    color: #1c2127;
 }
 
 .LoginPage__Login-Module-Form{
@@ -91,6 +107,11 @@
     align-items: center;
     letter-spacing: 1px;
     color: #ffffff;
+}
+
+.LoginPage__Container--Dark .LoginPage__Login-Module-Bottom{
+    background-color: #A5B4FC;
+    color: #1c2127;
 }
 
 .LoginPage__Login-Module-Bottom span:hover {

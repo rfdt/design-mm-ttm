@@ -1,11 +1,14 @@
 import React, {useEffect, useState} from 'react';
 import {Chart} from "primereact/chart";
 import './TicketsHistory.css';
+import {useSelector} from "react-redux";
 
 function TicketsHistory(props) {
 
+    const {appTheme} = useSelector(state => state.global)
     const [chartData, setChartData] = useState({});
     const [chartOptions, setChartOptions] = useState({});
+
 
     useEffect(() => {
         const data = {
@@ -33,7 +36,7 @@ function TicketsHistory(props) {
             plugins: {
                 legend: {
                     labels: {
-                        color: '#000000'
+                        color: appTheme === 'dark' ? "#616162" : "black"
                     }
                 }
             },

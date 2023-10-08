@@ -24,11 +24,21 @@
     box-shadow: -20px 28px 29px 3px rgba(0,0,0,0.1);
 }
 
+.RegisterPage__Container--Dark .RegisterPage__Register-Module{
+    background-color: #071426;
+}
+
 .RegisterPage__Register-Module-Header{
     background-color: #5a57ff;
     height: 200px;
     border-radius: 35px 35px 140px 40px;
     user-select: none;
+    color: white;
+}
+
+.RegisterPage__Container--Dark .RegisterPage__Register-Module-Header{
+    background-color: #A5B4FC;
+    color: #1c2127;
 }
 
 .RegisterPage__Register-Module-Header-Title{
@@ -36,10 +46,10 @@
     padding-left: 40px;
     padding-top: 30px;
     font-size: 36px;
-    color: #ffffff;
     font-weight: bold;
     font-family: 'Exo 2', sans-serif;
 }
+
 
 .RegisterPage__Register-Module-Header-Title p{
     margin-bottom: 15px;
@@ -49,7 +59,6 @@
     padding-top: 10px;
     padding-left: 40px;
     font-size: 20px;
-    color: #ffffff;
     opacity: 0.9;
 }
 
@@ -71,19 +80,6 @@
     margin-bottom: 20px;
 }
 
-.RegisterPage__Register-Module-Form-Forgot span:hover {
-    font-weight: bold;
-    cursor: pointer;
-    transition: 0.3s;
-}
-
-.RegisterPage__Register-Module-Form-Forgot{
-    user-select: none;
-    text-align:center;
-    color: #757575;
-    letter-spacing: 1px;
-    /*font-size: 18px;*/
-}
 
 .RegisterPage__Register-Module-Bottom{
     position: absolute;
@@ -97,6 +93,11 @@
     align-items: center;
     letter-spacing: 1px;
     color: #ffffff;
+}
+
+.RegisterPage__Container--Dark .RegisterPage__Register-Module-Bottom{
+    background-color: #A5B4FC;
+    color: #1c2127;
 }
 
 .RegisterPage__Register-Module-Bottom span:hover {

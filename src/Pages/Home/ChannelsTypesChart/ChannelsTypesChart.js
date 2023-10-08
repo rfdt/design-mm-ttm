@@ -1,25 +1,28 @@
 import React, {useEffect, useState} from 'react';
 import './ChannelsTypesChart.css';
 import {Chart} from "primereact/chart";
+import {useSelector} from "react-redux";
 
 function ChannelsTypesChart(props) {
+
+    const {appTheme} = useSelector(state => state.global)
 
     const [chartData, setChartData] = useState({});
     const [chartOptions, setChartOptions] = useState({});
 
     useEffect(() => {
-        const textColor = "#000000";
+        const textColor = appTheme === 'dark' ? '#616162' : "#000000";
         const surfaceBorder = "#d9d9d9";
         const data = {
             datasets: [
                 {
                     data: [11, 16, 7, 3, 14],
                     backgroundColor: [
-                        "#ff4d4f",
-                        "#73d13d",
-                        "#ffec3d",
-                        "#5cdbd3",
-                        "#ff85c0"
+                        appTheme === 'dark' ? "#FF6259" :"#ff4d4f",
+                        appTheme === 'dark' ? "#4CD07D" :"#73d13d",
+                        appTheme === 'dark' ? "#EEC137" :"#ffec3d",
+                        appTheme === 'dark' ? "#35C4DC" :"#5cdbd3",
+                        appTheme === 'dark' ? "#F06BAC" :"#ff85c0"
                     ],
                     label: 'Каналы ММ и Мир-Телеком'
                 }

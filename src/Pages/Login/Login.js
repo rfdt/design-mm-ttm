@@ -15,8 +15,9 @@ import AuthPoster from "../../Modules/AuthPoster/AuthPoster";
 
 function Login(props) {
 
-    const {loginUser} = useActions();
+    const {appTheme} = useSelector(state => state.global)
     const {isAuthenticated, isLoaded, isLoading} = useSelector(state => state.user);
+    const {loginUser} = useActions();
     const navigate = useNavigate();
 
     const formik = useFormik({
@@ -46,7 +47,7 @@ function Login(props) {
 
     return (
         <_InnerPage>
-        <div className="LoginPage__Container">
+        <div className={classNames("LoginPage__Container", {"LoginPage__Container--Dark" : appTheme === 'dark'})}>
             <div className="LoginPage__Left-Side">
                 <div className="LoginPage__Login-Module">
                     <div className="LoginPage__Login-Module-Header">

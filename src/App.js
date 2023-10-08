@@ -11,17 +11,28 @@ import {useEffect} from "react";
 import PrivateRoute from "./Modules/PrivateRoute/PrivateRoute";
 import UnknownPage from "./Modules/UnknownPage/UnknownPage";
 import Register from "./Pages/Register/Register";
+import {useSelector} from "react-redux";
+import classNames from "classnames";
 
 function App() {
 
+    const {appTheme} = useSelector(state => state.global)
     const {loadUser} = useActions();
 
     useEffect(() => {
         loadUser()
     }, [])
 
+    useEffect(()=>{
+        if(appTheme === 'dark'){
+            import('primereact/resources/themes/lara-dark-indigo/theme.css')
+        }else {
+            import('primereact/resources/themes/lara-light-indigo/theme.css')
+        }
+    }, [appTheme])
+
     return (
-        <div className="App__Container">
+        <div className={classNames("App__Container", {"App__Container--Dark": appTheme === 'dark'})}>
             <Menu/>
             <div className="Layout__Container">
                 <Header/>

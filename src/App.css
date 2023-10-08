@@ -8,6 +8,10 @@
     flex-direction: row;
 }
 
+.App__Container--Dark{
+    background-color: #040D19;
+}
+
 .Layout__Container{
     width: 100%;
 }

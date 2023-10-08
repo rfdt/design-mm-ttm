@@ -9,10 +9,15 @@ import {ReactComponent as SwitchSVG} from '../../static/svg/switch.svg';
 import {ReactComponent as ChannelsSVG} from "../../static/svg/channels.svg";
 import {ReactComponent as ConnectionSVG} from  "../../static/svg/connection.svg";
 import {ReactComponent as GraphSVG} from  "../../static/svg/graph.svg";
+import classNames from "classnames";
+import {useSelector} from "react-redux";
 
 function AuthPoster(props) {
+
+    const {appTheme} = useSelector(state => state.global)
+
  return (
-     <div className="AuthPage__Poster">
+     <div className={classNames("AuthPage__Poster", {"AuthPage__Poster--Dark": appTheme === 'dark'})}>
          <div className="AuthPage__Poster-Logo">
              <img src={MM_Logo_Encircle} alt="" className='AuthPage__Poster-Logo-IMG'/>
              <div className="AuthPage__Poster-Title">

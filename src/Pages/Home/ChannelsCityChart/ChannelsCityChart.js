@@ -1,9 +1,12 @@
 import React, {useEffect, useState} from 'react';
 import './ChannelsCityChart.css';
 import {Chart} from "primereact/chart";
+import {useSelector} from "react-redux";
 
 function ChannelsCityChart(props) {
 
+    const {appTheme} = useSelector(state => state.global)
+    
     const [chartData, setChartData] = useState({});
     const [chartOptions, setChartOptions] = useState({});
 
@@ -14,12 +17,12 @@ function ChannelsCityChart(props) {
                 {
                     data: [470, 120,350, 290, 120],
                     backgroundColor: [
-                        "#ff4d4f",
-                        "#73d13d",
-                        "#ffec3d",
-                        "#5cdbd3",
-                        "#ff85c0",
-                        "#9254de"
+                        appTheme === 'dark' ? "#FF6259" : "#ff4d4f",
+                        appTheme === 'dark' ? "#4CD07D" : "#73d13d",
+                        appTheme === 'dark' ? "#EEC137" : "#ffec3d",
+                        appTheme === 'dark' ?  "#35C4DC" : "#5cdbd3",
+                        appTheme === 'dark' ? "#F06BAC" : "#ff85c0",
+                        appTheme === 'dark' ? "#B975F9" : "#9254de"
                     ],
                     hoverBackgroundColor: [
                         "#ff4d4f",

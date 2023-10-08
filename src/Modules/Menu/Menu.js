@@ -3,7 +3,7 @@ import MmLogo from "../../static/images/MM-LOGO-ENCIRCLE.png";
 import classNames from "classnames";
 import {
     HomeOutlined,
-    IssuesCloseOutlined,
+    IssuesCloseOutlined, LoginOutlined,
     LogoutOutlined,
     RightCircleOutlined,
     SettingOutlined,
@@ -11,22 +11,31 @@ import {
 } from "@ant-design/icons";
 import './Menu.css';
 import {useLocation, useNavigate} from "react-router-dom";
+import {useActions} from "../../Store/useActions";
+import {useSelector} from "react-redux";
+import MenuSettings from "./MenuSettings/MenuSettings";
 
 function Menu(props) {
+    const {isAuthenticated} = useSelector(state => state.user)
+    const {appTheme} = useSelector(state => state.global)
+    const {logoutUser} = useActions();
+
     const [isMenuOpened, setIsMenuOpened] = useState(false)
     const [selectedItem, setSelectedItem] = useState('home');
+    const [isSettingsOpened, setSettingsOpened] = useState(false);
 
     const location = useLocation();
     const navigate = useNavigate();
 
-    const navigateTo = (path) =>{
+
+    const navigateTo = (path) => {
         navigate(path)
     }
 
-    useEffect(()=>{
-        switch (location.pathname){
+    useEffect(() => {
+        switch (location.pathname) {
             case "/":
-               return setSelectedItem('home');
+                return setSelectedItem('home');
             case "/channels":
                 return setSelectedItem('channels');
             case "/tickets":
@@ -39,7 +48,7 @@ function Menu(props) {
 
     return (
         <div className={
-            classNames('Menu__Container', {'Menu--Open': isMenuOpened})
+            classNames('Menu__Container', {'Menu--Open': isMenuOpened, 'Menu__Container--Dark': appTheme === 'dark'})
         }>
             <div className={classNames('Menu__Logo', {'Menu__Logo--Open': isMenuOpened})}>
                 <div className="Menu__Logo-IMG" onClick={() => setIsMenuOpened(!isMenuOpened)}>
@@ -66,6 +75,7 @@ function Menu(props) {
                         <span className={classNames(
                             'Menu__Item-Text',
                             {'Menu__Item-Text--Disabled': selectedItem !== 'home'},
+                            {'Menu__Item-Text--Disabled-Dark': appTheme === 'dark'},
                             {'Menu__Item-Text--Active': selectedItem === 'home'}
                         )}>Главная</span>
                     }
@@ -84,6 +94,7 @@ function Menu(props) {
                         <span className={classNames(
                             'Menu__Item-Text',
                             {'Menu__Item-Text--Disabled': selectedItem !== 'channels'},
+                            {'Menu__Item-Text--Disabled-Dark': appTheme === 'dark'},
                             {'Menu__Item-Text--Active': selectedItem === 'channels'}
                         )}>Включения</span>
                     }
@@ -102,16 +113,17 @@ function Menu(props) {
                         <span className={classNames(
                             'Menu__Item-Text',
                             {'Menu__Item-Text--Disabled': selectedItem !== 'tickets'},
+                            {'Menu__Item-Text--Disabled-Dark': appTheme === 'dark'},
                             {'Menu__Item-Text--Active': selectedItem === 'tickets'}
                         )}>Тикеты</span>
                     }
                 </div>
             </div>
             <div className="Menu__Bottom">
-                <div onClick={()=>setIsMenuOpened(!isMenuOpened)}
-                    className={classNames('Menu__Item', 'Menu__Item-Open-Btn',
-                        {'Menu__Item--Closed': !isMenuOpened})}>
-                    <RightCircleOutlined  className={
+                <div onClick={() => setIsMenuOpened(!isMenuOpened)}
+                     className={classNames('Menu__Item', 'Menu__Item-Open-Btn',
+                         {'Menu__Item--Closed': !isMenuOpened})}>
+                    <RightCircleOutlined className={
                         classNames(
                             'Menu__Item-Logo',
                             {'Menu__Item-Logo-Opened Menu-Item-Closed': isMenuOpened}
@@ -120,12 +132,14 @@ function Menu(props) {
                         isMenuOpened &&
                         <span className={classNames(
                             'Menu__Item-Text', 'Menu__Item-Bottom-Text',
+                            {'Menu__Item-Bottom-Text-Dark': appTheme === 'dark'},
                         )}>Закрыть</span>
                     }
                 </div>
                 <div
-                     className={classNames('Menu__Item',
-                         {'Menu__Item--Closed': !isMenuOpened})}>
+                    onClick={()=>setSettingsOpened(true)}
+                    className={classNames('Menu__Item',
+                        {'Menu__Item--Closed': !isMenuOpened})}>
                     <SettingOutlined className={
                         classNames(
                             'Menu__Item-Logo',
@@ -135,25 +149,47 @@ function Menu(props) {
                         isMenuOpened &&
                         <span className={classNames(
                             'Menu__Item-Text', 'Menu__Item-Bottom-Text',
+                            {'Menu__Item-Bottom-Text-Dark': appTheme === 'dark'}
                         )}>Настройки</span>
                     }
                 </div>
-                <div
-                     className={classNames('Menu__Item',
-                         {'Menu__Item--Closed': !isMenuOpened})}>
-                    <LogoutOutlined className={
-                        classNames(
-                            'Menu__Item-Logo',
-                            {'Menu__Item-Logo-Opened': isMenuOpened},
-                        )}/>
-                    {
-                        isMenuOpened &&
-                        <span className={classNames(
-                            'Menu__Item-Text', 'Menu__Item-Bottom-Text'
-                        )}>Выйти</span>
-                    }
-                </div>
+                {isAuthenticated ?
+                    <div onClick={() => logoutUser()}
+                         className={classNames('Menu__Item',
+                             {'Menu__Item--Closed': !isMenuOpened})}>
+                        <LogoutOutlined className={
+                            classNames(
+                                'Menu__Item-Logo',
+                                {'Menu__Item-Logo-Opened': isMenuOpened}
+                            )}/>
+                        {
+                            isMenuOpened &&
+                            <span className={classNames(
+                                'Menu__Item-Text', 'Menu__Item-Bottom-Text',
+                            {'Menu__Item-Bottom-Text-Dark': appTheme === 'dark'}
+                            )}>Выйти</span>
+                        }
+                    </div>
+                    :
+                    <div onClick={() => navigateTo('/login')}
+                         className={classNames('Menu__Item',
+                             {'Menu__Item--Closed': !isMenuOpened})}>
+                        <LoginOutlined className={
+                            classNames(
+                                'Menu__Item-Logo',
+                                {'Menu__Item-Logo-Opened': isMenuOpened},
+                            )}/>
+                        {
+                            isMenuOpened &&
+                            <span className={classNames(
+                                'Menu__Item-Text', 'Menu__Item-Bottom-Text',
+                                {'Menu__Item-Bottom-Text-Dark': appTheme === 'dark'}
+                            )}>Войти</span>
+                        }
+                    </div>
+                }
             </div>
+            <MenuSettings visible={isSettingsOpened} close={()=>setSettingsOpened(false)}/>
         </div>
     );
 }

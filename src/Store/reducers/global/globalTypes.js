@@ -1,0 +1,1 @@
+export const GLOBAL_SET_THEME = "GLOBAL_SET_THEME";

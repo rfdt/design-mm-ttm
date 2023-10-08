@@ -1,6 +1,8 @@
 import {ChannelsApi} from "../../../Api/ChannelsApi";
 import {
-    CHANNELS_CLEAR_SELECTED_CHANNEL, CHANNELS_RESET_FILTERS,
+    CHANNELS_CLEAR_SELECTED_CHANNEL,
+    CHANNELS_RESET_FILTERS,
+    CHANNELS_SET_EDITING_CHANNEL, CHANNELS_SET_EDITING_MODE,
     CHANNELS_SET_FILTER_VALUE,
     CHANNELS_SET_FILTERED_CHANNELS,
     CHANNELS_SET_FILTERED_CHANNELS_COUNT,
@@ -17,6 +19,7 @@ const setSelectedChannelAC = (channel) => ({type: CHANNELS_SET_SELECTED_CHANNEL,
 const setLoadingSelectedChannelAC = (isLoading) => ({type: CHANNELS_SET_LOADING_SELECTED_CHANNEL, payload: isLoading})
 const setLoadedSelectedChannelAC = (channel) => ({type: CHANNELS_SET_LOADED_SELECTED_CHANNEL, payload: channel})
 const setFiltersValuesAC = (filterValues) => ({type: CHANNELS_SET_FILTERS_VALUES, payload: filterValues})
+
 
 export const findChannels = () => async (dispatch, getState) => {
     try {
@@ -62,3 +65,5 @@ export const getFilterValues = () => async (dispatch) =>{
         dispatch(setError(e))
     }
 }
+export const setEditChannel = (edit) =>({type: CHANNELS_SET_EDITING_CHANNEL, payload: edit})
+export const setEditingMode = (mode) => ({type: CHANNELS_SET_EDITING_MODE, payload: mode})

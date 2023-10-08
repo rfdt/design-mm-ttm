@@ -27,7 +27,6 @@
     width: 90px;
     display: flex;
     align-items: center;
-    color: black;
     font-family: 'Roboto', sans-serif;
     font-size: 16px;
 }
@@ -86,6 +85,10 @@
 .ChannelInfo__Table-String-Input-PAUSE{
     color: #6366F1;
     font-weight: bold;
+}
+
+.ChannelInfo__Table--Dark{
+    color: white !important;
 }
 
 @media (max-width: 600px) {

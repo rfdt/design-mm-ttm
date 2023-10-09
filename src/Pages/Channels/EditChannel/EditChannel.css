@@ -42,6 +42,33 @@
     align-items: center;
 }
 
+.EditChannel__Form-City{
+    width: 44%;
+}
+
+.EditChannel__Form-Street{
+    width: 44%;
+}
+
+.EditChannel__Form-Home{
+    width: 9%;
+}
+
+.EditChannel__Form-Pe{
+    width: 49%;
+}
+
+.EditChannel__Form-Input-PE{
+    flex-wrap: wrap;
+}
+
+.EditChannel__Form-Input-PE-Port{
+    width: 24%;
+}
+.EditChannel__Form-Input-PE-Vid{
+    width: 24%;
+}
+
 /*Приоритет снизу вверх*/
 /*Сначала правило до 320 потом до 480 и т.д*/
 @media (max-width: 600px) {
@@ -53,5 +80,29 @@
         text-align: center;
         margin-bottom: 7px;
         font-weight: bold;
+    }
+    .EditChannel__Form-Input-Address{
+        flex-direction: column;
+    }
+    .EditChannel__Form-City{
+        width: 100%;
+        margin-bottom: 5px;
+    }
+    .EditChannel__Form-Street{
+        width: 100%;
+        margin-bottom: 5px;
+    }
+    .EditChannel__Form-Home{
+        width: 100%;
+    }
+    .EditChannel__Form-Pe{
+        width: 100%;
+        margin-bottom: 10px;
+    }
+    .EditChannel__Form-Input-PE-Port{
+        width: 49%;
+    }
+    .EditChannel__Form-Input-PE-Vid{
+        width: 49%;
     }
 }

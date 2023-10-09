@@ -57,7 +57,7 @@ function ChannelInfo() {
                 {
                     !isLoadingSelectedChannel && loadedSelectedChannel ?
                         <>
-                            <div className="ChannelInfo__Table ChannelInfo__Table--Dark">
+                            <div className="ChannelInfo__Table">
                                 <div className="ChannelInfo__Table-String">
                                     <div className="ChannelInfo__Table-String-Title">
                                         ID

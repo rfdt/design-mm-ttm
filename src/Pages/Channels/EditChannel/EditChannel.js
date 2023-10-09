@@ -6,14 +6,56 @@ import {useActions} from "../../../Store/useActions";
 import {TabPanel, TabView} from "primereact/tabview";
 import {InputText} from "primereact/inputtext";
 import './EditChannel.css';
-
+import {AutoComplete} from "primereact/autocomplete";
+import {Dropdown} from "primereact/dropdown";
 function EditChannel(props) {
 
-    /* TODO ДОДЕЛАТЬ */
-
-    const {isEditingChannel, selectedChannel, loadedSelectedChannel, editingMode} = useSelector(state => state.channels);
+    const {isEditingChannel, selectedChannel, loadedSelectedChannel, editingMode, filtersValues} = useSelector(state => state.channels);
     const {setEditChannel, setEditingMode} = useActions();
     const [editingChannel, setEditingChannel] = useState(null);
+
+    const [filteredCitySuggestions, setFilteredCitySuggestions] = useState([]);
+    const [filteredStreetsSuggestions, setFilteredStreetsSuggestions] = useState([]);
+    const [servicesSuggestions, setServicesSuggestions] = useState([]);
+    const [statusSuggestions, setStatusSuggestions] = useState([]);
+    const [peSuggestions, setPeSuggestions] = useState([]);
+
+    useEffect(() => {
+        if (filtersValues && filtersValues.services) {
+            const suggestions = filtersValues.services.map(service => {
+                return ({name: service, code: service});
+            });
+            setServicesSuggestions(suggestions);
+        }
+        setStatusSuggestions([{name: "ВКЛ", code: "ВКЛ"}, {name: "ОТКЛ", code: "ОТКЛ"},
+            {name: "РЕЗЕРВ", code: "РЕЗЕРВ"}, {name: "ИЗМ", code: "ИЗМ"}, {name: "ПАУЗА", code: "ПАУЗА"}])
+    }, [filtersValues])
+
+
+    const cityCompleteMethod = (e) => {
+        filtersValues ? setFilteredCitySuggestions(e.query ? filtersValues.city.filter(city => city.toLowerCase().includes(e.query.toLowerCase())) : filtersValues.city) : setFilteredCitySuggestions([]);
+    }
+
+    const streetsCompleteMethod = (e) => {
+        if (filtersValues) {
+            if (editingChannel.city) {
+                if (e.query) {
+                    setFilteredStreetsSuggestions(filtersValues.streets[editingChannel.city]
+                        ?.filter(city => city.toLowerCase().includes(e.query.toLowerCase())));
+                } else {
+                    setFilteredStreetsSuggestions(filtersValues.streets[editingChannel.city]);
+                }
+            } else {
+                setFilteredStreetsSuggestions([]);
+            }
+        } else {
+            setFilteredStreetsSuggestions([]);
+        }
+    }
+
+    const peCompleteMethod = (e) => {
+        filtersValues ? setPeSuggestions(e.query ? filtersValues.pe.filter(pe => pe.toLowerCase().includes(e.query.toLowerCase())) : filtersValues.pe) : setPeSuggestions([]);
+    }
 
     useEffect(()=>{
         if(editingMode && selectedChannel && selectedChannel._id && isEditingChannel){
@@ -26,6 +68,21 @@ function EditChannel(props) {
         newValue[field] = value
         setEditingChannel(newValue)
     }
+
+    /* TODO ДОДЕЛАТЬ */
+    /*
+        Доделать функцию кооторая сохраняет канал, на основе
+        переменной типа изменения, создать новый, или изменить,
+        В зависимости от этого вызывать функции из channelActions
+        createUpdatedChannel(создать обновлённый канал) и updateChannel(обновить канал)
+
+        createUpdatedChannel - передаётся обновленный канал, а также создаётся полу channelRef(посмотреть в бд как называется)
+        создаётся новый канал, изменяющемуся каналу меняется статус на изм. затем action устанавляет текущий загруженный канал
+        loadedSelectedChannel на новый канал, который прилетит с сервера.
+
+        updateChannel - просто изменяется текущий канал, затем action устанавляет текущий загруженный канал
+        loadedSelectedChannel на обновленный канал, который прилетит с сервера.
+     */
 
     return (
         <Dialog header="Изменение канала связи" className='EditChannel__Container' draggable={false}
@@ -77,9 +134,12 @@ function EditChannel(props) {
                                    <div className="EditChannel__Form-Row">
                                        <div className="EditChannel__Form-Input-Title">Услуга</div>
                                        <div className="EditChannel__Form-Input">
-                                           <InputText style={{width: "49%"}} className="p-inputtext-sm"
-                                                      value={editingChannel.service}
-                                                      onChange={(e)=>setEditingChannelFieldValue('service', e.target.value)}
+                                           <Dropdown style={{width: "49%"}}
+                                               options={servicesSuggestions}
+                                                     value={{name: editingChannel.service, code: editingChannel.service}}
+                                                     onChange={(e) => setEditingChannelFieldValue('service', e.target.value.name)}
+                                                     optionLabel="name"
+                                                     placeholder="Услуга"
                                            />
                                            <InputText style={{width: "49%"}} className="p-inputtext-sm"
                                                       value={editingChannel.service_size}
@@ -89,16 +149,22 @@ function EditChannel(props) {
                                    </div>
                                    <div className="EditChannel__Form-Row">
                                        <div className="EditChannel__Form-Input-Title">Адрес</div>
-                                       <div className="EditChannel__Form-Input">
-                                           <InputText style={{width: "44%"}} className="p-inputtext-sm"
-                                                      value={editingChannel.city}
-                                                      onChange={(e)=>setEditingChannelFieldValue('city', e.target.value)}
+                                       <div className="EditChannel__Form-Input EditChannel__Form-Input-Address">
+                                           <AutoComplete value={editingChannel.city} suggestions={filteredCitySuggestions}
+                                                         completeMethod={cityCompleteMethod}
+                                                         onChange={(e) => setEditingChannelFieldValue('city', e.target.value)}
+                                                         placeholder='Населенный пункт' dropdown
+                                                         className='EditChannel__Form-City'
+
                                            />
-                                           <InputText style={{width: "44%"}} className="p-inputtext-sm"
-                                                      value={editingChannel.street}
-                                                      onChange={(e)=>setEditingChannelFieldValue('street', e.target.value)}
+                                           <AutoComplete value={editingChannel.street} suggestions={filteredStreetsSuggestions}
+                                                         completeMethod={streetsCompleteMethod}
+                                                         onChange={(e) => setEditingChannelFieldValue('street', e.target.value)}
+                                                         placeholder='Улица' dropdown
+                                                         className='EditChannel__Form-Street'
+                                                         inputClassName='p-inputtext-sm'
                                            />
-                                           <InputText style={{width: "9%"}} className="p-inputtext-sm"
+                                           <InputText  className="p-inputtext-sm EditChannel__Form-Home"
                                                       value={editingChannel.home}
                                                       onChange={(e)=>setEditingChannelFieldValue('home', e.target.value)}
                                            />
@@ -125,9 +191,12 @@ function EditChannel(props) {
                                    <div className="EditChannel__Form-Row">
                                        <div className="EditChannel__Form-Input-Title">Статус</div>
                                        <div className="EditChannel__Form-Input">
-                                           <InputText style={{width: "49%"}} className="p-inputtext-sm"
-                                                      value={editingChannel.status}
-                                                      onChange={(e)=>setEditingChannelFieldValue('status', e.target.value)}
+                                           <Dropdown style={{width: "49%"}}
+                                                     options={statusSuggestions}
+                                                     value={{name: editingChannel.status, code: editingChannel.status}}
+                                                     onChange={(e) => setEditingChannelFieldValue('status', e.target.value.name)}
+                                                     optionLabel="name"
+                                                     placeholder="Статус"
                                            />
                                            <InputText style={{width: "49%"}} className="p-inputtext-sm"
                                                       value={editingChannel.date}
@@ -154,16 +223,19 @@ function EditChannel(props) {
                                 <div className="EditChannel__Form-Container">
                                     <div className="EditChannel__Form-Row">
                                         <div className="EditChannel__Form-Input-Title">PE</div>
-                                        <div className="EditChannel__Form-Input">
-                                            <InputText style={{width: "49%"}} className="p-inputtext-sm"
-                                                value={editingChannel.channel_pe}
-                                                       onChange={(e)=>setEditingChannelFieldValue('channel_pe', e.target.value)}
+                                        <div className="EditChannel__Form-Input EditChannel__Form-Input-PE">
+                                            <AutoComplete value={editingChannel.channel_pe} suggestions={peSuggestions}
+                                                          completeMethod={peCompleteMethod}
+                                                          placeholder='PE'
+                                                          onChange={(e)=>setEditingChannelFieldValue('channel_pe', e.target.value)}
+                                                          dropdown
+                                                          className="p-inputtext-sm EditChannel__Form-Pe"
                                             />
-                                            <InputText style={{width: "24%"}} className="p-inputtext-sm"
+                                            <InputText className="p-inputtext-sm EditChannel__Form-Input-PE-Port"
                                                 value={editingChannel.channel_pe_port}
                                                        onChange={(e)=>setEditingChannelFieldValue('channel_pe_port', e.target.value)}
                                             />
-                                            <InputText style={{width: "24%"}} className="p-inputtext-sm"
+                                            <InputText className="p-inputtext-sm EditChannel__Form-Input-PE-Vid"
                                                 value={editingChannel.channel_vid}
                                                        onChange={(e)=>setEditingChannelFieldValue('channel_vid', e.target.value)}
                                             />

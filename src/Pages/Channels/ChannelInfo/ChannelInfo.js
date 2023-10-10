@@ -26,6 +26,9 @@ function ChannelInfo() {
     }, [selectedChannel])
 
     const startEditChannel = () =>{
+        if(loadedSelectedChannel && loadedSelectedChannel.status === 'ИЗМ'){
+            return setMessageError("Нельзя изменить архивный канал");
+        }
         if(isAuthenticated && user.roles.some(role=>EDIT_CHANNEL_ACCESS_ROLES.includes(role))){
             setEditChannel(true);
         }else {

@@ -18,11 +18,10 @@ import MenuSettings from "./MenuSettings/MenuSettings";
 function Menu(props) {
     const {isAuthenticated} = useSelector(state => state.user)
     const {appTheme} = useSelector(state => state.global)
-    const {logoutUser} = useActions();
+    const {logoutUser, toggleSettingsVisible} = useActions();
 
     const [isMenuOpened, setIsMenuOpened] = useState(false)
     const [selectedItem, setSelectedItem] = useState('home');
-    const [isSettingsOpened, setSettingsOpened] = useState(false);
 
     const location = useLocation();
     const navigate = useNavigate();
@@ -137,7 +136,7 @@ function Menu(props) {
                     }
                 </div>
                 <div
-                    onClick={()=>setSettingsOpened(true)}
+                    onClick={toggleSettingsVisible}
                     className={classNames('Menu__Item',
                         {'Menu__Item--Closed': !isMenuOpened})}>
                     <SettingOutlined className={
@@ -189,7 +188,6 @@ function Menu(props) {
                     </div>
                 }
             </div>
-            <MenuSettings visible={isSettingsOpened} close={()=>setSettingsOpened(false)}/>
         </div>
     );
 }

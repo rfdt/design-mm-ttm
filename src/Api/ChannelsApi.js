@@ -20,6 +20,14 @@ export class ChannelsApi {
         return axiosRequest.post(ChannelsApi.prefix + 'findall', {...filters})
     }
 
+    static updateAndCreate(channel){
+        return axiosRequest.post(ChannelsApi.prefix + 'updateandcreate', channel)
+    }
+
+    static updateChannel(channel){
+        return axiosRequest.post(ChannelsApi.prefix + 'update', channel)
+    }
+
     static testError(){
         return axiosRequest.get(ChannelsApi.prefix + 'test')
     }

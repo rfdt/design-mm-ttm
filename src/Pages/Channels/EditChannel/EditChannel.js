@@ -8,10 +8,11 @@ import {InputText} from "primereact/inputtext";
 import './EditChannel.css';
 import {AutoComplete} from "primereact/autocomplete";
 import {Dropdown} from "primereact/dropdown";
+
 function EditChannel(props) {
 
     const {isEditingChannel, selectedChannel, loadedSelectedChannel, editingMode, filtersValues} = useSelector(state => state.channels);
-    const {setEditChannel, setEditingMode} = useActions();
+    const {setEditChannel, setEditingMode, createAndUpdateChannel, updateChannel} = useActions();
     const [editingChannel, setEditingChannel] = useState(null);
 
     const [filteredCitySuggestions, setFilteredCitySuggestions] = useState([]);
@@ -69,20 +70,15 @@ function EditChannel(props) {
         setEditingChannel(newValue)
     }
 
-    /* TODO ДОДЕЛАТЬ */
-    /*
-        Доделать функцию кооторая сохраняет канал, на основе
-        переменной типа изменения, создать новый, или изменить,
-        В зависимости от этого вызывать функции из channelActions
-        createUpdatedChannel(создать обновлённый канал) и updateChannel(обновить канал)
-
-        createUpdatedChannel - передаётся обновленный канал, а также создаётся полу channelRef(посмотреть в бд как называется)
-        создаётся новый канал, изменяющемуся каналу меняется статус на изм. затем action устанавляет текущий загруженный канал
-        loadedSelectedChannel на новый канал, который прилетит с сервера.
-
-        updateChannel - просто изменяется текущий канал, затем action устанавляет текущий загруженный канал
-        loadedSelectedChannel на обновленный канал, который прилетит с сервера.
-     */
+    const handleChange = (e) =>{
+        e.preventDefault();
+        if(editingMode === 'newChannel'){
+            createAndUpdateChannel(editingChannel)
+        }
+        if(editingMode === 'editChannel'){
+            updateChannel(editingChannel)
+        }
+    }
 
     return (
         <Dialog header="Изменение канала связи" className='EditChannel__Container' draggable={false}
@@ -94,14 +90,14 @@ function EditChannel(props) {
                     isEditingChannel && selectedChannel && selectedChannel._id && loadedSelectedChannel && !editingMode &&
                     <div className="EditChannel__Mode-Container">
                         <Button label="Изменить текущий СУЗ" className="EditChannel__Mode-Btn"
-                                icon="pi pi-pencil" onClick={()=>setEditingMode('newChannel')} />
+                                icon="pi pi-pencil" onClick={()=>setEditingMode('editChannel')} />
                         <Button label="Создать новый СУЗ" className="EditChannel__Mode-Btn"
-                                icon="pi pi-plus-circle" onClick={()=>setEditingMode('editChannel')}/>
+                                icon="pi pi-plus-circle" onClick={()=>setEditingMode('newChannel')}/>
                     </div>
                 }
                 {
                     isEditingChannel && editingChannel && selectedChannel && selectedChannel._id && loadedSelectedChannel && editingMode &&
-                    <form>
+                    <form onSubmit={handleChange}>
                         <TabView>
                             <TabPanel header="Основное" >
                                <div className="EditChannel__Form-Container">

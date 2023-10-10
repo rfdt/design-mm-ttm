@@ -67,3 +67,26 @@ export const getFilterValues = () => async (dispatch) =>{
 }
 export const setEditChannel = (edit) =>({type: CHANNELS_SET_EDITING_CHANNEL, payload: edit})
 export const setEditingMode = (mode) => ({type: CHANNELS_SET_EDITING_MODE, payload: mode})
+export const createAndUpdateChannel = (channel) => async (dispatch) => {
+    try {
+        dispatch(setLoadingSelectedChannelAC(true));
+        const newChannel = await ChannelsApi.updateAndCreate(channel);
+        dispatch(setLoadedSelectedChannelAC(newChannel.data));
+        dispatch(setLoadingSelectedChannelAC(false));
+        dispatch(setEditChannel(false));
+    }catch (e){
+        dispatch(setError(e));
+    }
+}
+
+export const updateChannel = (channel) => async (dispatch) => {
+    try {
+        dispatch(setLoadingSelectedChannelAC(true));
+        const newChannel = await ChannelsApi.updateChannel(channel);
+        dispatch(setLoadedSelectedChannelAC(newChannel.data));
+        dispatch(setLoadingSelectedChannelAC(false));
+        dispatch(setEditChannel(false));
+    }catch (e){
+        dispatch(setError(e));
+    }
+}

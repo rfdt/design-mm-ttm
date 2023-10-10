@@ -1,12 +1,12 @@
 import React from 'react';
 import {Avatar, Badge, Input} from "antd";
-import {LeftCircleOutlined, UserOutlined} from "@ant-design/icons";
+import { UserOutlined} from "@ant-design/icons";
 import './Header.css';
 import {useSelector} from "react-redux";
 import {InputText} from "primereact/inputtext";
 import {Button} from "primereact/button";
-import {useActions} from "../../Store/useActions";
 import classNames from "classnames"
+import MobileMenu from "../MobileMenu/MobileMenu";
 
 function Header(props) {
 
@@ -39,7 +39,7 @@ function Header(props) {
                         </div>
                     </>}
             </div>
-            <LeftCircleOutlined className="Header__Mobile-Menu-Btn"/>
+            <MobileMenu />
         </div>
     );
 }

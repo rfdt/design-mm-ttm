@@ -7,12 +7,13 @@ import ErrorToast from "./Modules/ErrorToast/ErrorToast";
 import {Routes, Route} from "react-router-dom";
 import Login from "./Pages/Login/Login";
 import {useActions} from "./Store/useActions";
-import {useEffect} from "react";
+import React, {useEffect} from "react";
 import PrivateRoute from "./Modules/PrivateRoute/PrivateRoute";
 import UnknownPage from "./Modules/UnknownPage/UnknownPage";
 import Register from "./Pages/Register/Register";
 import {useSelector} from "react-redux";
 import classNames from "classnames";
+import MenuSettings from "./Modules/Menu/MenuSettings/MenuSettings";
 
 function App() {
 
@@ -55,6 +56,7 @@ function App() {
                 </div>
             </div>
             <ErrorToast/>
+            <MenuSettings />
         </div>
     );
 }

@@ -28,6 +28,10 @@ export class ChannelsApi {
         return axiosRequest.post(ChannelsApi.prefix + 'update', channel)
     }
 
+    static createChannel(newChannel){
+        return axiosRequest.post(ChannelsApi.prefix + 'create', newChannel)
+    }
+
     static testError(){
         return axiosRequest.get(ChannelsApi.prefix + 'test')
     }

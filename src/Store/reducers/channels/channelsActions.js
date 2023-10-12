@@ -90,3 +90,13 @@ export const updateChannel = (channel) => async (dispatch) => {
         dispatch(setError(e));
     }
 }
+
+export const createChannel = (newChannel) => async (dispatch) =>{
+    try {
+        const newChannelCreated = await ChannelsApi.createChannel(newChannel);
+        return true;
+    }catch (e){
+        dispatch(setError(e));
+        return false;
+    }
+}

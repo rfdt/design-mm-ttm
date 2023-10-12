@@ -10,6 +10,7 @@ import ExportExcel from "../ExportExcel/ExportExcel";
 import {useActions} from "../../../Store/useActions";
 import {useSelector} from "react-redux";
 import {MultiStateCheckbox} from "primereact/multistatecheckbox";
+import AddChannel from "../../../Modules/AddChannel/AddChannel";
 
 function ChannelsFilters({showError}) {
 
@@ -22,6 +23,7 @@ function ChannelsFilters({showError}) {
     const [statusSuggestions, setStatusSuggestions] = useState([]);
 
     const [extendedSearchVisible, setExtendedSearchVisible] = useState(false)
+    const [addChannelVisible, setAddChannelVisible] = useState(false)
 
     useEffect(() => {
         getFilterValues()
@@ -60,12 +62,16 @@ function ChannelsFilters({showError}) {
         }
     }
 
-    async function testError() {
-        try {
-            await ChannelsApi.testError()
-        } catch (e) {
-            setError(e)
-        }
+    // async function testError() {
+    //     try {
+    //         await ChannelsApi.testError()
+    //     } catch (e) {
+    //         setError(e)
+    //     }
+    // }
+
+    const showAddingChannel = () =>{
+        setAddChannelVisible(true)
     }
 
     const channelRegionOptions = [
@@ -73,8 +79,13 @@ function ChannelsFilters({showError}) {
         {value: 'north', icon: 'pi pi-map'},
     ];
 
+    const handleSearchSubmit = (e) =>{
+        e.preventDefault()
+        findChannels();
+    }
+
     return (<>
-        <div className='ChannelsFilters__Container'>
+        <form className='ChannelsFilters__Container' onSubmit={handleSearchSubmit} autoComplete={'off'}>
             <div className="ChannelsFilters__Base">
                 <div className="ChannelsFilters__AdditionalSearch">
                     <InputText type="text"
@@ -137,14 +148,15 @@ function ChannelsFilters({showError}) {
                             onClick={() => setExtendedSearchVisible(true)}
                     />
                     <ExportExcel/>
-                    <Button icon="pi pi-plus-circle" onClick={() => testError()}
+                    <Button icon="pi pi-plus-circle" onClick={showAddingChannel}
                             className='ChannelsFilters__ExtendedSearch-Btn'/>
                     <Button icon="pi pi-database" disabled severity="help" onClick={() => console.log(123)}
                             className='ChannelsFilters__ExtendedSearch-Btn'/>
                 </div>
             </div>
-        </div>
+        </form>
         <ExtendedSearch visible={extendedSearchVisible} close={() => setExtendedSearchVisible(false)}/>
+        <AddChannel close={()=>setAddChannelVisible(false)} visible={addChannelVisible}/>
     </>);
 }
 

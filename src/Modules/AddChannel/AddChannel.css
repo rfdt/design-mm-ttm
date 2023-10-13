@@ -1,8 +1,91 @@
-.AddChannel__Container{
-
-}
-
 .p-success{
     margin-top: 5px;
     color: var(--green-500);
+}
+
+.EditChannel__Form-Agg-Adding-Block{
+    width: 24%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-left: 3px;
+    padding-right: 3px;
+}
+
+.EditChannel__Form-Agg-Adding-Stop{
+    display: flex;
+    align-items: center;
+}
+
+.EditChannel__Form-Agg-Adding-Stop label{
+    margin-left: 4px;
+}
+
+.EditChannel__Form-Agg-Adding-Remove-Btn span {
+    font-size: 22px;
+    transition: 0.1s linear;
+    cursor: pointer;
+}
+
+.EditChannel__Form-Agg-Adding-Remove-Btn:hover span{
+    color: var(--purple-600);
+}
+
+.EditChannel__Form-Agg-Adding-Add-Btn span{
+    font-size: 22px;
+    transition: 0.1s linear;
+    cursor: pointer;
+}
+
+.EditChannel__Form-Agg-Adding-Add-Btn:hover span{
+    color: var(--purple-600);
+    cursor: pointer;
+}
+
+.AddChannel__Form-Row-Inputs{
+    width: 100%;
+}
+
+.AddChannel__Form-Row-Input-Agg{
+    margin-bottom: 5px;
+    flex-wrap: wrap;
+}
+
+.EditChannel__Form-Row-Agg{
+    margin-bottom: 0 !important;
+    align-items: start !important;
+}
+
+.AddChannel__Form-Input-Title-Agg{
+    margin-top: 15px;
+}
+
+.AddChannel__Form-Input-Agg{
+    width: 49%;
+}
+
+.AddChannel__Form-Input-Agg-Port{
+    width: 24%;
+}
+
+/*Приоритет снизу вверх*/
+/*Сначала правило до 320 потом до 480 и т.д*/
+@media (max-width: 768px) {
+    /*from 0px to 768px*/
+    .EditChannel__Form-Agg-Adding-Block{
+        width: 100%;
+        max-width: 150px;
+        margin: 10px auto 5px;
+    }
+    .AddChannel__Form-Input-Agg-Port{
+        width: 49%;
+    }
+}
+@media (max-width: 600px){
+    .EditChannel__Form-Row-Agg{
+        align-items:center !important;
+    }
+    .AddChannel__Form-Input-Title-Agg{
+        margin-top: 0;
+    }
 }

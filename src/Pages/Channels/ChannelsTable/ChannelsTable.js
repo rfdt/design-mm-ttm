@@ -22,7 +22,6 @@ function ChannelsTable() {
         {label: 'Копировать СУЗ', icon: 'pi pi-fw pi-copy', command: ()=>console.log(contextSelected)} //Функция на копирования СУЗа в бу.обмен
     ];
 
-
     const getStatusColor = (status) => {
         switch (status) {
             case 'ВКЛ':
@@ -43,6 +42,10 @@ function ChannelsTable() {
     const statusBodyTemplate = (rowData) => {
         return <Tag style={{width: "50px",}} value={rowData.status} severity={getStatusColor(rowData.status)}></Tag>;
     };
+
+    const dateBodyTemplate = (rowData) =>{
+        return (<>{new Date(rowData.date).toLocaleDateString()}</>)
+    }
 
     return (
         <>
@@ -65,7 +68,7 @@ function ChannelsTable() {
                 <Column field="street" header="Улица" className='ChannelsPage__Table-Street-Field'></Column>
                 <Column field="home" header="Дом" className='ChannelsPage__Table-Home-Field'></Column>
                 <Column field="status" header="Статус" body={statusBodyTemplate} className='ChannelsPage__Table-Status-Field'></Column>
-                <Column field="date" header="Дата" className='ChannelsPage__Table-Date-Field'></Column>
+                <Column field="date" header="Дата" body={dateBodyTemplate} className='ChannelsPage__Table-Date-Field'></Column>
             </DataTable>
         </>
     );

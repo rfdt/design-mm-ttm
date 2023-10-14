@@ -27,17 +27,28 @@ export const CreateChannelValidationSchema =  Yup.object().shape({
     date: Yup.string().required('Поле обязательно'),
     note: Yup.string().required('Поле обязательно'),
     rd_sr: Yup.string().required('Поле обязательно'),
-    channel_pe: Yup.string().required('Поле обязательно'),
+    channel_pe: Yup.object().shape({title: Yup.string().required()}),
     channel_pe_port: Yup.string().required('Поле обязательно'),
     channel_vid: Yup.string().required('Поле обязательно'),
-    channel_agg_stop: Yup.string().required('Поле обязательно'),
-    channel_agg_port: Yup.string().required('Поле обязательно'),
-    channel_acc_stop: Yup.string().required('Поле обязательно'),
-    channel_ip_mng_acc: Yup.string().required('Поле обязательно'),
-    channel_acc_port: Yup.string().required('Поле обязательно'),
-    channel_acc_model: Yup.string().required('Поле обязательно'),
-    channel_acc_sn: Yup.string().required('Поле обязательно'),
-    channel_acc_mac: Yup.string().required('Поле обязательно'),
+
+
+    channel_agg_stop: Yup.array().of(Yup.object().shape({
+        agg_stop:  Yup.object().shape({title: Yup.string().required('Поле agg_stop обязательно')}),
+        agg_port: Yup.string().required('Поле обязательно'),
+        withStop: Yup.boolean()
+    })).min(1),
+
+    channel_acc_stop: Yup.array().of(Yup.object().shape({
+        acc_stop:   Yup.string().required('Поле aсс_stop обязательно'),
+        acc_port: Yup.string().required('Поле обязательно'),
+        acc_ip_mng: Yup.string().required('Поле обязательно'),
+        acc_model:Yup.string().required('Поле обязательно'),
+        acc_sn: Yup.string().required('Поле обязательно'),
+        acc_mac: Yup.string().required('Поле обязательно'),
+        withStop: Yup.string().required('Поле обязательно')
+    })).min(1),
+
+
     zabbix: Yup.string().required('Поле обязательно'),
     zabbix_avail: Yup.string().required('Поле обязательно'),
     channel_region: Yup.string().required('Поле обязательно'),

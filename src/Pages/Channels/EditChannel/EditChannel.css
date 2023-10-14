@@ -56,6 +56,7 @@
 
 .EditChannel__Form-Pe{
     width: 49%;
+    min-width: 200px;
 }
 
 .EditChannel__Form-Input-PE{
@@ -104,5 +105,12 @@
     }
     .EditChannel__Form-Input-PE-Vid{
         width: 49%;
+    }
+    .AddChannel__Form-Input-Agg{
+        width: 100%;
+        margin-bottom: 5px;
+    }
+    .AddChannel__Form-Input-Agg-Port{
+        width: 100%;
     }
 }

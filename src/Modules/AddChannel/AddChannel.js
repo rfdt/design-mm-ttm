@@ -21,7 +21,6 @@ function AddChannel({close, visible}) {
     const [filteredStreetsSuggestions, setFilteredStreetsSuggestions] = useState([]);
     const [servicesSuggestions, setServicesSuggestions] = useState([]);
     const [statusSuggestions, setStatusSuggestions] = useState([]);
-    const [peSuggestions, setPeSuggestions] = useState([]);
     const [isSuccessAdded, setIsSuccessAdded] = useState(false);
 
     const formik = useFormik({
@@ -42,27 +41,24 @@ function AddChannel({close, visible}) {
             date: "",
             note: "XXXX",
             rd_sr: "XXXX",
-            channel_pe: "",
+            channel_pe: null,
             channel_pe_port: "",
             channel_vid: "",
-            channel_agg_stop: "",
-            channel_agg_port: "",
-            channel_acc_stop: "",
-            channel_ip_mng_acc: "",
-            channel_acc_port: "",
-            channel_acc_model: "",
-            channel_acc_sn: "",
-            channel_acc_mac: "",
             zabbix: "",
             zabbix_avail: "",
             channel_region: 'crimea',
-
-            new_channel_agg_stop: [{agg_stop: '', agg_port: '', withStop: false}]
+            channel_acc_stop: [{acc_stop: "", acc_port: "", acc_ip_mng: "", acc_model: "", acc_sn: "", acc_mac: "",  withStop: false}],
+            channel_agg_stop: [{agg_stop: '', agg_port: '', withStop: false}]
         },
         validationSchema: CreateChannelValidationSchema,
         onSubmit: async (data) => {
             setIsSuccessAdded(false)
-            const response = await createChannel(data);
+            const transformedObj = {...data,
+                channel_pe: data.channel_pe.title,
+                channel_agg_stop: data.channel_agg_stop.map((agg_stop)=>({...agg_stop, agg_stop: agg_stop.agg_stop.title}))
+            }
+            console.log(transformedObj)
+            const response = await createChannel(transformedObj);
             if (response) {
                 setIsSuccessAdded(true)
             }
@@ -102,10 +98,23 @@ function AddChannel({close, visible}) {
         }
     }
 
-    const peCompleteMethod = (e) => {
-        filtersValues ? setPeSuggestions(e.query ? filtersValues.pe.filter(pe => pe.toLowerCase().includes(e.query.toLowerCase())) : filtersValues.pe) : setPeSuggestions([]);
+    const handleChangeAgg = (index, value) => {
+        if (index === 0) {
+            formik.setFieldValue('channel_pe_port', value.uplink)
+        } else {
+            formik.setFieldValue(`channel_agg_stop[${index - 1}].agg_port`, value.uplink)
+        }
+        formik.setFieldValue(`channel_agg_stop[${index}].agg_stop`, value)
     }
 
+    const handleAccStopChange = (index) =>{
+        if (formik.values.channel_acc_stop[index].withStop) {
+            formik.setFieldValue(`channel_acc_stop[${index}]`, {acc_stop: "", acc_port: "", acc_ip_mng: "", acc_model: "", acc_sn: "", acc_mac: "",  withStop: false})
+        } else {
+            formik.setFieldValue(`channel_acc_stop[${index}]`, {acc_stop: "СТОП", acc_port: "СТОП", acc_ip_mng: "СТОП", acc_model: "СТОП", acc_sn: "СТОП", acc_mac: "СТОП",  withStop: true})
+        }
+        formik.setFieldValue(`channel_acc_stop[${index}].withStop`, !formik.values.channel_acc_stop[index].withStop)
+    }
 
     return (
         <Dialog header="Создание нового канала"
@@ -277,13 +286,13 @@ function AddChannel({close, visible}) {
                                     <div className="EditChannel__Form-Row">
                                         <div className="EditChannel__Form-Input-Title">PE</div>
                                         <div className="EditChannel__Form-Input EditChannel__Form-Input-PE">
-                                            <AutoComplete value={formik.values.channel_pe} suggestions={peSuggestions}
-                                                          completeMethod={peCompleteMethod}
-                                                          placeholder='PE'
-                                                          onChange={(e) => formik.setFieldValue('channel_pe', e.target.value)}
-                                                          dropdown
-                                                          className="p-inputtext-sm EditChannel__Form-Pe"
-                                            />
+                                            <Dropdown
+                                                value={formik.values.channel_pe}
+                                                onChange={(e) => formik.setFieldValue('channel_pe', e.target.value)}
+                                                options={filtersValues ? filtersValues.pe : []} optionLabel="title"
+                                                placeholder="PE"
+                                                filter
+                                                className="p-inputtext-sm EditChannel__Form-Pe"/>
                                             <InputText className="p-inputtext-sm EditChannel__Form-Input-PE-Port"
                                                        value={formik.values.channel_pe_port}
                                                        onChange={(e) => formik.setFieldValue('channel_pe_port', e.target.value)}
@@ -296,44 +305,30 @@ function AddChannel({close, visible}) {
                                             />
                                         </div>
                                     </div>
-                                    {/*<div className="EditChannel__Form-Row">*/}
-                                    {/*    <div className="EditChannel__Form-Input-Title">AGGSTOPOLD</div>*/}
-                                    {/*    <div className="EditChannel__Form-Input">*/}
-                                    {/*        <InputText style={{width: "75%"}} className="p-inputtext-sm"*/}
-                                    {/*                   value={formik.values.channel_agg_stop}*/}
-                                    {/*                   onChange={(e) => formik.setFieldValue('channel_agg_stop', e.target.value)}*/}
-                                    {/*                   placeholder="AGG STOP"*/}
-                                    {/*        />*/}
-                                    {/*        <InputText style={{width: "24%"}} className="p-inputtext-sm"*/}
-                                    {/*                   value={formik.values.channel_agg_port}*/}
-                                    {/*                   onChange={(e) => formik.setFieldValue('channel_agg_port', e.target.value)}*/}
-                                    {/*                   placeholder="AGG PORT"*/}
-                                    {/*        />*/}
-                                    {/*    </div>*/}
-                                    {/*</div>*/}
-                                    <FieldArray name="new_channel_agg_stop">
+                                    <FieldArray name="channel_agg_stop">
                                         {({push, remove}) => (
                                             <div className="EditChannel__Form-Row-Agg EditChannel__Form-Row">
                                                 <div
                                                     className="EditChannel__Form-Input-Title AddChannel__Form-Input-Title-Agg">AGGSTOP
                                                 </div>
                                                 <div className="AddChannel__Form-Row-Inputs">
-                                                    {formik.values.new_channel_agg_stop.map((agg_stop, index) => (
+                                                    {formik.values.channel_agg_stop.map((agg_stop, index) => (
                                                         <div key={index}
                                                              className="EditChannel__Form-Input AddChannel__Form-Row-Input-Agg">
-                                                            <InputText
-                                                                className="p-inputtext-sm AddChannel__Form-Input-Agg"
-                                                                value={formik.values.new_channel_agg_stop[index].agg_stop}
-                                                                onChange={(e) => formik.setFieldValue(`new_channel_agg_stop[${index}].agg_stop`, e.target.value)}
-                                                                placeholder="AGG STOP"
-                                                            />
+                                                            <Dropdown
+                                                                value={formik.values.channel_agg_stop[index].agg_stop}
+                                                                onChange={(e) => handleChangeAgg(index, e.target.value)}
+                                                                options={filtersValues ? formik.values.channel_agg_stop[index].withStop ? filtersValues.stop : filtersValues.ssw : []}
+                                                                optionLabel="title" placeholder="SSW"
+                                                                filter
+                                                                className="p-inputtext-sm AddChannel__Form-Input-Agg"/>
                                                             <InputText
                                                                 className="p-inputtext-sm AddChannel__Form-Input-Agg-Port"
-                                                                value={formik.values.new_channel_agg_stop[index].agg_port}
+                                                                value={formik.values.channel_agg_stop[index].agg_port}
                                                                 onChange={
                                                                     (e) => {
-                                                                        if(!formik.values.new_channel_agg_stop[index].withStop) {
-                                                                            formik.setFieldValue(`new_channel_agg_stop[${index}].agg_port`, e.target.value)
+                                                                        if (!formik.values.channel_agg_stop[index].withStop) {
+                                                                            formik.setFieldValue(`channel_agg_stop[${index}].agg_port`, e.target.value)
                                                                         }
                                                                     }
                                                                 }
@@ -341,35 +336,31 @@ function AddChannel({close, visible}) {
                                                             />
                                                             <div className="EditChannel__Form-Agg-Adding-Block">
                                                                 <div className="EditChannel__Form-Agg-Adding-Stop">
-                                                                    <Checkbox checked={formik.values.new_channel_agg_stop[index].withStop}
-                                                                              onChange={()=>{
-                                                                                  if(formik.values.new_channel_agg_stop[index].withStop) {
-                                                                                      formik.setFieldValue(`new_channel_agg_stop[${index}].agg_port`, "")
-                                                                                  }else {
-                                                                                      formik.setFieldValue(`new_channel_agg_stop[${index}].agg_port`, "СТОП")
-                                                                                  }
-                                                                                  formik.setFieldValue(`new_channel_agg_stop[${index}].withStop`, !formik.values.new_channel_agg_stop[index].withStop)
-                                                                              }}
+                                                                    <Checkbox
+                                                                        checked={formik.values.channel_agg_stop[index].withStop}
+                                                                        onChange={() => {
+                                                                            if (formik.values.channel_agg_stop[index].withStop) {
+                                                                                formik.setFieldValue(`channel_agg_stop[${index}].agg_port`, "")
+                                                                            } else {
+                                                                                formik.setFieldValue(`channel_agg_stop[${index}].agg_port`, "СТОП")
+                                                                            }
+                                                                            formik.setFieldValue(`channel_agg_stop[${index}].withStop`, !formik.values.channel_agg_stop[index].withStop)
+                                                                        }}
                                                                     />
-                                                                    <label htmlFor="ingredient1"
-                                                                           className="ml-2">ОПМ</label>
+                                                                    {/*<label htmlFor="ingredient1"*/}
+                                                                    {/*       className="ml-2">ОПМ</label>*/}
                                                                 </div>
-                                                                <div
-                                                                    className="EditChannel__Form-Agg-Adding-Remove-Btn">
-                                                                    <span className="pi pi-minus-circle"
-                                                                          onClick={() => index !== 0 ? remove(index) : null}/>
-                                                                </div>
-                                                                {index === formik.values.new_channel_agg_stop.length - 1 ?
-                                                                    <div
-                                                                        className="EditChannel__Form-Agg-Adding-Add-Btn"
-                                                                        onClick={() => push({
-                                                                            agg_stop: '',
-                                                                            channel_agg_port: '',
-                                                                            withStop: false
-                                                                        })}
-                                                                    >
-                                                                        <span className="pi pi-plus-circle"/>
-                                                                    </div> : null
+                                                                <Button icon="pi pi-times" rounded text
+                                                                        severity="danger" aria-label="Удалить"
+                                                                        onClick={() => index !== 0 ? remove(index) : null}/>
+                                                                {index === formik.values.channel_agg_stop.length - 1 ?
+                                                                    <Button icon="pi pi-plus" rounded text
+                                                                            severity="success" aria-label="Удалить"
+                                                                            onClick={() => push({
+                                                                                agg_stop: '',
+                                                                                channel_agg_port: '',
+                                                                                withStop: false
+                                                                            })}/> : null
                                                                 }
                                                             </div>
                                                         </div>
@@ -378,66 +369,75 @@ function AddChannel({close, visible}) {
                                             </div>
                                         )}
                                     </FieldArray>
-                                    <div className="EditChannel__Form-Row">
-                                        <div className="EditChannel__Form-Input-Title">ACCSTOP</div>
-                                        <div className="EditChannel__Form-Input">
-                                            <InputText style={{width: "100%"}} className="p-inputtext-sm"
-                                                       value={formik.values.channel_acc_stop}
-                                                       onChange={(e) => formik.setFieldValue('channel_acc_stop', e.target.value)}
-                                                       placeholder="ACC STOP"
-                                            />
-                                        </div>
-                                    </div>
-                                    <div className="EditChannel__Form-Row">
-                                        <div className="EditChannel__Form-Input-Title">IP MNG/A</div>
-                                        <div className="EditChannel__Form-Input">
-                                            <InputText style={{width: "100%"}} className="p-inputtext-sm"
-                                                       value={formik.values.channel_ip_mng_acc}
-                                                       onChange={(e) => formik.setFieldValue('channel_ip_mng_acc', e.target.value)}
-                                                       placeholder="IP MNG/A (Управления)"
-                                            />
-                                        </div>
-                                    </div>
-                                    <div className="EditChannel__Form-Row">
-                                        <div className="EditChannel__Form-Input-Title">PORT_A</div>
-                                        <div className="EditChannel__Form-Input">
-                                            <InputText style={{width: "100%"}} className="p-inputtext-sm"
-                                                       value={formik.values.channel_acc_port}
-                                                       onChange={(e) => formik.setFieldValue('channel_acc_port', e.target.value)}
-                                                       placeholder="Порт узла доступа"
-                                            />
-                                        </div>
-                                    </div>
-                                    <div className="EditChannel__Form-Row">
-                                        <div className="EditChannel__Form-Input-Title">MODEL</div>
-                                        <div className="EditChannel__Form-Input">
-                                            <InputText style={{width: "100%"}} className="p-inputtext-sm"
-                                                       value={formik.values.channel_acc_model}
-                                                       onChange={(e) => formik.setFieldValue('channel_acc_model', e.target.value)}
-                                                       placeholder="Модель узла доступа"
-                                            />
-                                        </div>
-                                    </div>
-                                    <div className="EditChannel__Form-Row">
-                                        <div className="EditChannel__Form-Input-Title">SN</div>
-                                        <div className="EditChannel__Form-Input">
-                                            <InputText style={{width: "100%"}} className="p-inputtext-sm"
-                                                       value={formik.values.channel_acc_sn}
-                                                       onChange={(e) => formik.setFieldValue('channel_acc_sn', e.target.value)}
-                                                       placeholder="Серийный номер узла доступа"
-                                            />
-                                        </div>
-                                    </div>
-                                    <div className="EditChannel__Form-Row">
-                                        <div className="EditChannel__Form-Input-Title">MAC</div>
-                                        <div className="EditChannel__Form-Input">
-                                            <InputText style={{width: "100%"}} className="p-inputtext-sm"
-                                                       value={formik.values.channel_acc_mac}
-                                                       onChange={(e) => formik.setFieldValue('channel_acc_mac', e.target.value)}
-                                                       placeholder="MAC узла доступа"
-                                            />
-                                        </div>
-                                    </div>
+                                    <FieldArray name="channel_acc_stop">
+                                        {({push, remove}) => (
+                                            <div className="EditChannel__Form-Row EditChannel__Form-Row-Agg">
+                                                <div
+                                                    className="EditChannel__Form-Input-Title AddChannel__Form-Input-Title-Agg">ACCSTOP
+                                                </div>
+                                                <div className="AddChannel__Form-Row-Inputs">
+                                                    {
+                                                        formik.values.channel_acc_stop.map((acc_stop, index)=>(
+                                                            <React.Fragment key={index}>
+                                                                <div key={index}
+                                                                    className="EditChannel__Form-Input AddChannel__Form-Row-Input-Agg">
+                                                                    <InputText style={{width: "49%"}} className="p-inputtext-sm"
+                                                                               value={formik.values.channel_acc_stop[index].acc_stop}
+                                                                               onChange={(e) => formik.setFieldValue(`channel_acc_stop[${index}].acc_stop`, e.target.value)}
+                                                                               placeholder="ACC STOP"
+                                                                    />
+                                                                    <InputText style={{width: "49%"}} className="p-inputtext-sm"
+                                                                               value={formik.values.channel_acc_stop[index].acc_ip_mng}
+                                                                               onChange={(e) => formik.setFieldValue(`channel_acc_stop[${index}].acc_ip_mng`, e.target.value)}
+                                                                               placeholder="IP MNG/A (Управления)"
+                                                                    />
+                                                                </div>
+                                                                <div
+                                                                    className="EditChannel__Form-Input AddChannel__Form-Row-Input-Agg">
+                                                                    <InputText style={{width: "49%"}} className="p-inputtext-sm"
+                                                                               value={formik.values.channel_acc_stop[index].acc_port}
+                                                                               onChange={(e) => formik.setFieldValue(`channel_acc_stop[${index}].acc_port`, e.target.value)}
+                                                                               placeholder="Порт узла доступа"
+                                                                    />
+                                                                    <InputText style={{width: "49%"}} className="p-inputtext-sm"
+                                                                               value={formik.values.channel_acc_stop[index].acc_model}
+                                                                               onChange={(e) => formik.setFieldValue(`channel_acc_stop[${index}].acc_model`, e.target.value)}
+                                                                               placeholder="Модель узла доступа"
+                                                                    />
+                                                                </div>
+                                                                <div
+                                                                    className="EditChannel__Form-Input AddChannel__Form-Row-Input-Agg">
+                                                                    <InputText style={{width: "49%"}} className="p-inputtext-sm"
+                                                                               value={formik.values.channel_acc_stop[index].acc_sn}
+                                                                               onChange={(e) => formik.setFieldValue(`channel_acc_stop[${index}].acc_sn`, e.target.value)}
+                                                                               placeholder="Серийный номер узла доступа"
+                                                                    />
+                                                                    <InputText style={{width: "49%"}} className="p-inputtext-sm"
+                                                                               value={formik.values.channel_acc_stop[index].acc_mac}
+                                                                               onChange={(e) => formik.setFieldValue(`channel_acc_stop[${index}].acc_mac`, e.target.value)}
+                                                                               placeholder="MAC узла доступа"
+                                                                    />
+                                                                </div>
+                                                                <div
+                                                                    className=" EditChannel__Form-Input AddChannel__Form-Row-Input-Agg EditChannel__Form-Input-Just-End">
+                                                                    <Checkbox
+                                                                        className='AddChannel__Form-Input-CheckBox-Stop-Acc'
+                                                                        checked={formik.values.channel_acc_stop[index].withStop}
+                                                                        onChange={() => handleAccStopChange(index)}
+                                                                    />
+                                                                    <Button icon="pi pi-times" rounded text severity="danger"
+                                                                            aria-label="Удалить" onClick={() => index !== 0 ? remove(index) : null}/>
+                                                                    {index === formik.values.channel_acc_stop.length - 1 ?
+                                                                    <Button icon="pi pi-plus" rounded text severity="success"
+                                                                            aria-label="Добавить" onClick={() => push({acc_stop: "", acc_port: "", acc_ip_mng: "", acc_model: "", acc_sn: "", acc_mac: ""})}/> : null}
+                                                                </div>
+                                                            </React.Fragment>
+                                                        ))
+                                                    }
+                                                </div>
+                                            </div>
+                                        )}
+                                    </FieldArray>
                                     <div className="EditChannel__Form-Row">
                                         <div className="EditChannel__Form-Input-Title">ZABBIX</div>
                                         <div className="EditChannel__Form-Input">

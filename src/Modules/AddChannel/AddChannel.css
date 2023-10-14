@@ -8,8 +8,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding-left: 3px;
-    padding-right: 3px;
+    padding-left: 6px;
 }
 
 .EditChannel__Form-Agg-Adding-Stop{
@@ -68,6 +67,16 @@
     width: 24%;
 }
 
+.EditChannel__Form-Input-Just-End{
+    justify-content: flex-end !important;
+    align-items: center;
+}
+
+.AddChannel__Form-Input-CheckBox-Stop-Acc{
+    margin-right: 13px;
+    margin-top: 2px;
+}
+
 /*Приоритет снизу вверх*/
 /*Сначала правило до 320 потом до 480 и т.д*/
 @media (max-width: 768px) {
@@ -79,6 +88,10 @@
     }
     .AddChannel__Form-Input-Agg-Port{
         width: 49%;
+    }
+
+    .EditChannel__Form-Input-Just-End{
+        justify-content: center !important;
     }
 }
 @media (max-width: 600px){

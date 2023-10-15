@@ -24,7 +24,10 @@ const setFiltersValuesAC = (filterValues) => ({type: CHANNELS_SET_FILTERS_VALUES
 export const findChannels = () => async (dispatch, getState) => {
     try {
         const filters = getState().channels.channelsFilters;
-        const channels = await ChannelsApi.findChannels(filters);
+        const channels = await ChannelsApi.findChannels({...filters,
+            peFilter: filters.peFilter.title || '',
+            channelAggStopFilter: filters.channelAggStopFilter.title || ''
+        });
         dispatch(setFilteredChannelsAC(channels.data.channels));
         dispatch(setFilteredChannelsCountAC(channels.data.count));
     } catch (e) {

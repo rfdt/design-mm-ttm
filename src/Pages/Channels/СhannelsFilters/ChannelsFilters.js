@@ -62,22 +62,10 @@ function ChannelsFilters({showError}) {
         }
     }
 
-    // async function testError() {
-    //     try {
-    //         await ChannelsApi.testError()
-    //     } catch (e) {
-    //         setError(e)
-    //     }
-    // }
-
     const showAddingChannel = () =>{
         setAddChannelVisible(true)
     }
 
-    const channelRegionOptions = [
-        {value: 'crimea', icon: 'pi pi-home'},
-        {value: 'north', icon: 'pi pi-map'},
-    ];
 
     const handleSearchSubmit = (e) =>{
         e.preventDefault()
@@ -93,10 +81,6 @@ function ChannelsFilters({showError}) {
                                placeholder="ID / Клиент / Доп.Инфо / Примечание" value={channelsFilters.addInfoFilter}
                                onChange={(e) => setFilterValue('addInfoFilter', e.target.value)}/>
                     <div className="ChannelsFilters__AdditionalSearch-Btns">
-                        <MultiStateCheckbox value={channelsFilters.channelRegionFilter}
-                                            onChange={(e) => setFilterValue('channelRegionFilter', e.value)}
-                                            options={channelRegionOptions} optionValue="value"
-                                            className='ChannelsFilters__AdditionalSearch-RegionBtn' empty={false}/>
                         <Button icon="pi pi-search"
                                 onClick={findChannels}
                                 className={'ChannelsFilters__AdditionalSearch-SearchBtn'} rounded severity="info"/>

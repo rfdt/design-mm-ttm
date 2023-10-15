@@ -5,6 +5,7 @@ import {AutoComplete} from "primereact/autocomplete";
 import {InputText} from "primereact/inputtext";
 import {useSelector} from "react-redux";
 import {useActions} from "../../../Store/useActions";
+import {Dropdown} from "primereact/dropdown";
 
 function ExtendedSearch({visible, close}) {
     const {channelsFilters, filtersValues} = useSelector(state => state.channels);
@@ -45,24 +46,21 @@ function ExtendedSearch({visible, close}) {
                               className={'ExtendedSearch__Item-100'}/>
             </div>
             <div className="ExtendedSearch__Row">
-                <AutoComplete value={channelsFilters.peFilter} suggestions={peSuggestions}
-                              completeMethod={peCompleteMethod}
-                              placeholder='PE'
-                              onChange={(e) => setFilterValue('peFilter', e.target.value)}
-                              dropdown
-                              className={'ExtendedSearch__Item-100'}/>
+                <Dropdown value={channelsFilters.peFilter}
+                          onChange={(e) => setFilterValue('peFilter',e.value)} options={filtersValues?.pe || []}
+                          optionLabel="title" placeholder="PE"
+                          filter  className="ExtendedSearch__Item-100" />
             </div>
             <div className="ExtendedSearch__Row">
                 <InputText value={channelsFilters.rdFilter}
                            placeholder='RD'
                            onChange={(e) => setFilterValue('rdFilter', e.target.value)}
                            className={'ExtendedSearch__Item-40'}/>
-                <AutoComplete value={channelsFilters.channelAggStopFilter} suggestions={aggSuggestions}
-                              completeMethod={aggCompleteMethod}
-                              placeholder='AGG'
-                              onChange={(e) => setFilterValue('channelAggStopFilter', e.target.value)}
-                              dropdown
-                              className={'ExtendedSearch__Item-40'}/>
+                <Dropdown value={channelsFilters.channelAggStopFilter}
+                          onChange={(e) => setFilterValue('channelAggStopFilter', e.target.value)}
+                          options={filtersValues ? filtersValues.ssw.concat(filtersValues.stop) : []}
+                          optionLabel="title" placeholder="AGG"
+                          filter  className="ExtendedSearch__Item-40" />
             </div>
             <div className="ExtendedSearch__Row">
                 <InputText value={channelsFilters.vidFilter}
@@ -76,12 +74,10 @@ function ExtendedSearch({visible, close}) {
                            className={'ExtendedSearch__Item-40'}/>
             </div>
             <div className="ExtendedSearch__Row">
-                <AutoComplete value={channelsFilters.channelAccStopFilter} suggestions={accSuggestions}
-                              completeMethod={accCompleteMethod}
-                              placeholder='ACC'
-                              onChange={(e) => setFilterValue('channelAccStopFilter', e.target.value)}
-                              dropdown
-                              className={'ExtendedSearch__Item-40'}/>
+                <InputText value={channelsFilters.channelAccStopFilter}
+                           placeholder='ACC'
+                           onChange={(e) => setFilterValue('channelAccStopFilter', e.target.value)}
+                           className={'ExtendedSearch__Item-40'}/>
                 <InputText value={channelsFilters.channelIpMngFilter}
                            placeholder='IP/MNG ACC'
                            onChange={(e) => setFilterValue('channelIpMngFilter', e.target.value)}

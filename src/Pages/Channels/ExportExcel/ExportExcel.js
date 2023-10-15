@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {Button} from "primereact/button";
 import {ConfirmDialog} from 'primereact/confirmdialog';
-import {exportExcelFromJson} from "../../../Modules/exportExcel";
+import {exportExcelFromJson, transformToBase} from "../../../Modules/exportExcel";
 import {ChannelsApi} from "../../../Api/ChannelsApi";
 import {useSelector} from "react-redux";
 import {useActions} from "../../../Store/useActions";
@@ -19,8 +19,10 @@ function ExportExcel() {
     async function findAndExport() {
         try {
             const response = await ChannelsApi.findToExport({...channelsFilters})
-            exportExcelFromJson(response?.data.channels || [])
+            const transformed = response.data ? transformToBase(response.data.channels) : []
+            exportExcelFromJson(transformed || [])
         } catch (error) {
+            console.log(error)
             setError(error)
         }finally {
             close()

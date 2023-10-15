@@ -19,14 +19,13 @@ const filtersInitialValue = {
     homeFilter: '',
     serviceFilter: '',
     statusFilter: '',
-    peFilter: '',
+    peFilter: "",
     rdFilter: '',
     channelAggStopFilter:'',
     vidFilter: '',
     sizeFilter: '',
     channelAccStopFilter: '',
     channelIpMngFilter: '',
-    channelRegionFilter: 'crimea',
 }
 
 const channelsReducerInitialState = {

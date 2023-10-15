@@ -14,15 +14,12 @@ import Register from "./Pages/Register/Register";
 import {useSelector} from "react-redux";
 import classNames from "classnames";
 import MenuSettings from "./Modules/Menu/MenuSettings/MenuSettings";
+import {useLocale} from "./Modules/useLocale";
 
 function App() {
 
     const {appTheme} = useSelector(state => state.global)
     const {loadUser} = useActions();
-
-    useEffect(() => {
-        loadUser()
-    }, [])
 
     useEffect(()=>{
         if(appTheme === 'dark'){
@@ -31,6 +28,13 @@ function App() {
             import('primereact/resources/themes/lara-light-indigo/theme.css')
         }
     }, [appTheme])
+
+    useLocale();
+
+    useEffect(() => {
+        loadUser()
+    }, [])
+
 
     return (
         <div className={classNames("App__Container", {"App__Container--Dark": appTheme === 'dark'})}>

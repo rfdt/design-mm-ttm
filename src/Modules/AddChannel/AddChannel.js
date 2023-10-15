@@ -11,6 +11,7 @@ import {useSelector} from "react-redux";
 import {Button} from "primereact/button";
 import {useActions} from "../../Store/useActions";
 import {Checkbox} from "primereact/checkbox";
+import {Calendar} from "primereact/calendar";
 
 function AddChannel({close, visible}) {
 
@@ -38,7 +39,7 @@ function AddChannel({close, visible}) {
             add_info: 'XXXX',
             contact: 'XXXX',
             status: "РЕЗЕРВ",
-            date: "",
+            date: new Date(),
             note: "XXXX",
             rd_sr: "XXXX",
             channel_pe: null,
@@ -257,10 +258,10 @@ function AddChannel({close, visible}) {
                                                       optionLabel="name"
                                                       placeholder="Статус"
                                             />
-                                            <InputText style={{width: "49%"}} className="p-inputtext-sm"
-                                                       value={formik.values.date}
-                                                       onChange={(e) => formik.setFieldValue('date', e.target.value)}
-                                                       placeholder="Дата включения. Формат: ДД.ММ.ГГГГ"
+                                            <Calendar value={formik.values.date}
+                                                      onChange={(e) => formik.setFieldValue('date', e.target.value)}
+                                                      dateFormat="dd.mm.yy"
+                                                      style={{width: "49%"}}
                                             />
                                         </div>
                                     </div>
@@ -347,8 +348,6 @@ function AddChannel({close, visible}) {
                                                                             formik.setFieldValue(`channel_agg_stop[${index}].withStop`, !formik.values.channel_agg_stop[index].withStop)
                                                                         }}
                                                                     />
-                                                                    {/*<label htmlFor="ingredient1"*/}
-                                                                    {/*       className="ml-2">ОПМ</label>*/}
                                                                 </div>
                                                                 <Button icon="pi pi-times" rounded text
                                                                         severity="danger" aria-label="Удалить"

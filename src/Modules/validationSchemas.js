@@ -11,6 +11,7 @@ export const UserRegisterValidationSchema = Yup.object().shape({
 })
 
 export const CreateChannelValidationSchema =  Yup.object().shape({
+    _id: Yup.string(),
     id_tbcd: Yup.string().required('Поле обязательно'),
     id_suz: Yup.string().required('Поле обязательно'),
     id_oss: Yup.string().required('Поле обязательно'),

@@ -8,11 +8,7 @@ import {useActions} from "../../Store/useActions";
 
 function Channels() {
 
-    const {findChannels, clearError} = useActions()
-
-    useEffect(()=>{
-        clearError()
-    }, [])
+    const {findChannels} = useActions()
 
     useEffect(() => {
         findChannels()

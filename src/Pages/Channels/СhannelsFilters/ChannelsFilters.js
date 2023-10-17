@@ -11,15 +11,14 @@ import {useSelector} from "react-redux";
 import AddChannel from "../../../Modules/AddChannel/AddChannel";
 import Hardware from "../Hardware/Hardware";
 
-function ChannelsFilters({showError}) {
+function ChannelsFilters() {
 
-    const {setFilterValue, getFilterValues, findChannels, clearSearch, setError} = useActions();
+    const {setFilterValue, getFilterValues, findChannels, clearSearch} = useActions();
     const {channelsFilters, filtersValues, filteredChannelsCount} = useSelector(state => state.channels);
 
     const [filteredCitySuggestions, setFilteredCitySuggestions] = useState([]);
     const [filteredStreetsSuggestions, setFilteredStreetsSuggestions] = useState([]);
     const [servicesSuggestions, setServicesSuggestions] = useState([]);
-    const [statusSuggestions, setStatusSuggestions] = useState([]);
 
     const [extendedSearchVisible, setExtendedSearchVisible] = useState(false)
     const [addChannelVisible, setAddChannelVisible] = useState(false)
@@ -35,8 +34,6 @@ function ChannelsFilters({showError}) {
             });
             setServicesSuggestions(suggestions);
         }
-        setStatusSuggestions([{name: "ВКЛ", code: "ВКЛ"}, {name: "ОТКЛ", code: "ОТКЛ"},
-            {name: "РЕЗЕРВ", code: "РЕЗЕРВ"}, {name: "ИЗМ", code: "ИЗМ"}, {name: "ПАУЗА", code: "ПАУЗА"}])
     }, [filtersValues])
 
 
@@ -114,7 +111,7 @@ function ChannelsFilters({showError}) {
                               optionLabel="name"
                               placeholder="Услуга" className="ChannelsFilters__MainSearch-Service"
                     />
-                    <Dropdown options={statusSuggestions}
+                    <Dropdown options={filtersValues ? filtersValues.status : []}
                               value={{name: channelsFilters.statusFilter, code: channelsFilters.statusFilter}}
                               onChange={(e) => setFilterValue('statusFilter', e.target.value.name)}
                               optionLabel="name"
@@ -130,9 +127,9 @@ function ChannelsFilters({showError}) {
                     <Button icon="pi pi-sliders-h" severity="info" className='ChannelsFilters__ExtendedSearch-Btn'
                             onClick={() => setExtendedSearchVisible(true)}
                     />
-                    <ExportExcel/>
                     <Button icon="pi pi-plus-circle" onClick={showAddingChannel}
                             className='ChannelsFilters__ExtendedSearch-Btn'/>
+                    <ExportExcel/>
                     <Hardware />
                 </div>
             </div>

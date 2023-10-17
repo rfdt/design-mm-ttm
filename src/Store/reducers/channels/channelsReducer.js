@@ -64,7 +64,10 @@ export const channelsReducer = (state= channelsReducerInitialState, action) =>{
             return {...state, channelsFilters: {...newFiltersValues}}
         }
         case CHANNELS_SET_FILTERS_VALUES: {
-            return {...state, filtersValues: action.payload}
+            return {...state, filtersValues: {...action.payload,
+                    status: [{name: "ВКЛ", code: "ВКЛ"}, {name: "ОТКЛ", code: "ОТКЛ"},
+                        {name: "РЕЗЕРВ", code: "РЕЗЕРВ"}, {name: "ИЗМ", code: "ИЗМ"}, {name: "ПАУЗА", code: "ПАУЗА"}],
+            }}
         }
         case CHANNELS_RESET_FILTERS: {
             return {...state, channelsFilters: {...filtersInitialValue}}

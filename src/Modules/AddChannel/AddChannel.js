@@ -12,6 +12,7 @@ import {Button} from "primereact/button";
 import {useActions} from "../../Store/useActions";
 import {Checkbox} from "primereact/checkbox";
 import {Calendar} from "primereact/calendar";
+import classNames from "classnames";
 
 function AddChannel({close, visible}) {
 
@@ -21,7 +22,6 @@ function AddChannel({close, visible}) {
     const [filteredCitySuggestions, setFilteredCitySuggestions] = useState([]);
     const [filteredStreetsSuggestions, setFilteredStreetsSuggestions] = useState([]);
     const [servicesSuggestions, setServicesSuggestions] = useState([]);
-    const [statusSuggestions, setStatusSuggestions] = useState([]);
     const [isSuccessAdded, setIsSuccessAdded] = useState(false);
 
     const formik = useFormik({
@@ -66,6 +66,8 @@ function AddChannel({close, visible}) {
         }
     });
 
+    const isFormFieldInvalidNonTouch = (name) => !!(formik.errors[name]);
+
     useEffect(() => {
         if (filtersValues && filtersValues.services) {
             const suggestions = filtersValues.services.map(service => {
@@ -73,8 +75,6 @@ function AddChannel({close, visible}) {
             });
             setServicesSuggestions(suggestions);
         }
-        setStatusSuggestions([{name: "ВКЛ", code: "ВКЛ"}, {name: "ОТКЛ", code: "ОТКЛ"},
-            {name: "РЕЗЕРВ", code: "РЕЗЕРВ"}, {name: "ПАУЗА", code: "ПАУЗА"}])
     }, [filtersValues])
 
 
@@ -135,17 +135,20 @@ function AddChannel({close, visible}) {
                                     <div className="EditChannel__Form-Row">
                                         <div className="EditChannel__Form-Input-Title">ID</div>
                                         <div className="EditChannel__Form-Input">
-                                            <InputText style={{width: "32%"}} className="p-inputtext-sm"
+                                            <InputText style={{width: "32%"}}
+                                                       className={classNames("p-inputtext-sm", { 'p-invalid': isFormFieldInvalidNonTouch('id_tbcd')})}
                                                        value={formik.values.id_tbcd}
                                                        onChange={(e) => formik.setFieldValue('id_tbcd', e.target.value)}
                                                        placeholder='ID TBCD'
                                             />
-                                            <InputText style={{width: "32%"}} className="p-inputtext-sm"
+                                            <InputText style={{width: "32%"}}
+                                                       className={classNames("p-inputtext-sm", { 'p-invalid': isFormFieldInvalidNonTouch('id_suz')})}
                                                        value={formik.values.id_suz}
                                                        onChange={(e) => formik.setFieldValue('id_suz', e.target.value)}
                                                        placeholder='ID СУЗ'
                                             />
-                                            <InputText style={{width: "32%"}} className="p-inputtext-sm"
+                                            <InputText style={{width: "32%"}}
+                                                       className={classNames("p-inputtext-sm", { 'p-invalid': isFormFieldInvalidNonTouch('id_oss')})}
                                                        value={formik.values.id_oss}
                                                        onChange={(e) => formik.setFieldValue('id_oss', e.target.value)}
                                                        placeholder='ID OSS'
@@ -155,7 +158,8 @@ function AddChannel({close, visible}) {
                                     <div className="EditChannel__Form-Row">
                                         <div className="EditChannel__Form-Input-Title"></div>
                                         <div className="EditChannel__Form-Input">
-                                            <InputText style={{width: "66%"}} className="p-inputtext-sm"
+                                            <InputText style={{width: "66%"}}
+                                                       className={classNames("p-inputtext-sm", { 'p-invalid': isFormFieldInvalidNonTouch('id_cms')})}
                                                        value={formik.values.id_cms}
                                                        onChange={(e) => formik.setFieldValue('id_cms', e.target.value)}
                                                        placeholder='ID CMS'
@@ -178,7 +182,8 @@ function AddChannel({close, visible}) {
                                     <div className="EditChannel__Form-Row">
                                         <div className="EditChannel__Form-Input-Title">Клиент</div>
                                         <div className="EditChannel__Form-Input">
-                                            <InputText style={{width: "100%"}} className="p-inputtext-sm"
+                                            <InputText style={{width: "100%"}}
+                                                       className={classNames("p-inputtext-sm", { 'p-invalid': isFormFieldInvalidNonTouch('client')})}
                                                        value={formik.values.client}
                                                        onChange={(e) => formik.setFieldValue('client', e.target.value)}
                                                        placeholder='Название клиента'
@@ -194,11 +199,13 @@ function AddChannel({close, visible}) {
                                                       onChange={(e) => formik.setFieldValue('service', e.target.value.name)}
                                                       optionLabel="name"
                                                       placeholder="Услуга"
+                                                      className={classNames("p-inputtext-sm", { 'p-invalid': isFormFieldInvalidNonTouch('service')})}
                                             />
-                                            <InputText style={{width: "49%"}} className="p-inputtext-sm"
+                                            <InputText style={{width: "49%"}}
                                                        value={formik.values.service_size}
                                                        onChange={(e) => formik.setFieldValue('service_size', e.target.value)}
                                                        placeholder='Размер услуги'
+                                                       className={classNames("p-inputtext-sm", { 'p-invalid': isFormFieldInvalidNonTouch('service_size')})}
                                             />
                                         </div>
                                     </div>
@@ -210,41 +217,43 @@ function AddChannel({close, visible}) {
                                                           completeMethod={cityCompleteMethod}
                                                           onChange={(e) => formik.setFieldValue('city', e.target.value)}
                                                           placeholder='Населенный пункт' dropdown
-                                                          className='EditChannel__Form-City'
-
+                                                          className={classNames("EditChannel__Form-City", { 'p-invalid': isFormFieldInvalidNonTouch('city')})}
                                             />
                                             <AutoComplete value={formik.values.street}
                                                           suggestions={filteredStreetsSuggestions}
                                                           completeMethod={streetsCompleteMethod}
                                                           onChange={(e) => formik.setFieldValue('street', e.target.value)}
                                                           placeholder='Улица' dropdown
-                                                          className='EditChannel__Form-Street'
                                                           inputClassName='p-inputtext-sm'
+                                                          className={classNames("EditChannel__Form-Street", { 'p-invalid': isFormFieldInvalidNonTouch('street')})}
                                             />
-                                            <InputText className="p-inputtext-sm EditChannel__Form-Home"
+                                            <InputText
                                                        value={formik.values.home}
                                                        onChange={(e) => formik.setFieldValue('home', e.target.value)}
                                                        placeholder="Дом"
+                                                       className={classNames("p-inputtext-sm EditChannel__Form-Home", { 'p-invalid': isFormFieldInvalidNonTouch('home')})}
                                             />
                                         </div>
                                     </div>
                                     <div className="EditChannel__Form-Row">
                                         <div className="EditChannel__Form-Input-Title">Инфо</div>
                                         <div className="EditChannel__Form-Input">
-                                            <InputText style={{width: "100%"}} className="p-inputtext-sm"
+                                            <InputText style={{width: "100%"}}
                                                        value={formik.values.add_info}
                                                        onChange={(e) => formik.setFieldValue('add_info', e.target.value)}
                                                        placeholder="Дополнительная информация"
+                                                       className={classNames("p-inputtext-sm", { 'p-invalid': isFormFieldInvalidNonTouch('add_info')})}
                                             />
                                         </div>
                                     </div>
                                     <div className="EditChannel__Form-Row">
                                         <div className="EditChannel__Form-Input-Title">Контакт</div>
                                         <div className="EditChannel__Form-Input">
-                                            <InputText style={{width: "100%"}} className="p-inputtext-sm"
+                                            <InputText style={{width: "100%"}}
                                                        value={formik.values.contact}
                                                        onChange={(e) => formik.setFieldValue('contact', e.target.value)}
                                                        placeholder="Контакт для связи"
+                                                       className={classNames("p-inputtext-sm", { 'p-invalid': isFormFieldInvalidNonTouch('contact')})}
                                             />
                                         </div>
                                     </div>
@@ -252,7 +261,7 @@ function AddChannel({close, visible}) {
                                         <div className="EditChannel__Form-Input-Title">Статус</div>
                                         <div className="EditChannel__Form-Input">
                                             <Dropdown style={{width: "49%"}}
-                                                      options={statusSuggestions}
+                                                      options={filtersValues ? filtersValues.status : []}
                                                       value={{name: formik.values.status, code: formik.values.status}}
                                                       onChange={(e) => formik.setFieldValue('status', e.target.value.name)}
                                                       optionLabel="name"
@@ -260,7 +269,7 @@ function AddChannel({close, visible}) {
                                             />
                                             <Calendar value={formik.values.date}
                                                       onChange={(e) => formik.setFieldValue('date', e.target.value)}
-                                                      dateFormat="dd.mm.yy"
+                                                      dateFormat="yy.mm.dd"
                                                       style={{width: "49%"}}
                                             />
                                         </div>
@@ -268,15 +277,17 @@ function AddChannel({close, visible}) {
                                     <div className="EditChannel__Form-Row">
                                         <div className="EditChannel__Form-Input-Title">Прим</div>
                                         <div className="EditChannel__Form-Input">
-                                            <InputText style={{width: "49%"}} className="p-inputtext-sm"
+                                            <InputText style={{width: "49%"}}
                                                        value={formik.values.note}
                                                        onChange={(e) => formik.setFieldValue('note', e.target.value)}
                                                        placeholder="Примечание"
+                                                       className={classNames("p-inputtext-sm", { 'p-invalid': isFormFieldInvalidNonTouch('note')})}
                                             />
-                                            <InputText style={{width: "49%"}} className="p-inputtext-sm"
+                                            <InputText style={{width: "49%"}}
                                                        value={formik.values.rd_sr}
                                                        onChange={(e) => formik.setFieldValue('rd_sr', e.target.value)}
                                                        placeholder="RD_SR"
+                                                       className={classNames("p-inputtext-sm", { 'p-invalid': isFormFieldInvalidNonTouch('rd_sr')})}
                                             />
                                         </div>
                                     </div>
@@ -293,16 +304,17 @@ function AddChannel({close, visible}) {
                                                 options={filtersValues ? filtersValues.pe : []} optionLabel="title"
                                                 placeholder="PE"
                                                 filter
-                                                className="p-inputtext-sm EditChannel__Form-Pe"/>
-                                            <InputText className="p-inputtext-sm EditChannel__Form-Input-PE-Port"
-                                                       value={formik.values.channel_pe_port}
+                                                className={classNames("p-inputtext-sm EditChannel__Form-Pe", { 'p-invalid': isFormFieldInvalidNonTouch('channel_pe')})}
+                                            />
+                                            <InputText value={formik.values.channel_pe_port}
                                                        onChange={(e) => formik.setFieldValue('channel_pe_port', e.target.value)}
                                                        placeholder="PE Порт"
+                                                       className={classNames("p-inputtext-sm EditChannel__Form-Input-PE-Port", { 'p-invalid': isFormFieldInvalidNonTouch('channel_pe_port')})}
                                             />
-                                            <InputText className="p-inputtext-sm EditChannel__Form-Input-PE-Vid"
-                                                       value={formik.values.channel_vid}
+                                            <InputText value={formik.values.channel_vid}
                                                        onChange={(e) => formik.setFieldValue('channel_vid', e.target.value)}
                                                        placeholder="Vlan ID"
+                                                       className={classNames("p-inputtext-sm EditChannel__Form-Input-PE-Vid", { 'p-invalid': isFormFieldInvalidNonTouch('channel_vid')})}
                                             />
                                         </div>
                                     </div>
@@ -322,9 +334,9 @@ function AddChannel({close, visible}) {
                                                                 options={filtersValues ? formik.values.channel_agg_stop[index].withStop ? filtersValues.stop : filtersValues.ssw : []}
                                                                 optionLabel="title" placeholder="SSW"
                                                                 filter
-                                                                className="p-inputtext-sm AddChannel__Form-Input-Agg"/>
+                                                                className={classNames("p-inputtext-sm AddChannel__Form-Input-Agg", { 'p-invalid': formik.errors.channel_agg_stop && formik.errors.channel_agg_stop[index] && formik.errors.channel_agg_stop[index].agg_stop})}
+                                                            />
                                                             <InputText
-                                                                className="p-inputtext-sm AddChannel__Form-Input-Agg-Port"
                                                                 value={formik.values.channel_agg_stop[index].agg_port}
                                                                 onChange={
                                                                     (e) => {
@@ -334,6 +346,7 @@ function AddChannel({close, visible}) {
                                                                     }
                                                                 }
                                                                 placeholder="AGG PORT"
+                                                                className={classNames("p-inputtext-sm AddChannel__Form-Input-Agg-Port", { 'p-invalid': formik.errors.channel_agg_stop && formik.errors.channel_agg_stop[index] && formik.errors?.channel_agg_stop[index]?.agg_port})}
                                                             />
                                                             <div className="EditChannel__Form-Input AddChannel__Form-Row-Input-Agg EditChannel__Form-Input-Just-End">
                                                                 <div className="EditChannel__Form-Agg-Adding-Stop">
@@ -345,7 +358,7 @@ function AddChannel({close, visible}) {
                                                                             } else {
                                                                                 formik.setFieldValue(`channel_agg_stop[${index}].agg_port`, "СТОП")
                                                                             }
-                                                                            formik.setFieldValue(`channel_agg_stop[${index}].withStop`, !formik.values.channel_agg_stop[index].withStop)
+                                                                            formik.setFieldValue(`channel_agg_stop[${index}].withStop`, !formik.values?.channel_agg_stop[index]?.withStop)
                                                                         }}
                                                                         className='AddChannel__Form-Input-CheckBox-Stop-Acc'
                                                                     />
@@ -381,41 +394,47 @@ function AddChannel({close, visible}) {
                                                             <React.Fragment key={index}>
                                                                 <div key={index}
                                                                     className="EditChannel__Form-Input AddChannel__Form-Row-Input-Agg">
-                                                                    <InputText style={{width: "49%"}} className="p-inputtext-sm"
+                                                                    <InputText style={{width: "49%"}}
                                                                                value={formik.values.channel_acc_stop[index].acc_stop}
                                                                                onChange={(e) => formik.setFieldValue(`channel_acc_stop[${index}].acc_stop`, e.target.value)}
                                                                                placeholder="ACC STOP"
+                                                                               className={classNames("p-inputtext-sm", { 'p-invalid': formik.errors.channel_acc_stop && formik.errors?.channel_acc_stop[index]?.acc_stop})}
                                                                     />
-                                                                    <InputText style={{width: "49%"}} className="p-inputtext-sm"
+                                                                    <InputText style={{width: "49%"}}
                                                                                value={formik.values.channel_acc_stop[index].acc_ip_mng}
                                                                                onChange={(e) => formik.setFieldValue(`channel_acc_stop[${index}].acc_ip_mng`, e.target.value)}
                                                                                placeholder="IP MNG/A (Управления)"
+                                                                               className={classNames("p-inputtext-sm", { 'p-invalid': formik.errors.channel_acc_stop && formik.errors?.channel_acc_stop[index]?.acc_ip_mng})}
                                                                     />
                                                                 </div>
                                                                 <div
                                                                     className="EditChannel__Form-Input AddChannel__Form-Row-Input-Agg">
-                                                                    <InputText style={{width: "49%"}} className="p-inputtext-sm"
+                                                                    <InputText style={{width: "49%"}}
                                                                                value={formik.values.channel_acc_stop[index].acc_port}
                                                                                onChange={(e) => formik.setFieldValue(`channel_acc_stop[${index}].acc_port`, e.target.value)}
                                                                                placeholder="Порт узла доступа"
+                                                                               className={classNames("p-inputtext-sm", { 'p-invalid': formik.errors.channel_acc_stop && formik.errors.channel_acc_stop[index] && formik.errors?.channel_acc_stop[index]?.acc_port})}
                                                                     />
-                                                                    <InputText style={{width: "49%"}} className="p-inputtext-sm"
+                                                                    <InputText style={{width: "49%"}}
                                                                                value={formik.values.channel_acc_stop[index].acc_model}
                                                                                onChange={(e) => formik.setFieldValue(`channel_acc_stop[${index}].acc_model`, e.target.value)}
                                                                                placeholder="Модель узла доступа"
+                                                                               className={classNames("p-inputtext-sm", { 'p-invalid': formik.errors.channel_acc_stop && formik.errors.channel_acc_stop[index] && formik.errors?.channel_acc_stop[index]?.acc_model})}
                                                                     />
                                                                 </div>
                                                                 <div
                                                                     className="EditChannel__Form-Input AddChannel__Form-Row-Input-Agg">
-                                                                    <InputText style={{width: "49%"}} className="p-inputtext-sm"
+                                                                    <InputText style={{width: "49%"}}
                                                                                value={formik.values.channel_acc_stop[index].acc_sn}
                                                                                onChange={(e) => formik.setFieldValue(`channel_acc_stop[${index}].acc_sn`, e.target.value)}
                                                                                placeholder="Серийный номер узла доступа"
+                                                                               className={classNames("p-inputtext-sm", { 'p-invalid': formik.errors.channel_acc_stop && formik.errors.channel_acc_stop[index] && formik.errors?.channel_acc_stop[index]?.acc_sn})}
                                                                     />
                                                                     <InputText style={{width: "49%"}} className="p-inputtext-sm"
                                                                                value={formik.values.channel_acc_stop[index].acc_mac}
                                                                                onChange={(e) => formik.setFieldValue(`channel_acc_stop[${index}].acc_mac`, e.target.value)}
                                                                                placeholder="MAC узла доступа"
+                                                                               className={classNames("p-inputtext-sm", { 'p-invalid': formik.errors.channel_acc_stop && formik.errors.channel_acc_stop[index] && formik.errors?.channel_acc_stop[index]?.acc_mac})}
                                                                     />
                                                                 </div>
                                                                 <div
@@ -441,15 +460,17 @@ function AddChannel({close, visible}) {
                                     <div className="EditChannel__Form-Row">
                                         <div className="EditChannel__Form-Input-Title">ZABBIX</div>
                                         <div className="EditChannel__Form-Input">
-                                            <InputText style={{width: "49%"}} className="p-inputtext-sm"
+                                            <InputText style={{width: "49%"}}
                                                        value={formik.values.zabbix}
                                                        onChange={(e) => formik.setFieldValue('zabbix', e.target.value)}
                                                        placeholder="Zabbix"
+                                                       className={classNames("p-inputtext-sm", { 'p-invalid': isFormFieldInvalidNonTouch('zabbix')})}
                                             />
-                                            <InputText style={{width: "49%"}} className="p-inputtext-sm"
+                                            <InputText style={{width: "49%"}}
                                                        value={formik.values.zabbix_avail}
                                                        onChange={(e) => formik.setFieldValue('zabbix_avail', e.target.value)}
                                                        placeholder="Zabbix Статус"
+                                                       className={classNames("p-inputtext-sm", { 'p-invalid': isFormFieldInvalidNonTouch('zabbix_avail')})}
                                             />
                                         </div>
                                     </div>

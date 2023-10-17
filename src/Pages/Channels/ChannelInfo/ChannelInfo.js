@@ -143,7 +143,7 @@ function ChannelInfo() {
                                                        loadedSelectedChannel.status === "ПАУЗА" ? "ChannelInfo__Table-String-Input-PAUSE" : null,
                                                        loadedSelectedChannel.status !== "ОТКЛ" && loadedSelectedChannel.status !== "ВКЛ" && loadedSelectedChannel.status !== "ПАУЗА" ? "ChannelInfo__Table-String-Input-OTHER" : null
                                                    ].join(' ')}/>
-                                        <InputText value={new Date(loadedSelectedChannel.date).toLocaleDateString()}
+                                        <InputText value={new Date(loadedSelectedChannel.date).toLocaleDateString().split('.').reverse().join('.')}
                                                    className="p-inputtext-sm  ChannelInfo__Table-String-Input-50"/>
                                     </div>
                                 </div>

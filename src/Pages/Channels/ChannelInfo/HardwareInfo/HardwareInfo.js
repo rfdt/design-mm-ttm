@@ -2,7 +2,7 @@ import React from 'react';
 import {InputText} from "primereact/inputtext";
 import {useSelector} from "react-redux";
 
-function HardwareInfo(props) {
+function HardwareInfo() {
 
     const {loadedSelectedChannel} = useSelector(state => state.channels)
 
@@ -36,39 +36,54 @@ function HardwareInfo(props) {
             ))}
             {loadedSelectedChannel.channel_acc_stop.map((acc, index) => (
                 <React.Fragment key={index}>
-                    <div className="ChannelInfo__Table-String">
-                        <div className="ChannelInfo__Table-String-Title">
-                            ACCSTOP
+                    {acc.withStop ?
+                        <div className="ChannelInfo__Table-String">
+                            <div className="ChannelInfo__Table-String-Title">
+                                ACCSTOP
+                            </div>
+                            <div className="ChannelInfo__Table-String-Inputs">
+                                <InputText value={acc.acc_stop}
+                                           className="p-inputtext-sm ChannelInfo__Table-String-Input-50"/>
+                                <InputText value={acc.acc_ip_mng}
+                                           className="p-inputtext-sm ChannelInfo__Table-String-Input-50"/>
+                            </div>
                         </div>
-                        <div className="ChannelInfo__Table-String-Inputs">
-                            <InputText value={acc.acc_stop}
-                                       className="p-inputtext-sm ChannelInfo__Table-String-Input-50"/>
-                            <InputText value={acc.acc_ip_mng}
-                                       className="p-inputtext-sm ChannelInfo__Table-String-Input-50"/>
-                        </div>
-                    </div>
-                    <div className="ChannelInfo__Table-String">
-                        <div className="ChannelInfo__Table-String-Title">
+                        :
+                        <>
+                            <div className="ChannelInfo__Table-String">
+                                <div className="ChannelInfo__Table-String-Title">
+                                    ACCSTOP
+                                </div>
+                                <div className="ChannelInfo__Table-String-Inputs">
+                                    <InputText value={acc.acc_stop}
+                                               className="p-inputtext-sm ChannelInfo__Table-String-Input-50"/>
+                                    <InputText value={acc.acc_ip_mng}
+                                               className="p-inputtext-sm ChannelInfo__Table-String-Input-50"/>
+                                </div>
+                            </div>
+                            <div className="ChannelInfo__Table-String">
+                                <div className="ChannelInfo__Table-String-Title">
 
-                        </div>
-                        <div className="ChannelInfo__Table-String-Inputs">
-                            <InputText value={acc.acc_port}
-                                       className="p-inputtext-sm ChannelInfo__Table-String-Input-50"/>
-                            <InputText value={acc.acc_model}
-                                       className="p-inputtext-sm ChannelInfo__Table-String-Input-50"/>
-                        </div>
-                    </div>
-                    <div className="ChannelInfo__Table-String">
-                        <div className="ChannelInfo__Table-String-Title">
+                                </div>
+                                <div className="ChannelInfo__Table-String-Inputs">
+                                    <InputText value={acc.acc_port}
+                                               className="p-inputtext-sm ChannelInfo__Table-String-Input-50"/>
+                                    <InputText value={acc.acc_model}
+                                               className="p-inputtext-sm ChannelInfo__Table-String-Input-50"/>
+                                </div>
+                            </div>
+                            <div className="ChannelInfo__Table-String">
+                                <div className="ChannelInfo__Table-String-Title">
 
-                        </div>
-                        <div className="ChannelInfo__Table-String-Inputs">
-                            <InputText value={acc.acc_sn}
-                                       className="p-inputtext-sm ChannelInfo__Table-String-Input-50"/>
-                            <InputText value={acc.acc_mac}
-                                       className="p-inputtext-sm ChannelInfo__Table-String-Input-50"/>
-                        </div>
-                    </div>
+                                </div>
+                                <div className="ChannelInfo__Table-String-Inputs">
+                                    <InputText value={acc.acc_sn}
+                                               className="p-inputtext-sm ChannelInfo__Table-String-Input-50"/>
+                                    <InputText value={acc.acc_mac}
+                                               className="p-inputtext-sm ChannelInfo__Table-String-Input-50"/>
+                                </div>
+                            </div>
+                        </>}
                 </React.Fragment>
             ))}
             <div className="ChannelInfo__Table-String">

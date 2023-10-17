@@ -3,14 +3,13 @@ import {InputText} from "primereact/inputtext";
 import {Button} from "primereact/button"
 import {AutoComplete} from "primereact/autocomplete";
 import {Dropdown} from "primereact/dropdown";
-import {ChannelsApi} from "../../../Api/ChannelsApi";
 import './ChannelsFilters.css';
 import ExtendedSearch from "../ExtendedSearch/ExtendedSearch";
 import ExportExcel from "../ExportExcel/ExportExcel";
 import {useActions} from "../../../Store/useActions";
 import {useSelector} from "react-redux";
-import {MultiStateCheckbox} from "primereact/multistatecheckbox";
 import AddChannel from "../../../Modules/AddChannel/AddChannel";
+import Hardware from "../Hardware/Hardware";
 
 function ChannelsFilters({showError}) {
 
@@ -134,8 +133,7 @@ function ChannelsFilters({showError}) {
                     <ExportExcel/>
                     <Button icon="pi pi-plus-circle" onClick={showAddingChannel}
                             className='ChannelsFilters__ExtendedSearch-Btn'/>
-                    <Button icon="pi pi-database" disabled severity="help" onClick={() => console.log(123)}
-                            className='ChannelsFilters__ExtendedSearch-Btn'/>
+                    <Hardware />
                 </div>
             </div>
         </form>

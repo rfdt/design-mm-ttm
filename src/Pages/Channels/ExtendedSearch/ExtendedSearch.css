@@ -8,6 +8,10 @@
     justify-content: space-between;
 }
 
+.ExtendedSearch__Row-Btns {
+    justify-content: flex-end;
+}
+
 .ExtendedSearch__Item-25{
     width: 25%;
 }

@@ -1,0 +1,12 @@
+.ChannelsFilters__Hardware{
+    width: 100%;
+    max-width: 600px;
+}
+
+.ChannelsFilters__Hardware-LookUp-Title{
+    width: 65%;
+}
+
+.ChannelsFilters__Hardware-LookUp-Type{
+    width: 35%;
+}

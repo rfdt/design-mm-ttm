@@ -1,5 +1,5 @@
 import {
-    CHANNELS_CLEAR_SELECTED_CHANNEL,
+    CHANNELS_CLEAR_SELECTED_CHANNEL, CHANNELS_RESET_EXTENDED_FILTERS,
     CHANNELS_RESET_FILTERS,
     CHANNELS_SET_EDITING_CHANNEL,
     CHANNELS_SET_EDITING_MODE,
@@ -68,6 +68,14 @@ export const channelsReducer = (state= channelsReducerInitialState, action) =>{
         }
         case CHANNELS_RESET_FILTERS: {
             return {...state, channelsFilters: {...filtersInitialValue}}
+        }
+        case CHANNELS_RESET_EXTENDED_FILTERS: {
+            return {...state, channelsFilters:
+                    {...state.channelsFilters, addInfoFilter: "", peFilter: "",
+                        rdFilter: "", channelAccStopFilter: "", channelAggStopFilter: "",
+                        channelIpMngFilter: "", sizeFilter: "", vidFilter: ""
+                    }
+            }
         }
         case CHANNELS_SET_EDITING_CHANNEL:
             return {...state, isEditingChannel: action.payload, editingMode: ''}

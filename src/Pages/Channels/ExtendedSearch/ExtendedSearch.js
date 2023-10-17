@@ -6,30 +6,16 @@ import {InputText} from "primereact/inputtext";
 import {useSelector} from "react-redux";
 import {useActions} from "../../../Store/useActions";
 import {Dropdown} from "primereact/dropdown";
+import {Button} from "primereact/button";
 
 function ExtendedSearch({visible, close}) {
     const {channelsFilters, filtersValues} = useSelector(state => state.channels);
-    const {setFilterValue} = useActions()
+    const {setFilterValue, resetExtendedFilters} = useActions()
 
     const [clientsSuggestions, setClientsSuggestions] = useState([]);
-    const [aggSuggestions, setAggSuggestions] = useState([]);
-    const [accSuggestions, setAccSuggestions] = useState([]);
-    const [peSuggestions, setPeSuggestions] = useState([]);
-
 
     const clientsCompleteMethod = (e) => {
         filtersValues ? setClientsSuggestions(e.query ? filtersValues.clients.filter(clients => clients.toLowerCase().includes(e.query.toLowerCase())) : filtersValues.clients) : setClientsSuggestions([]);
-    }
-
-    const peCompleteMethod = (e) => {
-        filtersValues ? setPeSuggestions(e.query ? filtersValues.pe.filter(pe => pe.toLowerCase().includes(e.query.toLowerCase())) : filtersValues.pe) : setPeSuggestions([]);
-    }
-    const aggCompleteMethod = (e) => {
-        filtersValues ? setAggSuggestions(e.query ? filtersValues.agg.filter(agg => agg.toLowerCase().includes(e.query.toLowerCase())) : filtersValues.agg) : setAggSuggestions([]);
-    }
-
-    const accCompleteMethod = (e) => {
-        filtersValues ? setAccSuggestions(e.query ? filtersValues.acc.filter(acc => acc.toLowerCase().includes(e.query.toLowerCase())) : filtersValues.acc) : setAccSuggestions([]);
     }
 
     return (<Dialog header="Расширенный поиск" visible={visible} className={'ExtendedSearch__Container'}
@@ -82,6 +68,15 @@ function ExtendedSearch({visible, close}) {
                            placeholder='IP/MNG ACC'
                            onChange={(e) => setFilterValue('channelIpMngFilter', e.target.value)}
                            className={'ExtendedSearch__Item-40'}/>
+            </div>
+            <div className="ExtendedSearch__Row ExtendedSearch__Row-Btns">
+                <Button icon="pi pi-times"
+                        className={'ExtendedSearch__Item-40'}
+                        label="Очистить" severity="danger"
+                        aria-label="Очистить"
+                        size="small"
+                        onClick={resetExtendedFilters}
+                />
             </div>
         </div>
     </Dialog>);

@@ -75,23 +75,23 @@
     width: 100%;
 }
 
-.ChannelInfo__Table-String-Input-ON{
-    color: #22C55E;
+.ChannelInfo__Table-String-Input-ON.p-inputtext{
+    color: #22C55E ;
     font-weight: bold;
 }
 
-.ChannelInfo__Table-String-Input-OTHER{
-    color: #FA8E42;
+.ChannelInfo__Table-String-Input-OTHER.p-inputtext{
+    color: #FA8E42 ;
     font-weight: bold;
 }
 
-.ChannelInfo__Table-String-Input-OFF{
-    color: #FF3D32;
+.ChannelInfo__Table-String-Input-OFF.p-inputtext{
+    color: #FF3D32 ;
     font-weight: bold;
 }
 
-.ChannelInfo__Table-String-Input-PAUSE{
-    color: #6366F1;
+.ChannelInfo__Table-String-Input-PAUSE.p-inputtext{
+    color: #6366F1 ;
     font-weight: bold;
 }
 

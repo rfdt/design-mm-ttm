@@ -1,6 +1,6 @@
 import {ChannelsApi} from "../../../Api/ChannelsApi";
 import {
-    CHANNELS_CLEAR_SELECTED_CHANNEL,
+    CHANNELS_CLEAR_SELECTED_CHANNEL, CHANNELS_RESET_EXTENDED_FILTERS,
     CHANNELS_RESET_FILTERS,
     CHANNELS_SET_EDITING_CHANNEL, CHANNELS_SET_EDITING_MODE,
     CHANNELS_SET_FILTER_VALUE,
@@ -60,6 +60,7 @@ export const selectChannel = (channel) => async (dispatch, getState) => {
 export const clearSelectedChannel = () => ({type: CHANNELS_CLEAR_SELECTED_CHANNEL})
 export const setFilterValue = (filter, value) =>({type: CHANNELS_SET_FILTER_VALUE, payload: {filter, value}})
 export const resetFilters = () => ({type: CHANNELS_RESET_FILTERS})
+export const resetExtendedFilters = () => ({type: CHANNELS_RESET_EXTENDED_FILTERS})
 export const getFilterValues = () => async (dispatch) =>{
     try {
         const filtersValue = await ChannelsApi.getFiltersValue();
@@ -98,6 +99,15 @@ export const createChannel = (newChannel) => async (dispatch) =>{
     try {
         const newChannelCreated = await ChannelsApi.createChannel(newChannel);
         return true;
+    }catch (e){
+        dispatch(setError(e));
+        return false;
+    }
+}
+
+export const clearExtendedSearch = () => (dispatch)=> {
+    try {
+        dispatch(resetExtendedFilters());
     }catch (e){
         dispatch(setError(e));
         return false;

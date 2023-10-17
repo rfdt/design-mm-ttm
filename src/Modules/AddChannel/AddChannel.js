@@ -335,7 +335,7 @@ function AddChannel({close, visible}) {
                                                                 }
                                                                 placeholder="AGG PORT"
                                                             />
-                                                            <div className="EditChannel__Form-Agg-Adding-Block">
+                                                            <div className="EditChannel__Form-Input AddChannel__Form-Row-Input-Agg EditChannel__Form-Input-Just-End">
                                                                 <div className="EditChannel__Form-Agg-Adding-Stop">
                                                                     <Checkbox
                                                                         checked={formik.values.channel_agg_stop[index].withStop}
@@ -347,6 +347,7 @@ function AddChannel({close, visible}) {
                                                                             }
                                                                             formik.setFieldValue(`channel_agg_stop[${index}].withStop`, !formik.values.channel_agg_stop[index].withStop)
                                                                         }}
+                                                                        className='AddChannel__Form-Input-CheckBox-Stop-Acc'
                                                                     />
                                                                 </div>
                                                                 <Button icon="pi pi-times" rounded text
@@ -418,7 +419,7 @@ function AddChannel({close, visible}) {
                                                                     />
                                                                 </div>
                                                                 <div
-                                                                    className=" EditChannel__Form-Input AddChannel__Form-Row-Input-Agg EditChannel__Form-Input-Just-End">
+                                                                    className="EditChannel__Form-Input AddChannel__Form-Row-Input-Agg EditChannel__Form-Input-Just-End">
                                                                     <Checkbox
                                                                         className='AddChannel__Form-Input-CheckBox-Stop-Acc'
                                                                         checked={formik.values.channel_acc_stop[index].withStop}

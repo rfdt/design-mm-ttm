@@ -22,7 +22,6 @@ function AddChannel({close, visible}) {
     const [filteredCitySuggestions, setFilteredCitySuggestions] = useState([]);
     const [filteredStreetsSuggestions, setFilteredStreetsSuggestions] = useState([]);
     const [servicesSuggestions, setServicesSuggestions] = useState([]);
-    const [isSuccessAdded, setIsSuccessAdded] = useState(false);
 
     const formik = useFormik({
         initialValues: {
@@ -53,15 +52,13 @@ function AddChannel({close, visible}) {
         },
         validationSchema: CreateChannelValidationSchema,
         onSubmit: async (data) => {
-            setIsSuccessAdded(false)
             const transformedObj = {...data,
                 channel_pe: data.channel_pe.title,
                 channel_agg_stop: data.channel_agg_stop.map((agg_stop)=>({...agg_stop, agg_stop: agg_stop.agg_stop.title}))
             }
-            console.log(transformedObj)
             const response = await createChannel(transformedObj);
             if (response) {
-                setIsSuccessAdded(true)
+                close();
             }
         }
     });
@@ -128,7 +125,6 @@ function AddChannel({close, visible}) {
                     <form onSubmit={formik.handleSubmit}>
                         {Object.keys(formik.errors).length > 0 ?
                             <p className="p-error">Не все поля заполнены</p> : null}
-                        {isSuccessAdded ? <p className="p-success">Канал успешно добавлен</p> : null}
                         <TabView>
                             <TabPanel header="Основное">
                                 <div className="EditChannel__Form-Container">

@@ -210,6 +210,7 @@ function EditForm({editingChannel}) {
                                                onChange={(e) => formik.setFieldValue('city', e.target.value)}
                                                placeholder='Населенный пункт' dropdown
                                                className={classNames("EditChannel__Form-City", { 'p-invalid': isFormFieldInvalidNonTouch('city')})}
+                                               disabled
                                  />
                                  <AutoComplete value={formik.values.street}
                                                suggestions={filteredStreetsSuggestions}
@@ -218,12 +219,14 @@ function EditForm({editingChannel}) {
                                                placeholder='Улица' dropdown
                                                inputClassName='p-inputtext-sm'
                                                className={classNames("EditChannel__Form-Street", { 'p-invalid': isFormFieldInvalidNonTouch('street')})}
+                                               disabled
                                  />
                                  <InputText
                                      value={formik.values.home}
                                      onChange={(e) => formik.setFieldValue('home', e.target.value)}
                                      placeholder="Дом"
                                      className={classNames("p-inputtext-sm EditChannel__Form-Home", { 'p-invalid': isFormFieldInvalidNonTouch('home')})}
+                                     disabled
                                  />
                              </div>
                          </div>

@@ -1,0 +1,22 @@
+.HardwarePage__Header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 15px 15px 30px;
+}
+
+.HardwarePage__Title{
+    font-size: 24px;
+    font-weight: bold;
+}
+
+
+@media (max-width: 480px){
+    /*from 0px to 480px*/
+    .HardwarePage__Header{
+        flex-direction: column;
+    }
+    .HardwarePage__Title{
+        margin-bottom: 20px;
+    }
+}

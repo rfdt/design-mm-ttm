@@ -1,5 +1,6 @@
 import {ChannelsApi} from "../../../Api/ChannelsApi";
 import {
+    CHANNELS_ADD_NEW_HARDWARE,
     CHANNELS_CLEAR_SELECTED_CHANNEL, CHANNELS_RESET_EXTENDED_FILTERS,
     CHANNELS_RESET_FILTERS,
     CHANNELS_SET_EDITING_CHANNEL, CHANNELS_SET_EDITING_MODE,
@@ -12,6 +13,7 @@ import {
     CHANNELS_SET_SELECTED_CHANNEL
 } from "./channelsTypes";
 import {setError} from "../errors/errorsActions";
+import {axiosRequest} from "../../../Axios/axiosRequest";
 
 const setFilteredChannelsAC = (channels) => ({type: CHANNELS_SET_FILTERED_CHANNELS, payload: channels})
 const setFilteredChannelsCountAC = (count) => ({type: CHANNELS_SET_FILTERED_CHANNELS_COUNT, payload: count})
@@ -19,6 +21,7 @@ const setSelectedChannelAC = (channel) => ({type: CHANNELS_SET_SELECTED_CHANNEL,
 const setLoadingSelectedChannelAC = (isLoading) => ({type: CHANNELS_SET_LOADING_SELECTED_CHANNEL, payload: isLoading})
 const setLoadedSelectedChannelAC = (channel) => ({type: CHANNELS_SET_LOADED_SELECTED_CHANNEL, payload: channel})
 const setFiltersValuesAC = (filterValues) => ({type: CHANNELS_SET_FILTERS_VALUES, payload: filterValues})
+const addHardwareAC = (newHardware) =>({type: CHANNELS_ADD_NEW_HARDWARE, payload: newHardware})
 
 
 export const findChannels = () => async (dispatch, getState) => {
@@ -111,5 +114,14 @@ export const clearExtendedSearch = () => (dispatch)=> {
     }catch (e){
         dispatch(setError(e));
         return false;
+    }
+}
+
+export const addHardware = (newHardware) => async (dispatch) =>{
+    try {
+        const newHardwareSaved = await ChannelsApi.createHardware(newHardware);
+        dispatch(addHardwareAC(newHardwareSaved.data))
+    }catch (e){
+        dispatch(setError(e));
     }
 }

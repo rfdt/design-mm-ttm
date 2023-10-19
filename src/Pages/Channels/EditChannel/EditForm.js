@@ -358,15 +358,21 @@ function EditForm({editingChannel}) {
                                                      </div>
                                                      <Button icon="pi pi-times" rounded text
                                                              severity="danger" aria-label="Удалить"
-                                                             onClick={() => index !== 0 ? remove(index) : null}/>
+                                                             disabled={index === 0 && formik.values.channel_agg_stop.length === 1}
+                                                             onClick={(e) => {
+                                                                  remove(index)
+                                                     }}/>
                                                      {index === formik.values.channel_agg_stop.length - 1 ?
                                                          <Button icon="pi pi-plus" rounded text
                                                                  severity="success" aria-label="Удалить"
-                                                                 onClick={() => push({
+                                                                 onClick={(e) => {
+                                                                     e.stopPropagation();
+                                                                     push({
                                                                      agg_stop: '',
                                                                      channel_agg_port: '',
                                                                      withStop: false
-                                                                 })}/> : null
+                                                                 })}
+                                                         }/> : null
                                                      }
                                                  </div>
                                              </div>
@@ -423,7 +429,7 @@ function EditForm({editingChannel}) {
                                                                     placeholder="Серийный номер узла доступа"
                                                                     className={classNames("p-inputtext-sm", { 'p-invalid': formik.errors.channel_acc_stop && formik.errors.channel_acc_stop[index] && formik.errors?.channel_acc_stop[index]?.acc_sn})}
                                                          />
-                                                         <InputText style={{width: "49%"}} className="p-inputtext-sm"
+                                                         <InputText style={{width: "49%"}}
                                                                     value={formik.values.channel_acc_stop[index].acc_mac}
                                                                     onChange={(e) => formik.setFieldValue(`channel_acc_stop[${index}].acc_mac`, e.target.value)}
                                                                     placeholder="MAC узла доступа"
@@ -438,7 +444,7 @@ function EditForm({editingChannel}) {
                                                              onChange={() => handleAccStopChange(index)}
                                                          />
                                                          <Button icon="pi pi-times" rounded text severity="danger"
-                                                                 aria-label="Удалить" onClick={() => index !== 0 ? remove(index) : null}/>
+                                                                 aria-label="Удалить" disabled={index === 0} onClick={() => index !== 0 ? remove(index) : null}/>
                                                          {index === formik.values.channel_acc_stop.length - 1 ?
                                                              <Button icon="pi pi-plus" rounded text severity="success"
                                                                      aria-label="Добавить" onClick={() => push({acc_stop: "", acc_port: "", acc_ip_mng: "", acc_model: "", acc_sn: "", acc_mac: ""})}/> : null}

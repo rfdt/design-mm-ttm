@@ -1,4 +1,5 @@
 import {
+    CHANNELS_ADD_NEW_HARDWARE,
     CHANNELS_CLEAR_SELECTED_CHANNEL, CHANNELS_RESET_EXTENDED_FILTERS,
     CHANNELS_RESET_FILTERS,
     CHANNELS_SET_EDITING_CHANNEL,
@@ -84,6 +85,12 @@ export const channelsReducer = (state= channelsReducerInitialState, action) =>{
             return {...state, isEditingChannel: action.payload, editingMode: ''}
         case CHANNELS_SET_EDITING_MODE:
             return {...state, editingMode: action.payload}
+        case CHANNELS_ADD_NEW_HARDWARE:
+            const newFiltersValues = {
+                ...state.filtersValues
+            }
+            newFiltersValues[action.payload.hardware_type] = [...state.filtersValues[action.payload.hardware_type], action.payload]
+            return {...state, filtersValues: newFiltersValues}
         default: return state
     }
 }

@@ -16,6 +16,7 @@ import classNames from "classnames";
 import MenuSettings from "./Modules/Menu/MenuSettings/MenuSettings";
 import {useLocale} from "./Modules/Hooks/useLocale";
 import {useTheme} from "./Modules/Hooks/useTheme";
+import Hardware from "./Pages/Hardware/Hardware";
 
 function App() {
 
@@ -45,6 +46,11 @@ function App() {
                         <Route path='/channels' element={
                             <PrivateRoute>
                                 <Channels/>
+                            </PrivateRoute>
+                        }/>
+                        <Route path='/hardware' element={
+                            <PrivateRoute>
+                               <Hardware />
                             </PrivateRoute>
                         }/>
                         <Route path='/login' element={<Login/>}/>

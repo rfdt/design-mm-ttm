@@ -54,3 +54,10 @@ export const CreateChannelValidationSchema =  Yup.object().shape({
     zabbix_avail: Yup.string().required('Поле обязательно'),
     channel_region: Yup.string().required('Поле обязательно'),
 })
+
+export const AddHardwareValidationSchema = Yup.object().shape({
+    title: Yup.string().required(),
+    uplink: Yup.string().required(),
+    uplink_type: Yup.object().required(),
+    hardware_type: Yup.object().required()
+})

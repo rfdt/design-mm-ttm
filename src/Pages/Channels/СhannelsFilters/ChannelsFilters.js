@@ -9,7 +9,7 @@ import ExportExcel from "../ExportExcel/ExportExcel";
 import {useActions} from "../../../Store/useActions";
 import {useSelector} from "react-redux";
 import AddChannel from "../../../Modules/AddChannel/AddChannel";
-import Hardware from "../Hardware/Hardware";
+import {useNavigate} from "react-router-dom";
 
 function ChannelsFilters() {
 
@@ -20,8 +20,10 @@ function ChannelsFilters() {
     const [filteredStreetsSuggestions, setFilteredStreetsSuggestions] = useState([]);
     const [servicesSuggestions, setServicesSuggestions] = useState([]);
 
-    const [extendedSearchVisible, setExtendedSearchVisible] = useState(false)
-    const [addChannelVisible, setAddChannelVisible] = useState(false)
+    const [extendedSearchVisible, setExtendedSearchVisible] = useState(false);
+    const [addChannelVisible, setAddChannelVisible] = useState(false);
+
+    const navigate = useNavigate();
 
     useEffect(() => {
         getFilterValues()
@@ -130,7 +132,8 @@ function ChannelsFilters() {
                     <Button icon="pi pi-plus-circle" onClick={showAddingChannel}
                             className='ChannelsFilters__ExtendedSearch-Btn'/>
                     <ExportExcel/>
-                    <Hardware />
+                    <Button icon="pi pi-database" severity="help"
+                            className='ChannelsFilters__ExtendedSearch-Btn' onClick={()=>navigate('/hardware')}/>
                 </div>
             </div>
         </form>

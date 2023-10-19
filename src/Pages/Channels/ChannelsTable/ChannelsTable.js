@@ -58,6 +58,7 @@ function ChannelsTable() {
                        contextMenuSelection={contextSelected}
                        onContextMenuSelectionChange={(e) => setContextSelected(e.value)}
                        metaKeySelection={false}
+                       emptyMessage='Нет каналов по заданным фильтрам'
             >
                 <Column field="id_suz" header="ID" className='ChannelsPage__Table-ID-Field'></Column>
                 <Column field="id_oss" header="ID_OSS" className='ChannelsPage__Table-ID-OSS-Field'></Column>

@@ -1,0 +1,28 @@
+.AddHardware__Dialog-Container{
+    width: 100%;
+    max-width: 500px;
+}
+
+.AddHardware__Row{
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.AddHardware__Row.AddHardware__Row-Centered{
+    justify-content: center;
+}
+
+.AddHardware__Row-Title{
+    width: 130px;
+}
+
+.AddHardware__Row-Input{
+    width: 100%;
+}
+
+.AddHardware__Submit-Btn{
+    width: 100%;
+    max-width: 200px;
+    margin-top: 10px;
+}

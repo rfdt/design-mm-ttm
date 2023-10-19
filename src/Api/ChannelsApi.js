@@ -32,6 +32,10 @@ export class ChannelsApi {
         return axiosRequest.post(ChannelsApi.prefix + 'create', newChannel)
     }
 
+    static createHardware(newHardware){
+        return axiosRequest.post(ChannelsApi.prefix + 'create/hardware', newHardware)
+    }
+
     static testError(){
         return axiosRequest.get(ChannelsApi.prefix + 'test')
     }

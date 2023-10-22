@@ -5,27 +5,16 @@ import './AddHardware.css';
 import {InputText} from "primereact/inputtext";
 import {Dropdown} from "primereact/dropdown";
 import {useFormik} from "formik";
-import {AddHardwareValidationSchema} from "../../../Modules/validationSchemas";
+import {AddOrEditHardwareValidationSchema} from "../../../Modules/validationSchemas";
 import classNames from "classnames";
 import {useActions} from "../../../Store/useActions";
+import {hardware_types, hardware_uplink_type} from "../../../Modules/hardwareTypes";
 
 function AddHardware(props) {
 
     const {addHardware} = useActions()
 
     const [addHardwareVisible, setAddHardwareVisible] = useState(false);
-
-    const hardware_types = [
-        { name: 'PE', code: 'pe' },
-        { name: 'AGG', code: 'agg' },
-        { name: 'СТОП', code: 'stop' }
-    ];
-
-    const hardware_uplink_type = [
-        {name: 'В ядро', code: 'to_core'},
-        {name: 'В PE', code: "to_ar"},
-        {name: 'В SSW', code: "to_ssw"}
-    ]
 
     const formik = useFormik({
         initialValues: {
@@ -34,7 +23,7 @@ function AddHardware(props) {
             uplink_type: '',
             hardware_type: ''
         },
-        validationSchema: AddHardwareValidationSchema,
+        validationSchema: AddOrEditHardwareValidationSchema,
         onSubmit: (data) => {
             addHardware({...data, hardware_type: data.hardware_type.code, uplink_type: data.uplink_type.code})
                 .then(()=>setAddHardwareVisible(false))
@@ -45,7 +34,7 @@ function AddHardware(props) {
 
     return (
         <>
-            <Button label="Добавить" severity="success" onClick={() => setAddHardwareVisible(true)} disabled={props.disabled}/>
+            <Button label="Добавить" type="button" severity="success" onClick={() => setAddHardwareVisible(true)} disabled={props.disabled}/>
             <Dialog header="Добавление оборудования" visible={addHardwareVisible}
                     onHide={() => setAddHardwareVisible(false)}
                     resizable={false}

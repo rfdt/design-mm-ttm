@@ -2,7 +2,7 @@ import {ChannelsApi} from "../../../Api/ChannelsApi";
 import {
     CHANNELS_ADD_NEW_HARDWARE,
     CHANNELS_CLEAR_SELECTED_CHANNEL, CHANNELS_RESET_EXTENDED_FILTERS,
-    CHANNELS_RESET_FILTERS,
+    CHANNELS_RESET_FILTERS, CHANNELS_SET_EDITED_HARDWARE,
     CHANNELS_SET_EDITING_CHANNEL, CHANNELS_SET_EDITING_MODE,
     CHANNELS_SET_FILTER_VALUE,
     CHANNELS_SET_FILTERED_CHANNELS,
@@ -13,7 +13,6 @@ import {
     CHANNELS_SET_SELECTED_CHANNEL
 } from "./channelsTypes";
 import {setError} from "../errors/errorsActions";
-import {axiosRequest} from "../../../Axios/axiosRequest";
 
 const setFilteredChannelsAC = (channels) => ({type: CHANNELS_SET_FILTERED_CHANNELS, payload: channels})
 const setFilteredChannelsCountAC = (count) => ({type: CHANNELS_SET_FILTERED_CHANNELS_COUNT, payload: count})
@@ -22,6 +21,7 @@ const setLoadingSelectedChannelAC = (isLoading) => ({type: CHANNELS_SET_LOADING_
 const setLoadedSelectedChannelAC = (channel) => ({type: CHANNELS_SET_LOADED_SELECTED_CHANNEL, payload: channel})
 const setFiltersValuesAC = (filterValues) => ({type: CHANNELS_SET_FILTERS_VALUES, payload: filterValues})
 const addHardwareAC = (newHardware) =>({type: CHANNELS_ADD_NEW_HARDWARE, payload: newHardware})
+const editChannelAC = (hardware) => ({type: CHANNELS_SET_EDITED_HARDWARE, payload: hardware})
 
 
 export const findChannels = () => async (dispatch, getState) => {
@@ -121,6 +121,15 @@ export const addHardware = (newHardware) => async (dispatch) =>{
     try {
         const newHardwareSaved = await ChannelsApi.createHardware(newHardware);
         dispatch(addHardwareAC(newHardwareSaved.data))
+    }catch (e){
+        dispatch(setError(e));
+    }
+}
+
+export const editHardware = (editHardware) => async (dispatch) =>{
+    try {
+        const editedHardware = await ChannelsApi.editHardware(editHardware);
+        dispatch(editChannelAC(editedHardware.data));
     }catch (e){
         dispatch(setError(e));
     }

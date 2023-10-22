@@ -7,12 +7,16 @@ import {useSelector} from "react-redux";
 import {FilterMatchMode, FilterOperator} from "primereact/api";
 import {Dropdown} from "primereact/dropdown";
 import AddHardware from "./AddHardware/AddHardware";
+import EditHardware from "./EditHardware/EditHardware";
+import {hardwareTypeWord} from "../../Modules/hardwareTypes";
 
 function Hardware() {
 
     const {filtersValues} = useSelector(state => state.channels);
 
     const hardwares = useMemo(()=> filtersValues ? filtersValues.pe.concat(filtersValues.ssw.concat(filtersValues.stop)) : [], [filtersValues])
+
+    const [selectedHardware, setSelectedHardware] = useState(null);
 
     const [filters] = useState({
         title: {
@@ -21,10 +25,6 @@ function Hardware() {
         },
         hardware_type: {value: null, matchMode: FilterMatchMode.CONTAINS}
     });
-
-    const hardwareTypeWord = {
-        stop: "СТОП", ssw: "SSW", pe: "PE"
-    }
 
     const typeRowFilterTemplate = (options) => {
         return (
@@ -41,15 +41,22 @@ function Hardware() {
     }
 
     return (
-        <>
             <_InnerPage>
                 <div className="HardwarePage__Header">
                     <div className="HardwarePage__Title">Оборудование</div>
                     <div className="HardwarePage__Btn"><AddHardware disabled={!filtersValues}/></div>
                 </div>
                 <div className="HardwarePage__Container">
-                    <DataTable value={hardwares} paginator rows={10} dataKey="_id" filters={filters} filterDisplay="menu" loading={!filtersValues} emptyMessage="Нет данных.">
-                        <Column field="title" header="Hostname"  filter showFilterMatchModes={false}  />
+                    <DataTable value={hardwares}
+                               paginator rows={12}
+                               dataKey="_id" filters={filters}
+                               filterDisplay="menu" loading={!filtersValues}
+                               emptyMessage="Нет данных."
+                               selectionMode="single"
+                               selection={selectedHardware}
+                               onSelectionChange={(e) => setSelectedHardware(e.value)}
+                    >
+                        <Column field="title" header="Hostname"  filter showFilterMatchModes={false} />
                         <Column field="hardware_type" header="Тип" filter filterElement={typeRowFilterTemplate}
                             style={{width: '25%'}}
                                 showFilterMatchModes={false}
@@ -57,8 +64,8 @@ function Hardware() {
                         />
                     </DataTable>
                 </div>
+                {selectedHardware ? <EditHardware selectedHardware={selectedHardware} setSelectedHardware={setSelectedHardware}/> : null}
             </_InnerPage>
-        </>
     );
 }
 

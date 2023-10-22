@@ -55,7 +55,8 @@ export const CreateChannelValidationSchema =  Yup.object().shape({
     channel_region: Yup.string().required('Поле обязательно'),
 })
 
-export const AddHardwareValidationSchema = Yup.object().shape({
+export const AddOrEditHardwareValidationSchema = Yup.object().shape({
+    _id: Yup.string(),
     title: Yup.string().required(),
     uplink: Yup.string().required(),
     uplink_type: Yup.object().required(),

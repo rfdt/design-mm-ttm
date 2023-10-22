@@ -372,7 +372,7 @@ function EditForm({editingChannel}) {
                                                                      e.stopPropagation();
                                                                      push({
                                                                      agg_stop: '',
-                                                                     channel_agg_port: '',
+                                                                     agg_port: '',
                                                                      withStop: false
                                                                  })}
                                                          }/> : null

@@ -128,12 +128,16 @@ function ChannelsFilters() {
                 <div className="ChannelsFilters__ExtendedSearch-Btns">
                     <Button icon="pi pi-sliders-h" severity="info" className='ChannelsFilters__ExtendedSearch-Btn'
                             onClick={() => setExtendedSearchVisible(true)}
+                            type="button"
                     />
                     <Button icon="pi pi-plus-circle" onClick={showAddingChannel}
+                            type="button"
                             className='ChannelsFilters__ExtendedSearch-Btn'/>
                     <ExportExcel/>
                     <Button icon="pi pi-database" severity="help"
-                            className='ChannelsFilters__ExtendedSearch-Btn' onClick={()=>navigate('/hardware')}/>
+                            className='ChannelsFilters__ExtendedSearch-Btn' onClick={()=>navigate('/hardware')}
+                            type="button"
+                    />
                 </div>
             </div>
         </form>

@@ -1,7 +1,7 @@
 import {
     CHANNELS_ADD_NEW_HARDWARE,
     CHANNELS_CLEAR_SELECTED_CHANNEL, CHANNELS_RESET_EXTENDED_FILTERS,
-    CHANNELS_RESET_FILTERS,
+    CHANNELS_RESET_FILTERS, CHANNELS_SET_EDITED_HARDWARE,
     CHANNELS_SET_EDITING_CHANNEL,
     CHANNELS_SET_EDITING_MODE,
     CHANNELS_SET_FILTER_VALUE,
@@ -91,6 +91,11 @@ export const channelsReducer = (state= channelsReducerInitialState, action) =>{
             }
             newFiltersValues[action.payload.hardware_type] = [...state.filtersValues[action.payload.hardware_type], action.payload]
             return {...state, filtersValues: newFiltersValues}
+        case CHANNELS_SET_EDITED_HARDWARE:
+            const editedFiltersValues = {...state.filtersValues}
+            let hardwareIndex = editedFiltersValues[action.payload.hardware_type].findIndex(hardware => hardware._id === action.payload._id)
+            editedFiltersValues[action.payload.hardware_type][hardwareIndex] = action.payload;
+            return {...state, filtersValues: editedFiltersValues}
         default: return state
     }
 }

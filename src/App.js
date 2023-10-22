@@ -1,22 +1,27 @@
+import React, {lazy, Suspense, useEffect} from "react";
+import {Routes, Route} from "react-router-dom";
+import {useActions} from "./Store/useActions";
+import classNames from "classnames";
+import {useSelector} from "react-redux";
+import {useLocale} from "./Modules/Hooks/useLocale";
+import {useTheme} from "./Modules/Hooks/useTheme";
 import './App.css';
-import Channels from "./Pages/Channels/Channels";
-import Home from "./Pages/Home/Home";
 import Menu from "./Modules/Menu/Menu";
 import Header from "./Modules/Header/Header";
 import ErrorToast from "./Modules/ErrorToast/ErrorToast";
-import {Routes, Route} from "react-router-dom";
-import Login from "./Pages/Login/Login";
-import {useActions} from "./Store/useActions";
-import React, {useEffect} from "react";
 import PrivateRoute from "./Modules/PrivateRoute/PrivateRoute";
 import UnknownPage from "./Modules/UnknownPage/UnknownPage";
-import Register from "./Pages/Register/Register";
-import {useSelector} from "react-redux";
-import classNames from "classnames";
 import MenuSettings from "./Modules/Menu/MenuSettings/MenuSettings";
-import {useLocale} from "./Modules/Hooks/useLocale";
-import {useTheme} from "./Modules/Hooks/useTheme";
-import Hardware from "./Pages/Hardware/Hardware";
+import PageLoader from "./Modules/PageLoader/PageLoader";
+
+/*LAZY LOAD PAGES */
+
+const HomePage = lazy(() => import('./Pages/Home/Home'));
+const ChannelsPage = lazy(() => import('./Pages/Channels/Channels'));
+const HardwarePage = lazy(() => import('./Pages/Hardware/Hardware'));
+const LoginPage = lazy(() => import('./Pages/Login/Login'));
+const RegisterPage = lazy(() => import('./Pages/Register/Register'))
+
 
 function App() {
 
@@ -39,28 +44,42 @@ function App() {
                 <div className="Pages__Container">
                     <Routes>
                         <Route path='/' element={
-                            <PrivateRoute>
-                                <Home/>
-                            </PrivateRoute>
+                            <Suspense fallback={<PageLoader/>}>
+                                <PrivateRoute>
+                                    <HomePage/>
+                                </PrivateRoute>
+                            </Suspense>
                         }/>
                         <Route path='/channels' element={
-                            <PrivateRoute>
-                                <Channels/>
-                            </PrivateRoute>
+                            <Suspense fallback={<PageLoader/>}>
+                                <PrivateRoute>
+                                    <ChannelsPage/>
+                                </PrivateRoute>
+                            </Suspense>
                         }/>
                         <Route path='/hardware' element={
-                            <PrivateRoute>
-                               <Hardware />
-                            </PrivateRoute>
+                            <Suspense fallback={<PageLoader/>}>
+                                <PrivateRoute>
+                                    <HardwarePage/>
+                                </PrivateRoute>
+                            </Suspense>
                         }/>
-                        <Route path='/login' element={<Login/>}/>
-                        <Route path='/register' element={<Register/>}/>
-                        <Route path='*' element={<UnknownPage />} />
+                        <Route path='/login' element={
+                            <Suspense fallback={<PageLoader/>}>
+                                <LoginPage/>
+                            </Suspense>
+                        }/>
+                        <Route path='/register' element={
+                            <Suspense fallback={<PageLoader/>}>
+                                <RegisterPage/>
+                            </Suspense>
+                        }/>
+                        <Route path='*' element={<UnknownPage/>}/>
                     </Routes>
                 </div>
             </div>
             <ErrorToast/>
-            <MenuSettings />
+            <MenuSettings/>
         </div>
     );
 }

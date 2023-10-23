@@ -1,0 +1,14 @@
+.VerifyChannel__Title{
+    font-size: 24px;
+    margin-left: 10px;
+    margin-bottom: 15px;
+    font-weight: 500;
+}
+
+/*Приоритет снизу вверх*/
+/*Сначала правило до 320 потом до 480 и т.д*/
+@media (max-width: 768px) {
+    .VerifyChannel__Title{
+        font-size: 24px;
+    }
+}

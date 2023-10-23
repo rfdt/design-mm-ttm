@@ -40,6 +40,14 @@ export class ChannelsApi {
         return axiosRequest.post(ChannelsApi.prefix + 'edit/hardware', editHardware)
     }
 
+    static verifyChannel(verifiedChannel){
+        return axiosRequest.post(ChannelsApi.prefix + 'verify', verifiedChannel)
+    }
+
+    static getRelatedChannels(channel_id){
+        return axiosRequest.get(ChannelsApi.prefix + 'related/'+channel_id)
+    }
+
     static testError(){
         return axiosRequest.get(ChannelsApi.prefix + 'test')
     }

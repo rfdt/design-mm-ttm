@@ -101,7 +101,7 @@ function EditHardware({selectedHardware, setSelectedHardware}) {
                         />
                     </div>
                     <div className="AddHardware__Row AddHardware__Row-Centered">
-                        <Button label="Изменить" className='AddHardware__Submit-Btn' type="submit"/>
+                        <Button label="Сохранить" className='AddHardware__Submit-Btn' type="submit"/>
                     </div>
                 </form>
             </div>

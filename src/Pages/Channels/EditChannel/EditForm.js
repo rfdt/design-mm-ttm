@@ -69,14 +69,14 @@ function EditForm({editingChannel}) {
             contact: editingChannel.contact,
             status: editingChannel.status,
             date: new Date(editingChannel.date),
-            note: "XXXX",
-            rd_sr: "XXXX",
+            note: editingChannel.note,
+            rd_sr: editingChannel.rd_sr,
             channel_pe: filtersValues.pe.filter(p=>p.title===editingChannel.channel_pe)[0],
             channel_pe_port: editingChannel.channel_pe_port,
             channel_vid: editingChannel.channel_vid,
             zabbix: editingChannel.zabbix,
             zabbix_avail: editingChannel.zabbix_avail,
-            channel_region: 'crimea',
+            channel_region: editingChannel.channel_region,
             channel_acc_stop: editingChannel.channel_acc_stop,
             channel_agg_stop: editingChannel.channel_agg_stop
                 .map(agg=>({...agg, agg_stop: agg.withStop ?
@@ -361,12 +361,14 @@ function EditForm({editingChannel}) {
                                                      </div>
                                                      <Button icon="pi pi-times" rounded text
                                                              severity="danger" aria-label="Удалить"
+                                                             type="button"
                                                              disabled={index === 0 && formik.values.channel_agg_stop.length === 1}
                                                              onClick={(e) => {
                                                                   remove(index)
                                                      }}/>
                                                      {index === formik.values.channel_agg_stop.length - 1 ?
                                                          <Button icon="pi pi-plus" rounded text
+                                                                 type="button"
                                                                  severity="success" aria-label="Удалить"
                                                                  onClick={(e) => {
                                                                      e.stopPropagation();
@@ -447,9 +449,12 @@ function EditForm({editingChannel}) {
                                                              onChange={() => handleAccStopChange(index)}
                                                          />
                                                          <Button icon="pi pi-times" rounded text severity="danger"
-                                                                 aria-label="Удалить" disabled={index === 0} onClick={() => index !== 0 ? remove(index) : null}/>
+                                                                 aria-label="Удалить" disabled={index === 0 && formik.values.channel_acc_stop.length === 1} onClick={() =>remove(index)}
+                                                                 type="button"
+                                                         />
                                                          {index === formik.values.channel_acc_stop.length - 1 ?
                                                              <Button icon="pi pi-plus" rounded text severity="success"
+                                                                     type="button"
                                                                      aria-label="Добавить" onClick={() => push({acc_stop: "", acc_port: "", acc_ip_mng: "", acc_model: "", acc_sn: "", acc_mac: ""})}/> : null}
                                                      </div>
                                                  </React.Fragment>

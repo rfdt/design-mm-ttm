@@ -10,17 +10,17 @@ import Menu from "./Modules/Menu/Menu";
 import Header from "./Modules/Header/Header";
 import ErrorToast from "./Modules/ErrorToast/ErrorToast";
 import PrivateRoute from "./Modules/PrivateRoute/PrivateRoute";
-import UnknownPage from "./Modules/UnknownPage/UnknownPage";
 import MenuSettings from "./Modules/Menu/MenuSettings/MenuSettings";
 import PageLoader from "./Modules/PageLoader/PageLoader";
 
 /*LAZY LOAD PAGES */
-
 const HomePage = lazy(() => import('./Pages/Home/Home'));
 const ChannelsPage = lazy(() => import('./Pages/Channels/Channels'));
 const HardwarePage = lazy(() => import('./Pages/Hardware/Hardware'));
 const LoginPage = lazy(() => import('./Pages/Login/Login'));
-const RegisterPage = lazy(() => import('./Pages/Register/Register'))
+const RegisterPage = lazy(() => import('./Pages/Register/Register'));
+const VerifyChannelPage = lazy(()=>import('./Pages/VerifyChannel/VerifyChannel'));
+const UnknownPage = lazy(()=>import('./Pages/UnknownPage/UnknownPage'));
 
 
 function App() {
@@ -64,6 +64,13 @@ function App() {
                                 </PrivateRoute>
                             </Suspense>
                         }/>
+                        <Route path='/verify/:id' element={
+                            <Suspense fallback={<PageLoader/>}>
+                                <PrivateRoute>
+                                    <VerifyChannelPage />
+                                </PrivateRoute>
+                            </Suspense>
+                        }/>
                         <Route path='/login' element={
                             <Suspense fallback={<PageLoader/>}>
                                 <LoginPage/>
@@ -74,7 +81,11 @@ function App() {
                                 <RegisterPage/>
                             </Suspense>
                         }/>
-                        <Route path='*' element={<UnknownPage/>}/>
+                        <Route path='*' element={
+                            <Suspense fallback={<PageLoader/>}>
+                                <UnknownPage />
+                            </Suspense>
+                        }/>
                     </Routes>
                 </div>
             </div>

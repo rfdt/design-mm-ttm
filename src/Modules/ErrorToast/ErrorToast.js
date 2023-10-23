@@ -2,7 +2,6 @@ import React, {useEffect, useRef} from 'react';
 import {Toast} from "primereact/toast";
 import {transformAxiosError} from "../transformAxiosError";
 import {useSelector} from "react-redux";
-import {clearError} from "../../Store/reducers/errors/errorsActions";
 import {useActions} from "../../Store/useActions";
 
 function ErrorToast(props) {

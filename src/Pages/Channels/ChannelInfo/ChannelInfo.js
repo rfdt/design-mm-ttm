@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import './ChannelInfo.css';
 import {Sidebar} from "primereact/sidebar";
-import {InputText} from "primereact/inputtext";
 import {Divider} from 'primereact/divider';
 import {ProgressSpinner} from "primereact/progressspinner";
 import {useSelector} from "react-redux";
@@ -10,12 +9,17 @@ import EditChannel from "../EditChannel/EditChannel";
 import {EDIT_CHANNEL_ACCESS_ROLES} from "../../../Modules/functionAccess";
 import InventoryHardwareInfo from "./HardwareInfo/InventoryHardwareInfo";
 import HardwareInfo from "./HardwareInfo/HardwareInfo";
+import {useNavigate} from "react-router-dom";
+import CommercialInfo from "./CommercialInfo/CommercialInfo";
+import VerifyInfo from "./VerifyInfo/VerifyInfo";
+import RelatedChannels from "./RelatedChannels/RelatedChannels";
 
 function ChannelInfo() {
 
     const {isLoadingSelectedChannel, loadedSelectedChannel, selectedChannel} = useSelector(state => state.channels)
     const {isAuthenticated, user} = useSelector(state => state.user)
     const {clearSelectedChannel, setEditChannel, setMessageError} = useActions()
+    const navigate = useNavigate();
     const [visible, setVisible] = useState(false);
 
     useEffect(() => {
@@ -41,13 +45,22 @@ function ChannelInfo() {
         }
     }
 
+    const onVerify = () =>{
+        if(selectedChannel && !selectedChannel.channel_verified){
+            navigate(`/verify/${selectedChannel._id}`)
+        }
+    }
+
 
     const customIcons = (
         <React.Fragment>
-            {loadedSelectedChannel && !loadedSelectedChannel.channel_verified ? <p className={'p-error'}>Канал не верифицирован</p> : null}
-            <button className="p-sidebar-icon p-link mr-2">
-                <span className="pi pi-file-export"/>
+            {loadedSelectedChannel && !loadedSelectedChannel.channel_verified ? <><p className={'p-error'}>Канал не верифицирован</p>
+            <button className="p-sidebar-icon p-link mr-2" disabled={loadedSelectedChannel && loadedSelectedChannel.channel_verified}
+                                                            onClick={()=>onVerify()}
+            >
+                <span className="pi pi-shield"/>
             </button>
+            </> : null}
             <button className="p-sidebar-icon p-link mr-2" onClick={startEditChannel}>
                 <span className="pi pi-file-edit"/>
             </button>
@@ -66,101 +79,15 @@ function ChannelInfo() {
                 {
                     !isLoadingSelectedChannel && loadedSelectedChannel ?
                         <>
-                            <div className="ChannelInfo__Table">
-                                <div className="ChannelInfo__Table-String">
-                                    <div className="ChannelInfo__Table-String-Title">
-                                        ID
-                                    </div>
-                                    <div className="ChannelInfo__Table-String-Inputs">
-                                        <InputText value={loadedSelectedChannel.id_tbcd}
-                                                   className="p-inputtext-sm ChannelInfo__Table-String-Input-33"/>
-                                        <InputText value={loadedSelectedChannel.id_suz}
-                                                   className="p-inputtext-sm ChannelInfo__Table-String-Input-33"/>
-                                        <InputText value={loadedSelectedChannel.id_oss}
-                                                   className="p-inputtext-sm ChannelInfo__Table-String-Input-33"/>
-                                    </div>
-                                </div>
-                                <div className="ChannelInfo__Table-String">
-                                    <div className="ChannelInfo__Table-String-Title">
-                                        Клиент
-                                    </div>
-                                    <div className="ChannelInfo__Table-String-Inputs">
-                                        <InputText value={loadedSelectedChannel.client}
-                                                   className="p-inputtext-sm ChannelInfo__Table-String-Input-100"/>
-                                    </div>
-                                </div>
-                                <div className="ChannelInfo__Table-String">
-                                    <div className="ChannelInfo__Table-String-Title">
-                                        Услуга
-                                    </div>
-                                    <div className="ChannelInfo__Table-String-Inputs">
-                                        <InputText value={loadedSelectedChannel.service}
-                                                   className="p-inputtext-sm ChannelInfo__Table-String-Input-50"/>
-                                        <InputText value={loadedSelectedChannel.service_size}
-                                                   className="p-inputtext-sm ChannelInfo__Table-String-Input-50"/>
-                                    </div>
-                                </div>
-                                <div className="ChannelInfo__Table-String">
-                                    <div className="ChannelInfo__Table-String-Title">
-                                        Адрес
-                                    </div>
-                                    <div className="ChannelInfo__Table-String-Inputs">
-                                        <InputText value={loadedSelectedChannel.city}
-                                                   className="p-inputtext-sm ChannelInfo__Table-String-Input-40"/>
-                                        <InputText value={loadedSelectedChannel.street}
-                                                   className="p-inputtext-sm ChannelInfo__Table-String-Input-40"/>
-                                        <InputText value={loadedSelectedChannel.home}
-                                                   className="p-inputtext-sm ChannelInfo__Table-String-Input-20"/>
-                                    </div>
-                                </div>
-                                <div className="ChannelInfo__Table-String">
-                                    <div className="ChannelInfo__Table-String-Title">
-                                        Инфо
-                                    </div>
-                                    <div className="ChannelInfo__Table-String-Inputs">
-                                        <InputText value={loadedSelectedChannel.add_info}
-                                                   className="p-inputtext-sm ChannelInfo__Table-String-Input-100"/>
-                                    </div>
-                                </div>
-                                <div className="ChannelInfo__Table-String">
-                                    <div className="ChannelInfo__Table-String-Title">
-                                        Контакт
-                                    </div>
-                                    <div className="ChannelInfo__Table-String-Inputs">
-                                        <InputText value={loadedSelectedChannel.contact}
-                                                   className="p-inputtext-sm ChannelInfo__Table-String-Input-100"/>
-                                    </div>
-                                </div>
-                                <div className="ChannelInfo__Table-String">
-                                    <div className="ChannelInfo__Table-String-Title">
-                                        Статус
-                                    </div>
-                                    <div className="ChannelInfo__Table-String-Inputs">
-                                        <InputText value={loadedSelectedChannel.status}
-                                                   className={["p-inputtext-sm", "ChannelInfo__Table-String-Input-50",
-                                                       loadedSelectedChannel.status === "ВКЛ" ? "ChannelInfo__Table-String-Input-ON" : null,
-                                                       loadedSelectedChannel.status === "ОТКЛ" ? "ChannelInfo__Table-String-Input-OFF" : null,
-                                                       loadedSelectedChannel.status === "ПАУЗА" ? "ChannelInfo__Table-String-Input-PAUSE" : null,
-                                                       loadedSelectedChannel.status !== "ОТКЛ" && loadedSelectedChannel.status !== "ВКЛ" && loadedSelectedChannel.status !== "ПАУЗА" ? "ChannelInfo__Table-String-Input-OTHER" : null
-                                                   ].join(' ')}/>
-                                        <InputText value={new Date(loadedSelectedChannel.date).toLocaleDateString().split('.').reverse().join('.')}
-                                                   className="p-inputtext-sm  ChannelInfo__Table-String-Input-50"/>
-                                    </div>
-                                </div>
-                                <div className="ChannelInfo__Table-String">
-                                    <div className="ChannelInfo__Table-String-Title">
-                                        Прим
-                                    </div>
-                                    <div className="ChannelInfo__Table-String-Inputs">
-                                        <InputText value={loadedSelectedChannel.note}
-                                                   className="p-inputtext-sm ChannelInfo__Table-String-Input-50"/>
-                                        <InputText value={loadedSelectedChannel.rd_sr}
-                                                   className="p-inputtext-sm  ChannelInfo__Table-String-Input-50"/>
-                                    </div>
-                                </div>
+                            <div className="ChannelInfo__Title">
+                                Сведения о канале
                             </div>
+                            <VerifyInfo />
+                            <CommercialInfo />
                             <Divider/>
                             {!loadedSelectedChannel.channel_verified ? <InventoryHardwareInfo /> : <HardwareInfo />}
+                            <Divider/>
+                            <RelatedChannels />
                             <Divider/>
                             <div className="ChannelInfo__Table">
                                 История тикетов или что-то другое

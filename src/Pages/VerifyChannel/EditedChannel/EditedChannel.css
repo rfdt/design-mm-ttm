@@ -1,0 +1,58 @@
+.VerifyChannel__Edit{
+    margin-top: 15px;
+}
+
+.VerifyChannel__Edit-Title{
+    font-size: 18px;
+    margin-left: 10px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    color: #8c8c8c;
+}
+
+.VerifyChannel__Edit-Body{
+    display: flex;
+}
+
+.VerifyChannel__Managment{
+    width: 50%;
+    display: flex;
+    justify-content: center;
+}
+
+.VerifyChannel__Technical{
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.EditedChannel__Form-Container-Max600{
+    max-width: 600px;
+}
+
+.EditedChannel__Submit-Btn{
+    width: 100%;
+    max-width: 300px;
+    margin: 0 auto;
+}
+
+
+/*Приоритет снизу вверх*/
+/*Сначала правило до 320 потом до 480 и т.д*/
+@media (max-width: 1350px) {
+    /*from 0px to 1200px*/
+    .VerifyChannel__Edit-Body{
+        flex-direction: column;
+        align-items: center;
+    }
+}
+@media (max-width: 1100px){
+    /*from 0px to 992px*/
+    .VerifyChannel__Managment{
+        width: 100%;
+    }
+    .VerifyChannel__Technical{
+        width: 100%;
+    }
+}

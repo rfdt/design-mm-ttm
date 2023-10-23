@@ -1,0 +1,55 @@
+.VerifyChannel__Inventory-Title{
+    font-size: 18px;
+    margin-left: 10px;
+    margin-top: 10px;
+    color: #8c8c8c;
+}
+
+.VerifyChannel__Inventory-Body{
+    display: flex;
+    margin-top: 15px;
+}
+
+.VerifyChannel__Inventory-Managment{
+    width: 50%;
+    align-self: center;
+    display: flex;
+    justify-content: center;
+}
+
+.VerifyChannel__Inventory-Technical{
+    width: 50%;
+    align-self: center;
+    display: flex;
+    justify-content: center;
+}
+
+.VerifyChannel__Inventory-Row-Title{
+    width: 90px;
+}
+
+/*Приоритет снизу вверх*/
+@media (max-width: 1350px) {
+    .VerifyChannel__Inventory-Body{
+        flex-direction: column;
+        align-items: center;
+    }
+    .VerifyChannel__Inventory-Managment{
+        margin-bottom: 15px;
+    }
+}
+@media (max-width: 1100px){
+    /*from 0px to 992px*/
+    .VerifyChannel__Inventory-Managment{
+        width: 100%;
+    }
+    .VerifyChannel__Inventory-Technical{
+        width: 100%;
+    }
+}
+@media (max-width: 768px) {
+    /*from 0px to 768px*/
+    .VerifyChannel__Inventory-Title{
+        font-size: 18px;
+    }
+}

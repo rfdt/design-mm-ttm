@@ -1,12 +1,12 @@
 import React from 'react';
-import {Avatar, Badge, Input} from "antd";
-import { UserOutlined} from "@ant-design/icons";
 import './Header.css';
 import {useSelector} from "react-redux";
 import {InputText} from "primereact/inputtext";
 import {Button} from "primereact/button";
 import classNames from "classnames"
 import MobileMenu from "../MobileMenu/MobileMenu";
+import {Avatar} from "primereact/avatar";
+import {Badge} from "primereact/badge";
 
 function Header(props) {
 
@@ -25,9 +25,12 @@ function Header(props) {
                 {isAuthenticated &&
                     <>
                         <div className="Header__User-Avatar">
-                            <Badge dot status={'success'}>
-                                <Avatar shape="square" icon={<UserOutlined/>} size={46}/>
-                            </Badge>
+                            {/*<Badge dot status={'success'}>*/}
+                            {/*    <Avatar shape="square" icon={<UserOutlined/>} size={46}/>*/}
+                            {/*</Badge>*/}
+                            <Avatar className="p-overlay-badge" icon="pi pi-user" size="large">
+                                <Badge size="normal" severity="success"/>
+                            </Avatar>
                         </div>
                         <div className="Header__User-Info">
                             <div className="Header__User-Data">

@@ -12,7 +12,7 @@ import {
     CHANNELS_SET_LOADING_SELECTED_CHANNEL,
     CHANNELS_SET_SELECTED_CHANNEL
 } from "./channelsTypes";
-import {setError} from "../errors/errorsActions";
+import {setError, setMessageError} from "../errors/errorsActions";
 
 const setFilteredChannelsAC = (channels) => ({type: CHANNELS_SET_FILTERED_CHANNELS, payload: channels})
 const setFilteredChannelsCountAC = (count) => ({type: CHANNELS_SET_FILTERED_CHANNELS_COUNT, payload: count})
@@ -131,6 +131,37 @@ export const editHardware = (editHardware) => async (dispatch) =>{
         const editedHardware = await ChannelsApi.editHardware(editHardware);
         dispatch(editChannelAC(editedHardware.data));
     }catch (e){
+        dispatch(setError(e));
+    }
+}
+
+export const getChannelToVerify = (id) => async (dispatch) =>{
+    try {
+        const channel = await ChannelsApi.findChannelById(id)
+        if(channel.data.channel_verified){
+            dispatch(setMessageError('Данный канал уже верифицирован.'))
+            return false;
+        }
+        return channel.data;
+    }catch (e){
+        dispatch(setError(e));
+    }
+}
+
+export const verifyChannel = (verifiedChannel) => async (dispatch) =>{
+    try {
+        const verifiedChannelResponse = await ChannelsApi.verifyChannel(verifiedChannel)
+        dispatch(setLoadedSelectedChannelAC(verifiedChannelResponse.data))
+    }catch (e){
+        dispatch(setError(e));
+    }
+}
+
+export const getRelatedChannels = (channel_id) => async (dispatch) => {
+    try {
+        const relatedChannelsResponse = await ChannelsApi.getRelatedChannels(channel_id);
+        return relatedChannelsResponse.data;
+    }catch(e){
         dispatch(setError(e));
     }
 }

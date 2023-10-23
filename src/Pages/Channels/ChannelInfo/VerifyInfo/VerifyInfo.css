@@ -1,0 +1,14 @@
+.Channel-VerifyInfo__Container{
+    height: 60px;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.Channel-VerifyInfo__Body{
+    display: flex;
+    align-items: center;
+}
+
+.Channel-VerifyInfo-Close{
+    margin-left: auto;
+}

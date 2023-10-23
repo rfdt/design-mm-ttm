@@ -8,7 +8,7 @@ import MobileMenu from "../MobileMenu/MobileMenu";
 import {Avatar} from "primereact/avatar";
 import {Badge} from "primereact/badge";
 
-function Header(props) {
+function Header() {
 
     const {appTheme} = useSelector(state => state.global)
     const {isAuthenticated, user} = useSelector(state => state.user)

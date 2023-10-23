@@ -390,7 +390,7 @@ function EditedChannel({verifiedChannel}) {
                                                                 severity="danger" aria-label="Удалить"
                                                                 type="button"
                                                                 disabled={index === 0 && formik.values.channel_agg_stop.length === 1}
-                                                                onClick={(e) => {
+                                                                onClick={() => {
                                                                     remove(index)
                                                                 }}/>
                                                         {index === formik.values.channel_agg_stop.length - 1 ?

@@ -38,7 +38,7 @@ export const findChannels = () => async (dispatch, getState) => {
     }
 }
 
-export const clearSearch = () => async (dispatch, getState) => {
+export const clearSearch = () => async (dispatch) => {
     try {
         dispatch(resetFilters());
         dispatch(findChannels());

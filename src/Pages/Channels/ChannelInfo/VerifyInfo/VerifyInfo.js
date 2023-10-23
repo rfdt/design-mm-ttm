@@ -1,11 +1,10 @@
 import React, {useState} from 'react';
 import './VerifyInfo.css';
 import {Avatar} from "primereact/avatar";
-import {Badge} from "primereact/badge";
 import {Button} from "primereact/button";
 import {useSelector} from "react-redux";
 
-function VerifyInfo(props) {
+function VerifyInfo() {
 
     const {loadedSelectedChannel} = useSelector(state => state.channels)
     const [visible, setVisible] = useState(true);

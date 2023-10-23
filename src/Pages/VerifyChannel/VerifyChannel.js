@@ -7,7 +7,7 @@ import ChannelInventory from "./ChannelInventory/ChannelInventory";
 import PageLoader from "../../Modules/PageLoader/PageLoader";
 import EditedChannel from "./EditedChannel/EditedChannel";
 
-function VerifyChannel(props) {
+function VerifyChannel() {
 
     const {id} = useParams();
     const {getChannelToVerify} = useActions();

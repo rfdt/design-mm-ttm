@@ -4,7 +4,7 @@ import {ReactComponent as Unknown} from "../../static/svg/unknown.svg";
 import {Button} from "primereact/button";
 import {useNavigate} from "react-router-dom";
 
-function UnknownPage(props) {
+function UnknownPage() {
 
     const navigate = useNavigate();
     return (

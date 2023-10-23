@@ -4,7 +4,7 @@ import {transformAxiosError} from "../transformAxiosError";
 import {useSelector} from "react-redux";
 import {useActions} from "../../Store/useActions";
 
-function ErrorToast(props) {
+function ErrorToast() {
 
     const toastRef = useRef(null);
     const {isErrored, errorObj, errorMessage} = useSelector(state => state.errors);

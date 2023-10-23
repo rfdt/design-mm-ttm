@@ -4,7 +4,7 @@ import {useActions} from "../../../../Store/useActions";
 import './RelatedChannels.css';
 import RelatedChannel from "./RelatedChannel/RelatedChannel";
 
-function RelatedChannels(props) {
+function RelatedChannels() {
 
     const {loadedSelectedChannel} = useSelector(state => state.channels)
     const {getRelatedChannels} = useActions();

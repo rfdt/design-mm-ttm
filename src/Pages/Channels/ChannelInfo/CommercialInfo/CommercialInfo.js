@@ -2,7 +2,7 @@ import React from 'react';
 import {InputText} from "primereact/inputtext";
 import {useSelector} from "react-redux";
 
-function CommercialInfo(props) {
+function CommercialInfo() {
 
     const {loadedSelectedChannel} = useSelector(state => state.channels)
 

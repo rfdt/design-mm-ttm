@@ -265,7 +265,7 @@ function AddChannel({close, visible}) {
                                             />
                                             <Calendar value={formik.values.date}
                                                       onChange={(e) => formik.setFieldValue('date', e.target.value)}
-                                                      dateFormat="yy.mm.dd"
+                                                      dateFormat="yy-mm-dd"
                                                       style={{width: "49%"}}
                                             />
                                         </div>

@@ -23,7 +23,7 @@ function VerifyInfo() {
                             </div>
                             <div className="Header__User-Email">
                                 Дата проверки: {new Date(loadedSelectedChannel.channel_verified_date)
-                                .toLocaleDateString().split('.').reverse().join('.')}
+                                .toLocaleDateString().split('.').reverse().join('-')}
                             </div>
                         </div>
                         <div className="Channel-VerifyInfo-Close">

@@ -88,7 +88,7 @@ function ChannelInventory({verifiedChannel}) {
                                             verifiedChannel.status === "ПАУЗА" ? "ChannelInfo__Table-String-Input-PAUSE" : null,
                                             verifiedChannel.status !== "ОТКЛ" && verifiedChannel.status !== "ВКЛ" && verifiedChannel.status !== "ПАУЗА" ? "ChannelInfo__Table-String-Input-OTHER" : null
                                         ].join(' ')}/>
-                             <InputText value={new Date(verifiedChannel.date).toLocaleDateString().split('.').reverse().join('.')}
+                             <InputText value={new Date(verifiedChannel.date).toLocaleDateString().split('.').reverse().join('-')}
                                         className="p-inputtext-sm  ChannelInfo__Table-String-Input-50"/>
                          </div>
                      </div>

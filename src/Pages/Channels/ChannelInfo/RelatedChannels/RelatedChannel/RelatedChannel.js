@@ -11,7 +11,7 @@ function RelatedChannel({channel}) {
                  {channel.client}
              </div>
              <div className="RelatedChannel__Id">
-                 {new Date(channel.date).toLocaleDateString().split('.').reverse().join('.')} | {channel.id_suz} | {channel.id_cms} | {channel.id_tbcd} | {channel.id_oss}
+                 {new Date(channel.date).toLocaleDateString().split('.').reverse().join('-')} | {channel.id_suz} | {channel.id_cms} | {channel.id_tbcd} | {channel.id_oss}
              </div>
          </div>
      </div>

@@ -327,7 +327,7 @@ function AddChannel({close, visible}) {
                                                             <Dropdown
                                                                 value={formik.values.channel_agg_stop[index].agg_stop}
                                                                 onChange={(e) => handleChangeAgg(index, e.target.value)}
-                                                                options={filtersValues ? formik.values.channel_agg_stop[index].withStop ? filtersValues.stop : filtersValues.ssw : []}
+                                                                options={filtersValues ? formik.values.channel_agg_stop[index].withStop ? filtersValues.stop : filtersValues.ssw.filter(agg_stop=>index === 0 ? agg_stop.uplink_type === 'to_ar' : agg_stop.uplink_type === 'to_ssw') : []}
                                                                 optionLabel="title" placeholder="SSW"
                                                                 filter
                                                                 className={classNames("p-inputtext-sm AddChannel__Form-Input-Agg", { 'p-invalid': formik.errors.channel_agg_stop && formik.errors.channel_agg_stop[index] && formik.errors.channel_agg_stop[index].agg_stop})}

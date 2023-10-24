@@ -45,7 +45,7 @@ function AddHardware(props) {
                     <form className='AddHardware__Form' onSubmit={formik.handleSubmit}>
                         <div className="AddHardware__Row">
                             <div className="AddHardware__Row-Title">
-                                Host Name
+                                Hostname
                             </div>
                             <InputText
                                 value={formik.values.title}
@@ -66,7 +66,7 @@ function AddHardware(props) {
                         </div>
                         <div className="AddHardware__Row">
                             <div className="AddHardware__Row-Title">
-                                Up Link
+                                Uplink
                             </div>
                             <InputText placeholder="Введите uplink"
                                        value={formik.values.uplink}

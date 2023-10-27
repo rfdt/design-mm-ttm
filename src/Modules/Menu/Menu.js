@@ -14,7 +14,7 @@ import {useLocation, useNavigate} from "react-router-dom";
 import {useActions} from "../../Store/useActions";
 import {useSelector} from "react-redux";
 
-function Menu(props) {
+function Menu() {
     const {isAuthenticated} = useSelector(state => state.user)
     const {appTheme} = useSelector(state => state.global)
     const {logoutUser, toggleSettingsVisible} = useActions();

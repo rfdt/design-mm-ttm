@@ -10,7 +10,7 @@ import {
     CHANNELS_SET_FILTERS_VALUES,
     CHANNELS_SET_LOADED_SELECTED_CHANNEL,
     CHANNELS_SET_LOADING_SELECTED_CHANNEL,
-    CHANNELS_SET_SELECTED_CHANNEL
+    CHANNELS_SET_SELECTED_CHANNEL, REMOVE_DRAFT_CHANNEL_BY_IDX, SAVE_OR_UPDATE_DRAFT_CHANNEL
 } from "./channelsTypes";
 
 const filtersInitialValue = {
@@ -22,7 +22,7 @@ const filtersInitialValue = {
     statusFilter: '',
     peFilter: "",
     rdFilter: '',
-    channelAggStopFilter:'',
+    channelAggStopFilter: '',
     vidFilter: '',
     sizeFilter: '',
     channelAccStopFilter: '',
@@ -38,11 +38,12 @@ const channelsReducerInitialState = {
     channelsFilters: {...filtersInitialValue},
     filtersValues: null,
     isEditingChannel: false,
-    editingMode: ''
+    editingMode: '',
+    channelsDrafts: JSON.parse(localStorage.getItem('mm-channels-draft') || "[]")
 }
 
-export const channelsReducer = (state= channelsReducerInitialState, action) =>{
-    switch (action.type){
+export const channelsReducer = (state = channelsReducerInitialState, action) => {
+    switch (action.type) {
         case CHANNELS_SET_FILTERED_CHANNELS:
             return {...state, filteredChannels: action.payload}
         case CHANNELS_SET_FILTERED_CHANNELS_COUNT:
@@ -56,7 +57,7 @@ export const channelsReducer = (state= channelsReducerInitialState, action) =>{
         case CHANNELS_SET_LOADED_SELECTED_CHANNEL: {
             return {...state, loadedSelectedChannel: action.payload}
         }
-        case CHANNELS_CLEAR_SELECTED_CHANNEL:{
+        case CHANNELS_CLEAR_SELECTED_CHANNEL: {
             return {...state, selectedChannel: null, isLoadingSelectedChannel: false, loadedSelectedChannel: null}
         }
         case CHANNELS_SET_FILTER_VALUE: {
@@ -65,17 +66,22 @@ export const channelsReducer = (state= channelsReducerInitialState, action) =>{
             return {...state, channelsFilters: {...newFiltersValues}}
         }
         case CHANNELS_SET_FILTERS_VALUES: {
-            return {...state, filtersValues: {...action.payload,
+            return {
+                ...state, filtersValues: {
+                    ...action.payload,
                     status: [{name: "ВКЛ", code: "ВКЛ"}, {name: "ОТКЛ", code: "ОТКЛ"},
                         {name: "РЕЗЕРВ", code: "РЕЗЕРВ"}, {name: "ИЗМ", code: "ИЗМ"}, {name: "ПАУЗА", code: "ПАУЗА"}],
-            }}
+                }
+            }
         }
         case CHANNELS_RESET_FILTERS: {
             return {...state, channelsFilters: {...filtersInitialValue}}
         }
         case CHANNELS_RESET_EXTENDED_FILTERS: {
-            return {...state, channelsFilters:
-                    {...state.channelsFilters, addInfoFilter: "", peFilter: "",
+            return {
+                ...state, channelsFilters:
+                    {
+                        ...state.channelsFilters, addInfoFilter: "", peFilter: "",
                         rdFilter: "", channelAccStopFilter: "", channelAggStopFilter: "",
                         channelIpMngFilter: "", sizeFilter: "", vidFilter: ""
                     }
@@ -96,6 +102,30 @@ export const channelsReducer = (state= channelsReducerInitialState, action) =>{
             let hardwareIndex = editedFiltersValues[action.payload.hardware_type].findIndex(hardware => hardware._id === action.payload._id)
             editedFiltersValues[action.payload.hardware_type][hardwareIndex] = action.payload;
             return {...state, filtersValues: editedFiltersValues}
-        default: return state
+        case SAVE_OR_UPDATE_DRAFT_CHANNEL:
+            let channelDrafts = [...state.channelsDrafts]
+            const index = channelDrafts.findIndex(
+                (draft) => (draft.client && draft.client === action.payload.client) || (draft.channel_vid && draft.channel_vid === action.payload.channel_vid)
+                || (draft.id_suz && draft.id_suz === action.payload.id_suz) || (draft.id_tbcd && draft.id_tbcd === action.payload.id_tbcd)
+                || (draft.id_oss && draft.id_oss === action.payload.id_oss) || (draft.id_cms && draft.id_cms === action.payload.id_cms)
+            )
+            console.log(index)
+            if(index > -1){
+                channelDrafts[index] = {...action.payload}
+            }else {
+                if(channelDrafts.length === 10){
+                    channelDrafts[0] = action.payload
+                }else {
+                    channelDrafts.push(action.payload)
+                }
+            }
+            localStorage.setItem('mm-channels-draft', JSON.stringify(channelDrafts));
+            return {...state, channelsDrafts: channelDrafts}
+        case REMOVE_DRAFT_CHANNEL_BY_IDX:
+            let channelDraftsDeleted = [...state.channelsDrafts].filter((_, idx)=>idx !== action.payload);
+            localStorage.setItem('mm-channels-draft', JSON.stringify(channelDraftsDeleted));
+            return {...state, channelsDrafts: channelDraftsDeleted}
+        default:
+            return state
     }
 }

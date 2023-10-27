@@ -204,8 +204,7 @@ function EditForm({editingChannel}) {
                                  {/*           className={classNames("p-inputtext-sm", { 'p-invalid': isFormFieldInvalidNonTouch('service_size')})}*/}
                                  {/*/>*/}
                                  <InputNumber  value={formik.values.service_size} onChange={(e)=>formik.setFieldValue('service_size', e.value)}
-                                               style={{width: "49%"}} showButtons buttonLayout="horizontal" min={1} step={0.5}
-                                               decrementButtonClassName="p-button-danger" incrementButtonClassName="p-button-success" incrementButtonIcon="pi pi-plus" decrementButtonIcon="pi pi-minus"
+                                               style={{width: "49%"}} min={1} step={0.5}
                                                placeholder="Скорость в МБ" suffix=" МБ"
                                                className={classNames("p-inputtext-sm", { 'p-invalid': isFormFieldInvalidNonTouch('service_size')})}
                                  />

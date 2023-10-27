@@ -1,0 +1,10 @@
+.NewChannelsDrafts__Container{
+    width: 100%;
+    max-width: 450px;
+    margin: 0 auto;
+}
+
+.NewChannel__ClearDraft{
+    width: 100%;
+    margin: 0 auto;
+}

@@ -8,7 +8,7 @@ import ExtendedSearch from "../ExtendedSearch/ExtendedSearch";
 import ExportExcel from "../ExportExcel/ExportExcel";
 import {useActions} from "../../../Store/useActions";
 import {useSelector} from "react-redux";
-import AddChannel from "../../../Modules/AddChannel/AddChannel";
+import AddChannel from "../AddChannel/AddChannel";
 import {useNavigate} from "react-router-dom";
 
 function ChannelsFilters() {

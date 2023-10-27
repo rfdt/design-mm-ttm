@@ -3,6 +3,11 @@
     color: var(--green-500);
 }
 
+.AddChannel__Container{
+    width: 100%;
+    max-width: 850px;
+}
+
 .EditChannel__Form-Agg-Adding-Block{
     width: 24%;
     display: flex;

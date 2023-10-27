@@ -10,7 +10,7 @@ import {
     CHANNELS_SET_FILTERS_VALUES,
     CHANNELS_SET_LOADED_SELECTED_CHANNEL,
     CHANNELS_SET_LOADING_SELECTED_CHANNEL,
-    CHANNELS_SET_SELECTED_CHANNEL
+    CHANNELS_SET_SELECTED_CHANNEL, REMOVE_DRAFT_CHANNEL_BY_IDX, SAVE_OR_UPDATE_DRAFT_CHANNEL
 } from "./channelsTypes";
 import {setError, setMessageError} from "../errors/errorsActions";
 
@@ -165,3 +165,7 @@ export const getRelatedChannels = (channel_id) => async (dispatch) => {
         dispatch(setError(e));
     }
 }
+
+export const saveOrUpdateDraft = (channelDraft) => ({type: SAVE_OR_UPDATE_DRAFT_CHANNEL, payload: channelDraft})
+
+export const removeDraftByIdx = (idx) => ({type: REMOVE_DRAFT_CHANNEL_BY_IDX, payload: idx})

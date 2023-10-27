@@ -1,0 +1,49 @@
+.NewChannelDraft__Container{
+    display: flex;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+.NewChannelDraft__Info{
+    padding: 3px 0 3px;
+    margin-left: 7px;
+    width: calc(100% - 105px);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.NewChannelDraft__Title{
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.NewChannelDraft__ChannelInfo{
+    margin-top: 5px;
+    margin-left: 2px;
+}
+
+.NewChannelDraft__RemoveBtn{
+    display: none;
+}
+
+.NewChannelDraft__Container:hover .NewChannelDraft__RemoveBtn{
+    display: inline-flex;
+}
+
+@media (max-width: 768px) {
+    /*from 0px to 768px*/
+    .NewChannelDraft__Title{
+        font-size: 16px;
+    }
+    .NewChannelDraft__ChannelInfo{
+        font-size: 14px;
+        margin-top: 8px;
+    }
+}
+@media (max-width: 480px){
+    /*from 0px to 480px*/
+}
+@media (max-width: 320px){
+    /*from 0px to 320px*/
+}

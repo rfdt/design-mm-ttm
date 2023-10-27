@@ -19,7 +19,7 @@ function RelatedChannels() {
     }, [])
 
     return (
-        <>{relatedChannels.length > 0 ?
+        <>{relatedChannels && relatedChannels.length > 0 ?
             <div className='ChannelInfo__Related-Channels-Container'>
                 <div className="ChannelInfo__Related-Channels-Title">Связанные каналы</div>
                 <div className="ChannelInfo__Related-Channels-Body">

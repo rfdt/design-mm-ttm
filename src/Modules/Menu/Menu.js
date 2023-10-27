@@ -13,7 +13,6 @@ import './Menu.css';
 import {useLocation, useNavigate} from "react-router-dom";
 import {useActions} from "../../Store/useActions";
 import {useSelector} from "react-redux";
-import MenuSettings from "./MenuSettings/MenuSettings";
 
 function Menu(props) {
     const {isAuthenticated} = useSelector(state => state.user)
@@ -50,7 +49,7 @@ function Menu(props) {
             classNames('Menu__Container', {'Menu--Open': isMenuOpened, 'Menu__Container--Dark': appTheme === 'dark'})
         }>
             <div className={classNames('Menu__Logo', {'Menu__Logo--Open': isMenuOpened})}>
-                <div className="Menu__Logo-IMG" onClick={() => setIsMenuOpened(!isMenuOpened)}>
+                <div className="Menu__Logo-IMG">
                     <img src={MmLogo} alt=""/>
                 </div>
                 {isMenuOpened &&

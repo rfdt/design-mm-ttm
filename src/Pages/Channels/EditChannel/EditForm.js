@@ -11,6 +11,7 @@ import {Checkbox} from "primereact/checkbox";
 import {useSelector} from "react-redux";
 import {useActions} from "../../../Store/useActions";
 import classNames from "classnames";
+import {InputNumber} from "primereact/inputnumber";
 
 function EditForm({editingChannel}) {
 
@@ -61,7 +62,7 @@ function EditForm({editingChannel}) {
             id_cms: editingChannel.id_cms,
             client: editingChannel.client,
             service: editingChannel.service,
-            service_size: editingChannel.service_size,
+            service_size: editingChannel.service_size.includes('G') ? Number(editingChannel.service_size.split('G')[0]) * 1000 : Number(editingChannel.service_size.split('M')[0]),
             city: editingChannel.city,
             street: editingChannel.street,
             home: editingChannel.home,
@@ -87,7 +88,8 @@ function EditForm({editingChannel}) {
         onSubmit: async (data) => {
             const transformedObj = {...data,
                 channel_pe: data.channel_pe.title,
-                channel_agg_stop: data.channel_agg_stop.map((agg_stop)=>({...agg_stop, agg_stop: agg_stop.agg_stop.title}))
+                channel_agg_stop: data.channel_agg_stop.map((agg_stop)=>({...agg_stop, agg_stop: agg_stop.agg_stop.title})),
+                service_size: data.service_size >=1000 ? `${data.service_size / 1000}G` : `${data.service_size}M`
             }
             if(editingMode === 'newChannel'){
                 createAndUpdateChannel(transformedObj)
@@ -117,6 +119,8 @@ function EditForm({editingChannel}) {
         }
         formik.setFieldValue(`channel_acc_stop[${index}].withStop`, !formik.values.channel_acc_stop[index].withStop)
     }
+
+    console.log(editingChannel.service_size.split('M')[0])
 
  return (
      <FormikProvider value={formik}>
@@ -193,11 +197,17 @@ function EditForm({editingChannel}) {
                                            placeholder="Услуга"
                                            className={classNames("p-inputtext-sm", { 'p-invalid': isFormFieldInvalidNonTouch('service')})}
                                  />
-                                 <InputText style={{width: "49%"}}
-                                            value={formik.values.service_size}
-                                            onChange={(e) => formik.setFieldValue('service_size', e.target.value)}
-                                            placeholder='Размер услуги'
-                                            className={classNames("p-inputtext-sm", { 'p-invalid': isFormFieldInvalidNonTouch('service_size')})}
+                                 {/*<InputText style={{width: "49%"}}*/}
+                                 {/*           value={formik.values.service_size}*/}
+                                 {/*           onChange={(e) => formik.setFieldValue('service_size', e.target.value)}*/}
+                                 {/*           placeholder='Размер услуги'*/}
+                                 {/*           className={classNames("p-inputtext-sm", { 'p-invalid': isFormFieldInvalidNonTouch('service_size')})}*/}
+                                 {/*/>*/}
+                                 <InputNumber  value={formik.values.service_size} onChange={(e)=>formik.setFieldValue('service_size', e.value)}
+                                               style={{width: "49%"}} showButtons buttonLayout="horizontal" min={1} step={0.5}
+                                               decrementButtonClassName="p-button-danger" incrementButtonClassName="p-button-success" incrementButtonIcon="pi pi-plus" decrementButtonIcon="pi pi-minus"
+                                               placeholder="Скорость в МБ" suffix=" МБ"
+                                               className={classNames("p-inputtext-sm", { 'p-invalid': isFormFieldInvalidNonTouch('service_size')})}
                                  />
                              </div>
                          </div>
@@ -261,6 +271,12 @@ function EditForm({editingChannel}) {
                                            onChange={(e) => formik.setFieldValue('status', e.target.value.name)}
                                            optionLabel="name"
                                            placeholder="Статус"
+                                           className={[
+                                               formik.values.status === "ВКЛ" ? "EditChannel__Form-Status-ON" : null,
+                                               formik.values.status === "ОТКЛ" ? "EditChannel__Form-Status-OFF" : null,
+                                               formik.values.status === "ПАУЗА" ? "EditChannel__Form-Status-PAUSE" : null,
+                                               formik.values.status !== "ОТКЛ" && formik.values.status !== "ВКЛ" && formik.values.status !== "ПАУЗА" ? "EditChannel__Form-Status-OTHER" : null
+                                           ].join(' ')}
                                  />
                                  <Calendar value={formik.values.date}
                                            onChange={(e) => formik.setFieldValue('date', e.target.value)}

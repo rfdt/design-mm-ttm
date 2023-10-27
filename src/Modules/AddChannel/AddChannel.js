@@ -3,6 +3,7 @@ import {Dialog} from "primereact/dialog"
 import './AddChannel.css';
 import {TabPanel, TabView} from "primereact/tabview";
 import {InputText} from "primereact/inputtext";
+import {InputNumber} from "primereact/inputnumber";
 import {Dropdown} from "primereact/dropdown";
 import {AutoComplete} from "primereact/autocomplete";
 import {FieldArray, FormikProvider, useFormik} from "formik";
@@ -25,22 +26,22 @@ function AddChannel({close, visible}) {
 
     const formik = useFormik({
         initialValues: {
-            id_tbcd: 'XXXX',
-            id_suz: 'XXXX',
-            id_oss: 'XXXX',
-            id_cms: 'XXXX',
+            id_tbcd: '',
+            id_suz: '',
+            id_oss: '',
+            id_cms: '',
             client: '',
             service: '',
-            service_size: '',
+            service_size: null,
             city: '',
             street: '',
             home: '',
-            add_info: 'XXXX',
-            contact: 'XXXX',
+            add_info: '',
+            contact: '',
             status: "РЕЗЕРВ",
             date: new Date(),
-            note: "XXXX",
-            rd_sr: "XXXX",
+            note: "",
+            rd_sr: "",
             channel_pe: null,
             channel_pe_port: "",
             channel_vid: "",
@@ -54,7 +55,8 @@ function AddChannel({close, visible}) {
         onSubmit: async (data) => {
             const transformedObj = {...data,
                 channel_pe: data.channel_pe.title,
-                channel_agg_stop: data.channel_agg_stop.map((agg_stop)=>({...agg_stop, agg_stop: agg_stop.agg_stop.title}))
+                channel_agg_stop: data.channel_agg_stop.map((agg_stop)=>({...agg_stop, agg_stop: agg_stop.agg_stop.title})),
+                service_size: data.service_size >=1000 ? `${data.service_size / 1000}G` : `${data.service_size}M`
             }
             const response = await createChannel(transformedObj);
             if (response) {
@@ -197,12 +199,18 @@ function AddChannel({close, visible}) {
                                                       placeholder="Услуга"
                                                       className={classNames("p-inputtext-sm", { 'p-invalid': isFormFieldInvalidNonTouch('service')})}
                                             />
-                                            <InputText style={{width: "49%"}}
-                                                       value={formik.values.service_size}
-                                                       onChange={(e) => formik.setFieldValue('service_size', e.target.value)}
-                                                       placeholder='Размер услуги'
-                                                       className={classNames("p-inputtext-sm", { 'p-invalid': isFormFieldInvalidNonTouch('service_size')})}
-                                            />
+                                            {/*<InputText style={{width: "49%"}}*/}
+                                            {/*           value={formik.values.service_size}*/}
+                                            {/*           onChange={(e) => formik.setFieldValue('service_size', e.target.value)}*/}
+                                            {/*           placeholder='Размер услуги'*/}
+                                            {/*           className={classNames("p-inputtext-sm", { 'p-invalid': isFormFieldInvalidNonTouch('service_size')})}*/}
+                                            {/*/>*/}
+                                            <InputNumber  value={formik.values.service_size} onChange={(e)=>formik.setFieldValue('service_size', e.value)}
+                                                          style={{width: "49%"}} showButtons buttonLayout="horizontal" min={1} step={0.5}
+                                                         decrementButtonClassName="p-button-danger" incrementButtonClassName="p-button-success" incrementButtonIcon="pi pi-plus" decrementButtonIcon="pi pi-minus"
+                                                          placeholder="Скорость в МБ" suffix=" МБ"
+                                                          className={classNames("p-inputtext-sm", { 'p-invalid': isFormFieldInvalidNonTouch('service_size')})}
+                                                          />
                                         </div>
                                     </div>
                                     <div className="EditChannel__Form-Row">
@@ -262,6 +270,12 @@ function AddChannel({close, visible}) {
                                                       onChange={(e) => formik.setFieldValue('status', e.target.value.name)}
                                                       optionLabel="name"
                                                       placeholder="Статус"
+                                                      className={[
+                                                          formik.values.status === "ВКЛ" ? "EditChannel__Form-Status-ON" : null,
+                                                          formik.values.status === "ОТКЛ" ? "EditChannel__Form-Status-OFF" : null,
+                                                          formik.values.status === "ПАУЗА" ? "EditChannel__Form-Status-PAUSE" : null,
+                                                          formik.values.status !== "ОТКЛ" && formik.values.status !== "ВКЛ" && formik.values.status !== "ПАУЗА" ? "EditChannel__Form-Status-OTHER" : null
+                                                      ].join(' ')}
                                             />
                                             <Calendar value={formik.values.date}
                                                       onChange={(e) => formik.setFieldValue('date', e.target.value)}

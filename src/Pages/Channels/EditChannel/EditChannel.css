@@ -54,6 +54,22 @@
     width: 9%;
 }
 
+.EditChannel__Form-Status-ON .p-dropdown-label{
+    color: #22C55E ;
+}
+
+.EditChannel__Form-Status-OTHER .p-dropdown-label{
+    color: #FA8E42 ;
+}
+
+.EditChannel__Form-Status-OFF .p-dropdown-label{
+    color: #FF3D32 ;
+}
+
+.EditChannel__Form-Status-PAUSE .p-dropdown-label{
+    color: #6366F1 ;
+}
+
 .EditChannel__Form-Pe{
     width: 49%;
     min-width: 200px;

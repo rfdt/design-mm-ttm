@@ -18,7 +18,7 @@ export const CreateChannelValidationSchema =  Yup.object().shape({
     id_cms: Yup.string().required('Поле обязательно'),
     client: Yup.string().required('Поле обязательно'),
     service: Yup.string().required('Поле обязательно'),
-    service_size: Yup.string().required('Поле обязательно'),
+    service_size: Yup.number().required('Поле обязательно').min(1),
     city: Yup.string().required('Поле обязательно'),
     street: Yup.string().required('Поле обязательно'),
     home: Yup.string().required('Поле обязательно'),

@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {FieldArray, FormikProvider, useFormik} from "formik";
+import {FieldArray, FormikProvider} from "formik";
 import {TabPanel, TabView} from "primereact/tabview";
 import {InputText} from "primereact/inputtext";
 import classNames from "classnames";
@@ -10,10 +10,8 @@ import {Calendar} from "primereact/calendar";
 import {Checkbox} from "primereact/checkbox";
 import {Button} from "primereact/button";
 import {useSelector} from "react-redux";
-import {useActions} from "../../../../Store/useActions";
-import {CreateChannelValidationSchema} from "../../../../Modules/validationSchemas";
 
-function AddChannelForm({close, formik}) {
+function AddChannelForm({ formik}) {
 
     const {filtersValues} = useSelector(state => state.channels);
 

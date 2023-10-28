@@ -109,7 +109,6 @@ export const channelsReducer = (state = channelsReducerInitialState, action) => 
                 || (draft.id_suz && draft.id_suz === action.payload.id_suz) || (draft.id_tbcd && draft.id_tbcd === action.payload.id_tbcd)
                 || (draft.id_oss && draft.id_oss === action.payload.id_oss) || (draft.id_cms && draft.id_cms === action.payload.id_cms)
             )
-            console.log(index)
             if(index > -1){
                 channelDrafts[index] = {...action.payload}
             }else {

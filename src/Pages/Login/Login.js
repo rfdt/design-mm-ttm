@@ -13,7 +13,7 @@ import {Navigate, useNavigate} from "react-router-dom";
 import PageLoader from "../../Modules/PageLoader/PageLoader";
 import AuthPoster from "../../Modules/AuthPoster/AuthPoster";
 
-function Login(props) {
+function Login() {
 
     const {appTheme} = useSelector(state => state.global)
     const {isAuthenticated, isLoaded, isLoading} = useSelector(state => state.user);

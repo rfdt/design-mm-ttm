@@ -12,7 +12,7 @@ import {useSelector} from "react-redux";
 import {Navigate, useNavigate} from "react-router-dom";
 import PageLoader from "../../Modules/PageLoader/PageLoader";
 
-function Register(props) {
+function Register() {
 
     const {registerUser} = useActions();
     const {isAuthenticated, isLoaded, isLoading} = useSelector(state => state.user);

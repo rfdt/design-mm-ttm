@@ -61,9 +61,9 @@ function Login(props) {
                     <form className="LoginPage__Login-Module-Form" onSubmit={formik.handleSubmit}>
                         <div className="p-inputgroup LoginPage__Login-Module-Form-Input">
                             <span className="p-inputgroup-addon">
-                                <i className="pi pi-user"></i>
+                                <i className="pi pi-at"></i>
                             </span>
-                            <InputText placeholder="Имя пользователя"
+                            <InputText placeholder="Корпоративный E-Mail"
                                        id="login"
                                        name="login"
                                        value={formik.values.login}

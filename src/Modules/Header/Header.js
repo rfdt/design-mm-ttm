@@ -25,9 +25,6 @@ function Header() {
                 {isAuthenticated &&
                     <>
                         <div className="Header__User-Avatar">
-                            {/*<Badge dot status={'success'}>*/}
-                            {/*    <Avatar shape="square" icon={<UserOutlined/>} size={46}/>*/}
-                            {/*</Badge>*/}
                             <Avatar className="p-overlay-badge" icon="pi pi-user" size="large">
                                 <Badge size="normal" severity="success"/>
                             </Avatar>
@@ -37,7 +34,7 @@ function Header() {
                                 {user.name.split(' ').slice(0,2).reverse().join(' ')}
                             </div>
                             <div className="Header__User-Email">
-                                {user.login}@miranda-media.ru
+                                {user.login}
                             </div>
                         </div>
                     </>}

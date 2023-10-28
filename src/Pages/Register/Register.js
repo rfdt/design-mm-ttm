@@ -72,9 +72,9 @@ function Register(props) {
                         {getFormErrorMessage('name')}
                         <div className="p-inputgroup RegisterPage__Register-Module-Form-Input">
                             <span className="p-inputgroup-addon">
-                                <i className="pi pi-user"></i>
+                                <i className="pi pi-at"></i>
                             </span>
-                            <InputText placeholder="Имя пользователя"
+                            <InputText placeholder="Корпоративный E-Mail"
                                        id="login"
                                        name="login"
                                        value={formik.values.login}

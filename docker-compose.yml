@@ -1,0 +1,14 @@
+version: "1"
+services:
+  mm-frontend:
+    container_name: mm-frontend
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "80:80"
+    environment:
+      NODE_ENV: production
+    restart: "always"
+
+#docker compose -f ./docker-compose.yml up --build --detach

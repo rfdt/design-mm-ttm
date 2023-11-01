@@ -32,6 +32,12 @@ export class ChannelsApi {
         return axiosRequest.post(ChannelsApi.prefix + 'create', newChannel)
     }
 
+    static createChannelFromFile(file){
+        const channelData = new FormData()
+        channelData.append('file', file)
+        return axiosRequest.post(ChannelsApi.prefix+'createfromfile', channelData)
+    }
+
     static createHardware(newHardware){
         return axiosRequest.post(ChannelsApi.prefix + 'create/hardware', newHardware)
     }

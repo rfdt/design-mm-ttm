@@ -86,6 +86,15 @@
     width: 24%;
 }
 
+.AddChannel__Upload{
+    display: flex;
+    justify-content: center;
+}
+
+.AddChannel__Form{
+    width: 100%;
+}
+
 /*Приоритет снизу вверх*/
 /*Сначала правило до 320 потом до 480 и т.д*/
 @media (max-width: 600px) {
@@ -128,5 +137,8 @@
     }
     .AddChannel__Form-Input-Agg-Port{
         width: 100%;
+    }
+    .EditChannel__InnerContainer .p-tabview .p-tabview-nav{
+        font-size: 14px;
     }
 }

@@ -108,6 +108,14 @@ export const createChannel = (newChannel) => async (dispatch) =>{
     }
 }
 
+export const createChannelsFromFile = async (file) => {
+   try {
+       const channels = await ChannelsApi.createChannelFromFile(file);
+   }catch (e){
+       console.log(e)
+   }
+}
+
 export const clearExtendedSearch = () => (dispatch)=> {
     try {
         dispatch(resetExtendedFilters());

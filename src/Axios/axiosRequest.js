@@ -3,7 +3,7 @@ import {store} from "../Store/store";
 import {logoutUser} from "../Store/reducers/user/userActions";
 
 export const axiosRequest = axios.create({
-    baseURL: "http://192.168.201.123:3000/",
+    baseURL: "http://localhost:3000/",
     headers: {
         'mm-token': localStorage.getItem('mm-token') || ''
     }

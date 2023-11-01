@@ -149,7 +149,6 @@
     height: 180px;
     display: flex;
     flex-direction: column;
-    justify-content: flex-end;
 }
 
 .Menu__Item:hover > *, .Menu__Item:hover > * {
@@ -172,9 +171,7 @@
 
 /*Приоритет снизу вверх*/
 /*Сначала правило до 320 потом до 480 и т.д*/
-@media (max-width: 1440px) {
-    /*from 0px to 1440px*/
-}
+
 
 @media (max-width: 1200px) {
     /*from 0px to 1200px*/
@@ -187,16 +184,4 @@
     .Menu__Container {
         display: none;
     }
-}
-
-@media (max-width: 768px) {
-    /*from 0px to 768px*/
-}
-
-@media (max-width: 480px) {
-    /*from 0px to 480px*/
-}
-
-@media (max-width: 320px) {
-    /*from 0px to 320px*/
 }

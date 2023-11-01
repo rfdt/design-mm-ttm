@@ -112,7 +112,7 @@ export const channelsReducer = (state = channelsReducerInitialState, action) => 
             if(index > -1){
                 channelDrafts[index] = {...action.payload}
             }else {
-                if(channelDrafts.length === 10){
+                if(channelDrafts.length === 5){
                     channelDrafts[0] = action.payload
                 }else {
                     channelDrafts.push(action.payload)

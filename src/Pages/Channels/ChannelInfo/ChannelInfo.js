@@ -85,6 +85,9 @@ function ChannelInfo() {
                             <VerifyInfo />
                             <CommercialInfo />
                             <Divider/>
+                            <div className="ChannelInfo__Title">
+                                Технические сведения
+                            </div>
                             {!loadedSelectedChannel.channel_verified ? <InventoryHardwareInfo /> : <HardwareInfo />}
                             <Divider/>
                             <RelatedChannels />

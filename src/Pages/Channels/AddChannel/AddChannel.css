@@ -82,6 +82,18 @@
     margin-top: 2px;
 }
 
+.AddChannel__FromExcel-Btn{
+    color: #8c8c8c;
+    font-size: 18px;
+    margin-right: 10px;
+    transition: 0.2s linear;
+}
+
+.AddChannel__FromExcel-Btn:hover {
+    color: var(--primary-400);
+    cursor: pointer;
+}
+
 /*Приоритет снизу вверх*/
 /*Сначала правило до 320 потом до 480 и т.д*/
 @media (max-width: 768px) {

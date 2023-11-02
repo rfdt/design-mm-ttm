@@ -99,11 +99,19 @@ function AddChannel({close, visible}) {
         setShowAddForm(true)
     }
 
+    const addChannelsIcons = () =>{
+        return(
+            <>
+                <i className="pi pi-file-excel AddChannel__FromExcel-Btn"></i>
+            </>
+        )
+    }
+
     return (
         <Dialog header="Создание нового канала"
                 className='AddChannel__Container'
                 visible={visible} onHide={saveAndClose}
-                draggable={false}
+                draggable={false} icons={addChannelsIcons}
         >
             {showAddForm && <AddChannelForm close={close} formik={formik}/>}
             {!showAddForm && <NewChannelsDrafts setChannelDraft={setChannelDraft}/>}

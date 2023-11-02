@@ -120,8 +120,6 @@ function EditForm({editingChannel}) {
         formik.setFieldValue(`channel_acc_stop[${index}].withStop`, !formik.values.channel_acc_stop[index].withStop)
     }
 
-    console.log(editingChannel.service_size.split('M')[0])
-
  return (
      <FormikProvider value={formik}>
          <form onSubmit={formik.handleSubmit}>
@@ -188,7 +186,7 @@ function EditForm({editingChannel}) {
                          </div>
                          <div className="EditChannel__Form-Row">
                              <div className="EditChannel__Form-Input-Title">Услуга</div>
-                             <div className="EditChannel__Form-Input">
+                             <div className="EditChannel__Form-Input" style={{overflow: "hidden"}}>
                                  <Dropdown style={{width: "49%"}}
                                            options={servicesSuggestions}
                                            value={{name: formik.values.service, code: formik.values.service}}

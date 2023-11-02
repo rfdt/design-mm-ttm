@@ -161,7 +161,7 @@ function AddChannelForm({formik}) {
                                 </div>
                                 <div className="EditChannel__Form-Row">
                                     <div className="EditChannel__Form-Input-Title">Услуга</div>
-                                    <div className="EditChannel__Form-Input">
+                                    <div className="EditChannel__Form-Input" style={{overflow: "hidden"}}>
                                         <Dropdown style={{width: "49%"}}
                                                   options={servicesSuggestions}
                                                   value={{name: formik.values.service, code: formik.values.service}}

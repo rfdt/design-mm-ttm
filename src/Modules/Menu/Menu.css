@@ -176,7 +176,7 @@
 @media (max-width: 1200px) {
     /*from 0px to 1200px*/
     .Menu__Item-Open-Btn{
-        display: none;
+       visibility: hidden;
     }
 }
 

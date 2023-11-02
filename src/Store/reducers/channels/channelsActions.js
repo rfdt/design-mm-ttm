@@ -108,11 +108,12 @@ export const createChannel = (newChannel) => async (dispatch) =>{
     }
 }
 
-export const createChannelsFromFile = async (file) => {
+export const createChannelsFromFile = (file) => async (dispatch) => {
    try {
        const channels = await ChannelsApi.createChannelFromFile(file);
+       return channels.data;
    }catch (e){
-       console.log(e)
+       dispatch(setError(e));
    }
 }
 

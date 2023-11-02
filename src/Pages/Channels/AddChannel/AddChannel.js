@@ -7,11 +7,13 @@ import {useActions} from "../../../Store/useActions";
 import {useFormik} from "formik";
 import {CreateChannelValidationSchema} from "../../../Modules/validationSchemas";
 import NewChannelsDrafts from "./NewChannelsDrafts/NewChannelsDrafts";
+import {useNavigate} from "react-router-dom";
 
 function AddChannel({close, visible}) {
 
     const {channelsDrafts} = useSelector(state => state.channels)
     const {createChannel, saveOrUpdateDraft, removeDraftByIdx} = useActions();
+    const navigateTo = useNavigate();
 
     const [showAddForm, setShowAddForm] = useState(false);
     const [selectedIdx, setSelectedIdx] = useState(null);
@@ -102,7 +104,7 @@ function AddChannel({close, visible}) {
     const addChannelsIcons = () =>{
         return(
             <>
-                <i className="pi pi-file-excel AddChannel__FromExcel-Btn"></i>
+                <i className="pi pi-file-excel AddChannel__FromExcel-Btn" onClick={()=>navigateTo('/channels/add/excel')}></i>
             </>
         )
     }

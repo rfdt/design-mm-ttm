@@ -10,8 +10,6 @@ import {Calendar} from "primereact/calendar";
 import {Checkbox} from "primereact/checkbox";
 import {Button} from "primereact/button";
 import {useSelector} from "react-redux";
-import {FileUpload} from "primereact/fileupload";
-import {createChannelsFromFile} from "../../../../Store/reducers/channels/channelsActions";
 
 function AddChannelForm({formik}) {
 
@@ -87,10 +85,6 @@ function AddChannelForm({formik}) {
     }
 
     const isFormFieldInvalidNonTouch = (name) => !!(formik.errors[name]);
-
-    const uploadHandler = ({files}) => {
-        createChannelsFromFile(files[0])
-    }
 
     return (
         <FormikProvider value={formik}>
@@ -471,10 +465,6 @@ function AddChannelForm({formik}) {
                                     </div>
                                 </div>
                             </div>
-                        </TabPanel>
-                        <TabPanel header="Массовое">
-                            <FileUpload className="AddChannel__Upload" auto accept=".xlsx" mode="basic"
-                                        name="file[]" customUpload uploadHandler={uploadHandler}/>
                         </TabPanel>
                     </TabView>
                     <Button label="Сохранить" icon="pi pi-check" className="EditChannel__Submit-Btn" size={"small"}

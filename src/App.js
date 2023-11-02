@@ -21,6 +21,7 @@ const LoginPage = lazy(() => import('./Pages/Login/Login'));
 const RegisterPage = lazy(() => import('./Pages/Register/Register'));
 const VerifyChannelPage = lazy(()=>import('./Pages/VerifyChannel/VerifyChannel'));
 const UnknownPage = lazy(()=>import('./Pages/UnknownPage/UnknownPage'));
+const AddFromExcelPage = lazy(()=>import('./Pages/AddExcel/AddExcel'));
 
 
 function App() {
@@ -68,6 +69,13 @@ function App() {
                             <Suspense fallback={<PageLoader/>}>
                                 <PrivateRoute>
                                     <VerifyChannelPage />
+                                </PrivateRoute>
+                            </Suspense>
+                        }/>
+                        <Route path='/channels/add/excel' element={
+                            <Suspense fallback={<PageLoader/>}>
+                                <PrivateRoute>
+                                    <AddFromExcelPage />
                                 </PrivateRoute>
                             </Suspense>
                         }/>

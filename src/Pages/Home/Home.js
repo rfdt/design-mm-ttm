@@ -1,11 +1,9 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import _InnerPage from "../_InnerPage/_InnerPage";
 import {
     CheckCircleOutlined,
     ClockCircleOutlined,
-    ExclamationCircleOutlined,
-    IdcardOutlined, IssuesCloseOutlined,
-    SlidersOutlined
+    IssuesCloseOutlined,
 } from "@ant-design/icons";
 import TicketsHistory from "./TicketsHistoryChart/TicketsHistory";
 import ChannelsTypesChart from "./ChannelsTypesChart/ChannelsTypesChart";
@@ -14,10 +12,23 @@ import {useSelector} from "react-redux";
 import classNames from 'classnames';
 
 import './Home.css';
+import BaseChannelsInfo from "./BaseChannelsInfo/BaseChannelsInfo";
+import ChannelsReservedInfo from "./ChannelsReservedInfo/ChannelsReservedInfo";
+import ClientsBaseInfo from "./ClientsBaseInfo/ClientsBaseInfo";
+import {useActions} from "../../Store/useActions";
 
-function Home(props) {
+function Home() {
 
     const {appTheme} = useSelector(state => state.global)
+    const {channelsDashboardLoaded} = useSelector(state => state.dashboard)
+
+    const {loadChannelsDashboard} = useActions();
+
+    useEffect(()=>{
+        if(!channelsDashboardLoaded){
+            loadChannelsDashboard();
+        }
+    }, [channelsDashboardLoaded])
 
     return (
         <_InnerPage>
@@ -31,44 +42,9 @@ function Home(props) {
                     </div>
                 </div>
                 <div className="HomePage__StatCards-Container">
-                    <div className="HomePage__StatCard">
-                        <div className="HomePage__Activation-Container">
-                            <div className="HomePage__Activation-Title">Всего каналов</div>
-                            <div className="HomePage__Activation-Count">65580 шт</div>
-                            <div className="HomePage__Activation-Channels">
-                                L2 - <span>3480</span> Inet - <span>7875</span> L3 - <span>8760</span>
-                            </div>
-                            <SlidersOutlined className='HomePage__Activation-Icon'/>
-                        </div>
-                    </div>
-                    <div className="HomePage__StatCard">
-                        <div className="HomePage__Reserved-Container">
-                            <div className="HomePage__Reserved-Title">
-                                Зарезервировано
-                            </div>
-                            <div className="HomePage__Reserved-Count">
-                                440 каналов
-                            </div>
-                            <div className="HomePage__Reserved-Description">
-                                * Новые каналы, ожидающие запуска
-                            </div>
-                            <ExclamationCircleOutlined className='HomePage__Reserved-Icon'/>
-                        </div>
-                    </div>
-                    <div className="HomePage__StatCard">
-                        <div className="HomePage__Clients-Container">
-                            <div className="HomePage__Clients-Title">
-                                Клиенты
-                            </div>
-                            <div className="HomePage__Clients-Count">
-                                1300 юр.лиц
-                            </div>
-                            <div className="HomePage__Clients-Description">
-                                Бол - <span>110</span> | Средн - <span>350</span> | Мал - <span>790</span>
-                            </div>
-                            <IdcardOutlined className='HomePage__Clients-Icon'/>
-                        </div>
-                    </div>
+                    <BaseChannelsInfo />
+                    <ChannelsReservedInfo />
+                    <ClientsBaseInfo />
                 </div>
                 <div className="HomePage__StatCards-Container HomePage__StatCards-Container-Square">
                     <div className="HomePage__StatCard--Sqaure">

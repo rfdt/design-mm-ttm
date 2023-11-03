@@ -54,6 +54,10 @@ export class ChannelsApi {
         return axiosRequest.get(ChannelsApi.prefix + 'related/'+channel_id)
     }
 
+    static getChannelsDashboard(){
+        return axiosRequest.get(ChannelsApi.prefix + 'dashboard')
+    }
+
     static testError(){
         return axiosRequest.get(ChannelsApi.prefix + 'test')
     }

@@ -10,11 +10,18 @@ import {useActions} from "../../../Store/useActions";
 import {useSelector} from "react-redux";
 import AddChannel from "../AddChannel/AddChannel";
 import {useNavigate} from "react-router-dom";
+import {
+    ADD_CHANNEL_ACCESS_ROLES,
+    ADD_HARDWARE_ACCESS_ROLES,
+    EDIT_CHANNEL_ACCESS_ROLES
+} from "../../../Modules/functionAccess";
 
 function ChannelsFilters() {
 
     const {setFilterValue, getFilterValues, findChannels, clearSearch} = useActions();
     const {channelsFilters, filtersValues, filteredChannelsCount} = useSelector(state => state.channels);
+    const {isAuthenticated, user} = useSelector(state => state.user)
+    const {setMessageError} = useActions()
 
     const [filteredCitySuggestions, setFilteredCitySuggestions] = useState([]);
     const [filteredStreetsSuggestions, setFilteredStreetsSuggestions] = useState([]);
@@ -61,9 +68,12 @@ function ChannelsFilters() {
     }
 
     const showAddingChannel = () =>{
-        setAddChannelVisible(true)
+        if(isAuthenticated && user.roles.some(role=>ADD_CHANNEL_ACCESS_ROLES.includes(role))){
+            setAddChannelVisible(true)
+        }else {
+            setMessageError("У вас нет доступа к добавлению канала");
+        }
     }
-
 
     const handleSearchSubmit = (e) =>{
         e.preventDefault()
@@ -132,11 +142,14 @@ function ChannelsFilters() {
                     />
                     <Button icon="pi pi-plus-circle" onClick={showAddingChannel}
                             type="button"
-                            className='ChannelsFilters__ExtendedSearch-Btn'/>
+                            className='ChannelsFilters__ExtendedSearch-Btn'
+                            disabled={isAuthenticated && !user.roles.some(role=>ADD_CHANNEL_ACCESS_ROLES.includes(role))}
+                    />
                     <ExportExcel/>
                     <Button icon="pi pi-database" severity="help"
                             className='ChannelsFilters__ExtendedSearch-Btn' onClick={()=>navigate('/hardware')}
                             type="button"
+                            disabled={isAuthenticated && !user.roles.some(role=>ADD_HARDWARE_ACCESS_ROLES.includes(role))}
                     />
                 </div>
             </div>

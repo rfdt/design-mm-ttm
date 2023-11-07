@@ -9,10 +9,18 @@ import {Dropdown} from "primereact/dropdown";
 import AddHardware from "./AddHardware/AddHardware";
 import EditHardware from "./EditHardware/EditHardware";
 import {hardwareTypeWord} from "../../Modules/hardwareTypes";
+import {
+    ADD_CHANNEL_ACCESS_ROLES,
+    ADD_HARDWARE_ACCESS_ROLES,
+    EDIT_HARDWARE_ACCESS_ROLES
+} from "../../Modules/functionAccess";
+import {useActions} from "../../Store/useActions";
 
 function Hardware() {
 
     const {filtersValues} = useSelector(state => state.channels);
+    const {isAuthenticated, user} = useSelector(state => state.user)
+    const {setMessageError} = useActions()
 
     const hardwares = useMemo(()=> filtersValues ? filtersValues.pe.concat(filtersValues.ssw.concat(filtersValues.stop)) : [], [filtersValues])
 
@@ -40,11 +48,19 @@ function Hardware() {
         return hardwareTypeWord[dataRow.hardware_type] || 'НЕИЗВЕСТНО';
     }
 
+    const selectHardware = (hardware) =>{
+        if(isAuthenticated && user.roles.some(role=>EDIT_HARDWARE_ACCESS_ROLES.includes(role))){
+            setSelectedHardware(hardware)
+        }else {
+            setMessageError("У вас нет доступа к изменению оборудования");
+        }
+    }
+
     return (
             <_InnerPage>
                 <div className="HardwarePage__Header">
                     <div className="HardwarePage__Title">Оборудование</div>
-                    <div className="HardwarePage__Btn"><AddHardware disabled={!filtersValues}/></div>
+                    <div className="HardwarePage__Btn"><AddHardware disabled={!filtersValues || (isAuthenticated && !user.roles.some(role=>ADD_HARDWARE_ACCESS_ROLES.includes(role)))}/></div>
                 </div>
                 <div className="HardwarePage__Container">
                     <DataTable value={hardwares}
@@ -54,7 +70,7 @@ function Hardware() {
                                emptyMessage="Нет данных."
                                selectionMode="single"
                                selection={selectedHardware}
-                               onSelectionChange={(e) => setSelectedHardware(e.value)}
+                               onSelectionChange={(e) => selectHardware(e.value)}
                     >
                         <Column field="title" header="Hostname"  filter showFilterMatchModes={false} />
                         <Column field="hardware_type" header="Тип" filter filterElement={typeRowFilterTemplate}

@@ -1,1 +1,4 @@
-export const EDIT_CHANNEL_ACCESS_ROLES = ["GFSS", "ODS", "TCUSS"];
+export const EDIT_CHANNEL_ACCESS_ROLES = ["GFSS", "TCUSS"];
+export const ADD_CHANNEL_ACCESS_ROLES = ["GFSS", "TCUSS"];
+export const EDIT_HARDWARE_ACCESS_ROLES=["TCUSS"];
+export const ADD_HARDWARE_ACCESS_ROLES=["TCUSS"];

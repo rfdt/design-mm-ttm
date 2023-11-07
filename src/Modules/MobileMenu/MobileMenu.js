@@ -28,7 +28,6 @@ function MobileMenu(props) {
         setIsMenuVisible(false)
     }
 
-    // TODO сделать мобильное меню
     return (
         <>
             <LeftOutlined className="Header__Mobile-Menu-Btn" onClick={() => setIsMenuVisible(true)}/>

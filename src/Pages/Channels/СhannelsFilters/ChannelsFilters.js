@@ -13,7 +13,6 @@ import {useNavigate} from "react-router-dom";
 import {
     ADD_CHANNEL_ACCESS_ROLES,
     ADD_HARDWARE_ACCESS_ROLES,
-    EDIT_CHANNEL_ACCESS_ROLES
 } from "../../../Modules/functionAccess";
 
 function ChannelsFilters() {

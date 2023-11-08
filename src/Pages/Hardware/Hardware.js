@@ -10,7 +10,6 @@ import AddHardware from "./AddHardware/AddHardware";
 import EditHardware from "./EditHardware/EditHardware";
 import {hardwareTypeWord} from "../../Modules/hardwareTypes";
 import {
-    ADD_CHANNEL_ACCESS_ROLES,
     ADD_HARDWARE_ACCESS_ROLES,
     EDIT_HARDWARE_ACCESS_ROLES
 } from "../../Modules/functionAccess";

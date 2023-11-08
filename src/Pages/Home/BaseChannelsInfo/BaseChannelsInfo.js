@@ -11,7 +11,7 @@ function BaseChannelsInfo() {
      <div className="HomePage__StatCard">
          {channelsDashboardLoaded ?
          <div className="HomePage__Activation-Container">
-             <div className="HomePage__Activation-Title">Всего каналов</div>
+             <div className="HomePage__Activation-Title">Активных каналов</div>
              <div className="HomePage__Activation-Count">{channelsCount} шт</div>
              <div className="HomePage__Activation-Channels">
                  Inet - <span>{services['INET']}</span> L2 - <span>{services['L2VPN']}</span> L3 - <span>{services['L3VPN']}</span>

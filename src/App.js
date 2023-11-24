@@ -12,6 +12,7 @@ import ErrorToast from "./Modules/ErrorToast/ErrorToast";
 import PrivateRoute from "./Modules/PrivateRoute/PrivateRoute";
 import MenuSettings from "./Modules/Menu/MenuSettings/MenuSettings";
 import PageLoader from "./Modules/PageLoader/PageLoader";
+import Ticket from "./Pages/Ticket/Ticket";
 
 /*LAZY LOAD PAGES */
 const HomePage = lazy(() => import('./Pages/Home/Home'));
@@ -76,6 +77,13 @@ function App() {
                             <Suspense fallback={<PageLoader/>}>
                                 <PrivateRoute>
                                     <AddFromExcelPage />
+                                </PrivateRoute>
+                            </Suspense>
+                        }/>
+                        <Route path='/ticket/:id' element={
+                            <Suspense fallback={<PageLoader/>}>
+                                <PrivateRoute>
+                                    <Ticket />
                                 </PrivateRoute>
                             </Suspense>
                         }/>

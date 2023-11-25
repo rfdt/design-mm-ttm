@@ -121,7 +121,7 @@ function Ticket(props) {
                                     </div>
                                     <div className="TroubleTicketInfo__Incident-Date">
                                         <div className="TroubleTicketInfo__Incident-Title">
-                                            Дата ТТ:
+                                            Дата открытия ТТ:
                                         </div>
                                         <div className="TroubleTicketInfo__Incident-Info">
                                             {new Date().toLocaleString()}
@@ -143,27 +143,30 @@ function Ticket(props) {
                                     label="Пауза"
                                     severity="info"
                                     className="TroubleTicketAction__Button"
+                                    size='small'
                                 />
                                 <Button
                                     label="Проверка клиентом"
                                     severity="help"
                                     className="TroubleTicketAction__Button"
+                                    size='small'
                                 />
                                 <Button
                                     label="Закрыть ТТ"
                                     severity="warning"
                                     className="TroubleTicketAction__Button"
+                                    size='small'
                                 />
                             </div>
                         </AccordionTab>
                         <AccordionTab header="Ответственные">
                             <div className="Performers__Container">
                                 <div className="Performer__Container">
-                                    <Avatar label="А" size="large"/>
+                                    <Avatar label="А" size="normal" className="Performer__Avatar"/>
                                     <div className="Performer__Name">Вайсфельд Андрей Андреевич</div>
                                 </div>
                                 <div className="Performer__Container">
-                                    <Avatar label="Р" size="large"/>
+                                    <Avatar label="Р" size="normal" className="Performer__Avatar"/>
                                     <div className="Performer__Name">Федько Руслан Диляверович</div>
                                 </div>
                             </div>
@@ -204,9 +207,9 @@ function Ticket(props) {
                                 onChange={(e) => setCommentType(e.value)}
                                 options={commentTypes}
                                 optionLabel="name"
-                                placeholder="Выберрите тип"
+                                placeholder="Выберите тип"
                             />
-                            <Button label="Отправить" raised icon="pi pi-send" iconPos="right"/>
+                            <Button label="Отправить" raised icon="pi pi-send" iconPos="right" size='small'/>
                         </div>
                         <Editor
                             value={text}
@@ -225,8 +228,8 @@ function Ticket(props) {
                                 url={"http://192.168.10.1/file/preview"}
                                 chooseOptions={{
                                     style: {
-                                        height: "50px",
-                                        width: "50px",
+                                        height: "45px",
+                                        width: "45px",
                                         justifyContent: "center",
                                         marginRight: "10px"
                                     },

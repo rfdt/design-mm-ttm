@@ -7,8 +7,8 @@
 
 .TicketPage__Info {
     background: var(--surface-card);
-    padding: 2em;
-    border-radius: 10px;
+    padding: 15px;
+    border-radius: 5px;
     margin-bottom: 1em;
     width: 25%;
     height: 100%;
@@ -72,6 +72,12 @@
     margin-bottom: 10px;
 }
 
+.Performer__Avatar{
+    width: 40px;
+    height: 40px;
+    font-size: 20px;
+}
+
 .Performer__Name {
     margin-left: 10px;
     margin-top: 2px;
@@ -92,10 +98,10 @@
 
 .AddComment__Container {
     background: var(--surface-card);
-    padding: 2em;
-    border-radius: 10px;
-    margin-bottom: 1em;
-    margin-top: 1em;
+    padding: 18px;
+    border-radius: 5px;
+    margin-bottom: 14px;
+    margin-top: 14px;
 }
 
 .AddComment__Header {
@@ -114,9 +120,7 @@
 
 .Comment__Container {
     background: var(--surface-card);
-    padding: 1.5em;
-    padding-top: 1em;
-    padding-bottom: 1em;
+    padding: 14px 18px;
     border-radius: 5px;
 }
 
@@ -137,7 +141,7 @@
 }
 
 .Comment__Theme-Tag {
-    height: 2em;
+    height: 28px;
     font-weight: bold;
 }
 
@@ -148,6 +152,7 @@
     padding: 10px;
     font-size: 14px;
     overflow: auto;
+    line-height: 16px;
 }
 
 .Comment__Text * {
@@ -208,8 +213,8 @@
 }
 
 .AddComment-File__Container {
-    width: 50px;
-    height: 50px;
+    width: 45px;
+    height: 45px;
     background-color: var(--blue-300);
     margin-right: 10px;
     border-radius: 5px;

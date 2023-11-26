@@ -1,0 +1,84 @@
+.TicketPage__Info {
+    background: var(--surface-card);
+    padding: 15px;
+    border-radius: 5px;
+    margin-bottom: 1em;
+    width: 25%;
+    height: 100%;
+}
+
+.TroubleTicketInfo__Client {
+    margin-bottom: 10px;
+}
+
+.TroubleTicketInfo__Client-Title {
+    color: #8c8c8c;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.TroubleTicketInfo__Client-Info {
+    font-size: 16px;
+    margin-top: 5px;
+    line-height: 18px;
+}
+
+.TroubleTicketInfo__Incident {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.TroubleTicketInfo__Incident > div {
+    width: 50%;
+}
+
+.TroubleTicketInfo__Incident-Title {
+    color: #8c8c8c;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.TroubleTicketInfo__Incident-Info {
+    font-size: 16px;
+    margin-top: 5px;
+}
+
+.TroubleTicketInfo__TT-Status {
+    font-weight: bold;
+    color: var(--orange-400);
+}
+
+.Performers__Container .Performer__Container:last-of-type {
+    margin-bottom: 0px;
+}
+
+.Performer__Container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.Performer__Avatar{
+    width: 40px;
+    height: 40px;
+    font-size: 20px;
+}
+
+.Performer__Name {
+    margin-left: 10px;
+    margin-top: 2px;
+    font-size: 16px;
+}
+
+.TroubleTicketAction__Container {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+}
+
+.TroubleTicketAction__Button {
+    margin-bottom: 5px;
+    /*width: 33%;*/
+}

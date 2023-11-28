@@ -53,16 +53,38 @@
     margin-bottom: 0px;
 }
 
+.TroubleTicket__Technical-Info__Row:first-of-type{
+    margin-top: 0;
+}
+
+.TroubleTicket__Technical-Info__Row{
+    margin-top: 10px;
+}
+
+.TroubleTicket__Technical-Info__Row-Title{
+    color: #8c8c8c;
+    font-size: 16px;
+    font-weight: bold;
+    margin-left: 4px;
+}
+
+.TroubleTicket__Technical-Info__Row-Inputs{
+    padding-top: 8px;
+    display: flex;
+    justify-content: space-between;
+}
+
 .Performer__Container {
     display: flex;
     align-items: center;
     margin-bottom: 10px;
 }
 
-.Performer__Avatar{
+.p-avatar.Performer__Avatar{
     width: 40px;
     height: 40px;
-    font-size: 20px;
+    font-size: 18px;
+    font-weight: bold;
 }
 
 .Performer__Name {

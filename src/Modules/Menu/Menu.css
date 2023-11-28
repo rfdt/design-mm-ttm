@@ -36,13 +36,14 @@
 }
 
 .Menu__Logo-IMG {
-    width: 150px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
 }
 
 .Menu__Logo-IMG img {
-    margin: 0 auto;
     height: 100%;
-    width: 100%;
+    width: 90%;
 }
 
 .Menu__Logo-Title {

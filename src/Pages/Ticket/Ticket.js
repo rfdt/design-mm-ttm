@@ -10,7 +10,7 @@ function Ticket(props) {
     const [text, setText] = useState(null);
     const [files, setFiles] = useState([]);
 
-    const [actionType, setActionType] = useState(null); //Тот проп который будет в редакс(текущее событие)
+    const [actionType, setActionType] = useState(null); // TODO Тот проп который будет в редакс(текущее событие)
 
     return (
         <_InnerPage>
@@ -25,6 +25,6 @@ function Ticket(props) {
             </div>
         </_InnerPage>
     );
-};
+}
 
 export default Ticket;

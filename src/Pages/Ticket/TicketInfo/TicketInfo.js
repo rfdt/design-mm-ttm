@@ -3,10 +3,11 @@ import './TicketInfo.css';
 import {Accordion, AccordionTab} from "primereact/accordion";
 import {Button} from "primereact/button";
 import {Avatar} from "primereact/avatar";
+import {InputText} from "primereact/inputtext"
 
 function TicketInfo({setActionType}) {
 
-    //setActionType - функция, которая будет из редакса, для установки типа события.
+    //TODO setActionType - функция, которая будет из редакса, для установки типа события.
 
     return (
         <div className="TicketPage__Info">
@@ -77,20 +78,64 @@ function TicketInfo({setActionType}) {
                         </div>
                     </div>
                 </AccordionTab>
-                <AccordionTab header="Техническая информация"></AccordionTab>
+                <AccordionTab header="Техническая информация">
+                    {/* TODO Добавить версию для каналов из инвентори (channel_verified == false) и вынести в отдельные блоки*/}
+                    <div className="TroubleTicket__Technical-Info">
+                        <div className="TroubleTicket__Technical-Info__Row">
+                            <div className="TroubleTicket__Technical-Info__Row-Title">
+                                PE
+                            </div>
+                            <div className="TroubleTicket__Technical-Info__Row-Inputs">
+                                <InputText value="SMFL-04-AR2-EDITED10" className="p-inputtext-sm" style={{width: "55%"}}/>
+                                <InputText value="xe-1/0/1" className="p-inputtext-sm" style={{width: "22%"}}/>
+                                <InputText value="1121" className="p-inputtext-sm" style={{width: "22%"}}/>
+                            </div>
+                        </div>
+                        <div className="TroubleTicket__Technical-Info__Row">
+                            <div className="TroubleTicket__Technical-Info__Row-Title">
+                                AGGSTOP
+                            </div>
+                            <div className="TroubleTicket__Technical-Info__Row-Inputs">
+                                <InputText value="SMFL-01-SSW1" className="p-inputtext-sm" style={{width: "77%"}}/>
+                                <InputText value="xe-1/0/1" className="p-inputtext-sm" style={{width: "22%"}}/>
+                            </div>
+                            <div className="TroubleTicket__Technical-Info__Row-Inputs">
+                                <InputText value="SMFL-01-SSW1" className="p-inputtext-sm" style={{width: "77%"}}/>
+                                <InputText value="xe-1/0/1" className="p-inputtext-sm" style={{width: "22%"}}/>
+                            </div>
+                        </div>
+                        <div className="TroubleTicket__Technical-Info__Row">
+                            <div className="TroubleTicket__Technical-Info__Row-Title">
+                                AССSTOP
+                            </div>
+                            <div className="TroubleTicket__Technical-Info__Row-Inputs">
+                                <InputText value="СТОП" className="p-inputtext-sm" style={{width: "49.5%"}}/>
+                                <InputText value="СТОП" className="p-inputtext-sm" style={{width: "49.5%"}}/>
+                            </div>
+                            <div className="TroubleTicket__Technical-Info__Row-Inputs">
+                                <InputText value="СТОП" className="p-inputtext-sm" style={{width: "49.5%"}}/>
+                                <InputText value="СТОП" className="p-inputtext-sm" style={{width: "49.5%"}}/>
+                            </div>
+                            <div className="TroubleTicket__Technical-Info__Row-Inputs">
+                                <InputText value="СТОП" className="p-inputtext-sm" style={{width: "49.5%"}}/>
+                                <InputText value="СТОП" className="p-inputtext-sm" style={{width: "49.5%"}}/>
+                            </div>
+                        </div>
+                    </div>
+                </AccordionTab>
                 <AccordionTab header="События">
                     <div className="TroubleTicketAction__Container">
                         <Button
                             label="Передать на выезд"
                             className="TroubleTicketAction__Button"
                             size='small'
-                            onClick={()=>setActionType('departure')}
+                            onClick={() => setActionType('departure')}
                         />
                         <Button
                             label="Передать подразделению"
                             className="TroubleTicketAction__Button"
                             size='small'
-                            onClick={()=>setActionType('subdivision')}
+                            onClick={() => setActionType('subdivision')}
                         />
                         <Button
                             label="Передать ОПМ"

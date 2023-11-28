@@ -4,7 +4,10 @@ import {Accordion, AccordionTab} from "primereact/accordion";
 import {Button} from "primereact/button";
 import {Avatar} from "primereact/avatar";
 
-function TicketInfo(props) {
+function TicketInfo({setActionType}) {
+
+    //setActionType - функция, которая будет из редакса, для установки типа события.
+
     return (
         <div className="TicketPage__Info">
             <Accordion activeIndex={0}>
@@ -78,23 +81,25 @@ function TicketInfo(props) {
                 <AccordionTab header="События">
                     <div className="TroubleTicketAction__Container">
                         <Button
-                            label="Пауза"
-                            severity="info"
-                            className="TroubleTicketAction__Button"
-                            size='small'
-                        />
-                        <Button
                             label="Передать на выезд"
                             className="TroubleTicketAction__Button"
                             size='small'
+                            onClick={()=>setActionType('departure')}
                         />
                         <Button
                             label="Передать подразделению"
                             className="TroubleTicketAction__Button"
                             size='small'
+                            onClick={()=>setActionType('subdivision')}
                         />
                         <Button
                             label="Передать ОПМ"
+                            className="TroubleTicketAction__Button"
+                            size='small'
+                        />
+                        <Button
+                            label="Пауза"
+                            severity="info"
                             className="TroubleTicketAction__Button"
                             size='small'
                         />
